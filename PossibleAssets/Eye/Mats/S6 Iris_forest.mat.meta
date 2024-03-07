@@ -1,8 +1,15 @@
 fileFormatVersion: 2
-guid: f43e2c42116706f4abf5dfe18dbebefb
+guid: 13437074b79050e4da686601cf318749
+timeCreated: 1472888751
+licenseType: Store
 NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67861
+  packageName: Realistic & Fantasy eyes
+  packageVersion: 1.0
+  assetPath: Assets/Eye/Mats/S6 Iris_forest.mat
+  uploadId: 135869

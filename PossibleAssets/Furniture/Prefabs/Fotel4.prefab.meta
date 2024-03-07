@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 5e3d4381d28afd94f8d0c4249d0e4b46
+guid: 80967ac7bb2c8104b8dd5b649046d79b
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 192628
+  packageName: Furniture FREE Pack
+  packageVersion: 1.0
+  assetPath: Assets/Furniture/Prefabs/Fotel4.prefab
+  uploadId: 426116

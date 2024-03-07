@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 2facba8bf47224f4d826a86c3ec377a5
+guid: bd72486aa780d7c488fce4c5de88266f
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 192628
+  packageName: Furniture FREE Pack
+  packageVersion: 1.0
+  assetPath: Assets/Furniture/Prefabs/3Seat2.prefab
+  uploadId: 426116

@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 694919279c0837944a629a0826787aa0
+guid: 9d4494b8b100519479f9699c5a7390a9
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 192628
+  packageName: Furniture FREE Pack
+  packageVersion: 1.0
+  assetPath: Assets/Furniture/Prefabs/BigCloset.prefab
+  uploadId: 426116
