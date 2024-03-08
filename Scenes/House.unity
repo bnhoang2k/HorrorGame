@@ -603,6 +603,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Eye_Describable
       objectReference: {fileID: 0}
+    - target: {fileID: 4422599371384274423, guid: 8cf9cdfe874e62448989b40dc23bb314, type: 3}
+      propertyPath: GameController
+      value: 
+      objectReference: {fileID: 431036686}
     - target: {fileID: 5294369854532265930, guid: 8cf9cdfe874e62448989b40dc23bb314, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.95
@@ -896,6 +900,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1763205461720261671, guid: 4d3d3e72efc968045afbb0831a561fee, type: 3}
+      propertyPath: GameController
+      value: 
+      objectReference: {fileID: 431036686}
     - target: {fileID: 8102961898300445339, guid: 4d3d3e72efc968045afbb0831a561fee, type: 3}
       propertyPath: GameController
       value: 
