@@ -5,8 +5,9 @@ using UnityEngine;
 public class GUIDisplay : MonoBehaviour
 {
 
-    private string message = "GUIDisplay base message";
     public Texture mouse_icon;
+    private string message = "GUIDisplay base message";
+    public GUIStyle centered_style;
 
     // Start is called before the first frame update
     void Start() {}
@@ -16,13 +17,22 @@ public class GUIDisplay : MonoBehaviour
 
     void OnGUI() {
 
-        int size = 10;
+        int mouse_size = 10;
         // Show where the mouse is in the center of the screen
-        GUI.DrawTexture(new Rect(Input.mousePosition.x - size/2, Input.mousePosition.y - size/2, size, size), mouse_icon);
+        GUI.DrawTexture(new Rect(Input.mousePosition.x - mouse_size/2, Input.mousePosition.y - mouse_size/2, mouse_size, mouse_size), mouse_icon);
 
         // Print what the player is touching
         // message is set by Describable objects
-        GUI.Label(new Rect(10, 10, 500, 20), message);
+
+        int message_x = Screen.width / 2;
+        int message_y = Screen.height - 30;
+
+        GUI.color = Color.white;
+
+       
+
+
+        GUI.Label(new Rect(0, Screen.height - 30, Screen.width, 20), message, centered_style);
         // Text will be cut off if it is longer to display than the rectangle
         // TODO: find a better way to display
 
