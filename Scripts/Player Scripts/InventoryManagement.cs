@@ -65,6 +65,11 @@ public class InventoryManagement : MonoBehaviour
             }
         }
 
+        // Cheat add everything
+        if (Input.GetKeyDown(KeyCode.C)) {
+            Actions.UpdateInventory?.Invoke(GameObject.Find("Eye_Describable").GetComponent<Describable>());
+        }
+
     }
 
     // void OnGUI() {

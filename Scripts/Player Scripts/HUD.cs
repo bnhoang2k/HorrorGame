@@ -32,12 +32,14 @@ public class HUD : MonoBehaviour
 
     private void OnEnable() {
         Actions.UpdateInventory += UpdateHUD;
-        Actions.UpdateItemEquipped += showEquipped;
+        Actions.UpdateItemEquipped += ShowEquipped;
     }
+
     private void OnDisable() {
         Actions.UpdateInventory -= UpdateHUD;
-        Actions.UpdateItemEquipped -= showEquipped;
+        Actions.UpdateItemEquipped -= ShowEquipped;
     }
+
     void UpdateHUD(Describable item) {
         // Update the HUD with the new item
         // TODO: Add more stuff here as we expand the inventory system
@@ -49,7 +51,7 @@ public class HUD : MonoBehaviour
         }
     }
 
-    void showEquipped(string item_name, bool equipped) {
+    void ShowEquipped(string item_name, bool equipped) {
         if (item_name == "Eye_Describable" && eyeImage) {
             Color color = eyeImage.color;
             color.a = equipped ? 1 : 0.5f;
