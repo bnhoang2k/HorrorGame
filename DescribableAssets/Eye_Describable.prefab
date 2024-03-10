@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Eye
   GameController: {fileID: 0}
+  isPickupable: 1
 --- !u!33 &2508787720736996245
 MeshFilter:
   m_ObjectHideFlags: 0

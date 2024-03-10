@@ -9,7 +9,8 @@ public class Describable : MonoBehaviour {
     public GameObject GameController;
     // You must drag in the INSTANCE of the game object that has GUIdisplay code
     // into the inspector window (NOT the prefab)
-    
+
+    public bool isPickupable = false;
 
     private void Start() {}
     private void Update() {}
