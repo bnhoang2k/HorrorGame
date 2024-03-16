@@ -22,14 +22,9 @@ public class InventoryManagement : MonoBehaviour
     bool slot3 = false;
     bool slot4 = false;
     bool slot5 = false;
-    public GUIStyle equipped_style;
-    public GUIStyle unequipped_style;
     
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    void Start() {}
 
     // Update is called once per frame
     void Update()
@@ -39,12 +34,16 @@ public class InventoryManagement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) {ears = !ears;}
 
         // check for equipping slot2 (eyes)
-        // I changed this to test my new function.
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
             InventoryItem eyeItem = inventory.Find(item => item.itemName == "Eye_Describable");
+            
+            // check if player has eyes in their inventory
             if (eyeItem != null) {
+                // equip/uneqiup eyes
                 eyes = !eyes;
+                // set if the player is blind or not
                 senseController.SetVision(eyes);
+                // change equipped status
                 Actions.UpdateItemEquipped?.Invoke("Eye_Describable", eyes);
             }
         }
@@ -72,79 +71,9 @@ public class InventoryManagement : MonoBehaviour
 
     }
 
-    // void OnGUI() {
-        
-    //     // draw inventory slots
-    //     int slot_x = 10;
-    //     int slot_y = 10;
-    //     int slot_size = 50;
-    //     int slot_spacing = slot_size + 10;
-        
-
-    //     // TODO: make a GUI content to get text and images in the box
-    //     // TODO: make sure you can still see the boxes even in the dark
-    //     GUIStyle style = unequipped_style;
-
-    //     // slot1: ears
-    //     if (ears) { // ears are equipped
-    //         style = equipped_style;
-    //     } else { // ears are not equipped
-    //         style = unequipped_style;
-    //     }
-    //     // draw slot
-    //     GUI.Box(new Rect(slot_x, slot_y, slot_size, slot_size), "1 Ears", style);
-        
-
-    //     // slot2: eyes
-    //     slot_x = slot_x + slot_spacing;
-
-    //     if (eyes) { // eyes are equipped
-    //         style = equipped_style;
-    //     } else { // eyes are not equipped
-    //         style = unequipped_style;
-    //     }
-    //     // draw slot
-    //     GUI.Box(new Rect(slot_x, slot_y, slot_size, slot_size), "2 Eyes", style);
-
-
-    //     // slot3: EMPTY
-    //     slot_x = slot_x + slot_spacing;
-
-    //     if (slot3) { // slot3 is equipped
-    //         style = equipped_style;
-    //     } else { // slot3 is not equipped
-    //         style = unequipped_style;
-    //     }
-    //     // draw slot
-    //     GUI.Box(new Rect(slot_x, slot_y, slot_size, slot_size), "3", style);
-
-
-    //     // slot4: EMPTY
-    //     slot_x = slot_x + slot_spacing;
-
-    //     if (slot4) { // slot4 is equipped
-    //         style = equipped_style;
-    //     } else { // slot4 is not equipped
-    //         style = unequipped_style;
-    //     }
-    //     // draw slot
-    //     GUI.Box(new Rect(slot_x, slot_y, slot_size, slot_size), "4", style);
-
-
-    //     // slot5: EMPTY
-    //     slot_x = slot_x + slot_spacing;
-
-    //     if (slot5) { // slot5 is equipped
-    //         style = equipped_style;
-    //     } else { // slot5 is not equipped
-    //         style = unequipped_style;
-    //     }
-    //     // draw slot
-    //     GUI.Box(new Rect(slot_x, slot_y, slot_size, slot_size), "5", style);
-
-    // }
-    public bool hasKey() {
+    public bool hasKey(string object_name) {
         // TODO: implement
+        // add pairs of objects and their corresponding keys to see if the player has the right key
         return true;
     }
 

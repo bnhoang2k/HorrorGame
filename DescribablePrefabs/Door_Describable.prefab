@@ -99,7 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013859883750}
   - component: {fileID: 95000012944575982}
-  - component: {fileID: 8102961898300445339}
+  - component: {fileID: 5604719378229779885}
   m_Layer: 0
   m_Name: Door_Describable
   m_TagString: Untagged
@@ -146,7 +146,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8102961898300445339
+--- !u!114 &5604719378229779885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -374,7 +374,8 @@ GameObject:
   - component: {fileID: 33000010417458318}
   - component: {fileID: 23000013241038996}
   - component: {fileID: 221817968537520153}
-  - component: {fileID: 6093085696190733552}
+  - component: {fileID: 4046669317466514320}
+  - component: {fileID: 2429024288418943674}
   m_Layer: 0
   m_Name: Door_Knob
   m_TagString: Untagged
@@ -471,7 +472,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300012, guid: 53fd6f5729dcb094ebf37d4437bf647a, type: 3}
---- !u!114 &6093085696190733552
+--- !u!114 &4046669317466514320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -485,6 +486,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Door knob
   GameController: {fileID: 0}
+  isPickupable: 0
+  isOpenable: 1
+--- !u!114 &2429024288418943674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012657353528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b998712baf8dd0478b9fc3a04a3c5be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root_door_name: Door_Describable
 --- !u!1 &1000012957683102
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,10 +510,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000013016911106}
-  - component: {fileID: 1763205461720261671}
   - component: {fileID: 33000014247284822}
   - component: {fileID: 23000011000226794}
   - component: {fileID: 65000011924577728}
+  - component: {fileID: 2702665990337861295}
+  - component: {fileID: 2769007888480170870}
   m_Layer: 0
   m_Name: Door_Main1
   m_TagString: Untagged
@@ -520,20 +537,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000010688086050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1763205461720261671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000012957683102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  description: Door
-  GameController: {fileID: 0}
 --- !u!33 &33000014247284822
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -607,6 +610,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.23618, y: 2.44728, z: 0.09461507}
   m_Center: {x: 0, y: 1.2209399, z: -0.00012127496}
+--- !u!114 &2702665990337861295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012957683102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Door Main
+  GameController: {fileID: 0}
+  isPickupable: 0
+  isOpenable: 1
+--- !u!114 &2769007888480170870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012957683102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b998712baf8dd0478b9fc3a04a3c5be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root_door_name: Door_Describable
 --- !u!1 &1000012960344038
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,3 +933,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Door frame
   GameController: {fileID: 0}
+  isPickupable: 0
+  isOpenable: 0

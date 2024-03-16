@@ -5,21 +5,25 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Camera player_camera;
+    private GameObject player;
+    private float arm_length;
 
+    // Start is called before the first frame update
     void Start()
     {
-
+        player_camera = Camera.main;
+        player = GameObject.Find("Player");
+        arm_length = player.GetComponent<Reach>().arm_length;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.E)) { Grab(); }
+        if (Input.GetKeyDown(KeyCode.E)) { Interact(); }
     }
 
-    void Grab()
+    void Interact()
     {
         // Raycast generates a ray from the origin in the direction of the camera
         // and returns true if it hits something.
@@ -27,19 +31,24 @@ public class PlayerInteract : MonoBehaviour
         // If it's describable, we want to "grab" it, remove it from the environment, and add it to the inventory.
         // 2f is adjustable, but ideally we want it to be arm length.
         RaycastHit hit;
+        Ray ray = player_camera.ScreenPointToRay(Input.mousePosition);
 
-        // Debug raycast
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(transform.position, forward, Color.green);
+        if (Physics.Raycast(ray, out hit, arm_length)) {
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 3f))
-        {
             Describable describable = hit.collider.GetComponent<Describable>();
+            // if the object can be picked up, grab it
             if (describable && describable.isPickupable)
             {
-                // Debug.Log("Grabbed " + describable.gameObject.name);
+                //Debug.Log("Grabbed " + describable.gameObject.name);
                 Actions.UpdateInventory(describable);
                 Destroy(describable.gameObject);
+            }
+            // if the object can be opened, open it
+            else if (describable && describable.isOpenable)
+            {
+                if (describable.gameObject.name == "Door_Main1" || describable.gameObject.name == "Door_Knob") {
+                    describable.gameObject.GetComponent<DoorOpenable>().open();
+                }
             }
         }
 

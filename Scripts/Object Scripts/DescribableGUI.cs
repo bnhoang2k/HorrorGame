@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GUIDisplay : MonoBehaviour
+public class DescribableGUI : MonoBehaviour
 {
 
     public Texture mouse_icon;
@@ -10,7 +10,10 @@ public class GUIDisplay : MonoBehaviour
     public GUIStyle centered_style;
 
     // Start is called before the first frame update
-    void Start() {}
+    void Start() {
+        // hide the normal mouse cursor
+        Cursor.visible = false;
+    }
 
     // Update is called once per frame
     void Update() {}
@@ -28,9 +31,6 @@ public class GUIDisplay : MonoBehaviour
         int message_y = Screen.height - 30;
 
         GUI.color = Color.white;
-
-       
-
 
         GUI.Label(new Rect(0, Screen.height - 30, Screen.width, 20), message, centered_style);
         // Text will be cut off if it is longer to display than the rectangle
