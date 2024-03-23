@@ -7,13 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tessellation
+  m_Name: RoundTable_Describable
   m_Shader: {fileID: 4800000, guid: 1829b7a5a473bbf4192595624aafa19d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - WIREFRAME_LIGHT_ATTENTION_ON
-  - WIREFRAME_TESSELLATION_NORMAL_RECONSTRUCTION
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -25,40 +23,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2cdbbeb780911dd49ad1dc94c0a3d46b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Wireframe_AmbientOcclusionMap:
@@ -66,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Wireframe_ColorTexture:
-        m_Texture: {fileID: 2800000, guid: 1cd6c08a803c99c43a57b6b2151f6c09, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Wireframe_NormalMap:
@@ -74,36 +40,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Wireframe_Tessellation_DispTex:
-        m_Texture: {fileID: 2800000, guid: 975e47fb08a459b4c9422af366c79608, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BumpScale: 1
     - _Cull: 2
     - _CurvedWorldTitle: 0
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.1
-    - _GlossyReflections: 1
-    - _Metallic: 0.8
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _WireframeShader_Diameter: 0.5
+    - _Glossiness: 0.5
+    - _Metallic: 0
+    - _WireframeShader_Diameter: 1
     - _WireframeShader_Smoothness: 0
     - _WireframeShader_Thickness: 0.01
     - _Wireframe_AmbientOcclusion: 0
     - _Wireframe_AmbientOcclusionStrength: 1
     - _Wireframe_BaseVertexColor: 0
     - _Wireframe_BumpEnumID: 0
-    - _Wireframe_ColorEmissionStrength: 0.2
+    - _Wireframe_ColorEmissionStrength: 0
     - _Wireframe_DistanceFade: 0
     - _Wireframe_DistanceFadeEnd: 10
     - _Wireframe_DistanceFadeStart: 5
@@ -117,15 +70,15 @@ Material:
     - _Wireframe_FresnelEnumID: 0
     - _Wireframe_FresnelInvert: 0
     - _Wireframe_FresnelPow: 1
-    - _Wireframe_IncludeLightEnumID: 1
+    - _Wireframe_IncludeLightEnumID: 0
     - _Wireframe_MetaPassMultiplier: 0
-    - _Wireframe_NormalReconstruct: 1
+    - _Wireframe_NormalReconstruct: 0
     - _Wireframe_NormalScale: 1
     - _Wireframe_NormalizeEdges: 0
     - _Wireframe_RenderingOptions_PBREnumID: 0
-    - _Wireframe_Tessellation: 17.191137
+    - _Wireframe_Tessellation: 4
     - _Wireframe_TessellationEnumID: 0
-    - _Wireframe_Tessellation_DispStrength: 2.168099
+    - _Wireframe_Tessellation_DispStrength: 0
     - _Wireframe_Tessellation_EdgeLength: 16
     - _Wireframe_Tessellation_MaxDistance: 35
     - _Wireframe_Tessellation_MinDistance: 10
@@ -143,11 +96,9 @@ Material:
     - _Wireframe_TransparentTex_Invert: 0
     - _Wireframe_TryQuad: 0
     - _Wireframe_WireVertexColor: 0
-    - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Wireframe_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Wireframe_Color: {r: 1, g: 0, b: 0, a: 1}
     - _Wireframe_ColorTexture_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _Wireframe_MainTex_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _Wireframe_Tessellation_DispTex_Scroll: {r: 0, g: 0, b: 0, a: 0}
