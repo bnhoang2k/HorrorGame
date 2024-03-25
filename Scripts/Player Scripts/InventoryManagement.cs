@@ -39,13 +39,14 @@ public class InventoryManagement : MonoBehaviour
             
             // check if player has eyes in their inventory
             if (eyeItem != null) {
-                // equip/uneqiup eyes
-                eyes = !eyes;
+                // equip/unequip eyes
                 // set if the player is blind or not
-                senseController.SetVision(eyes);
+                senseController.SetBlind(eyes);
                 // change equipped status
+                eyes = !eyes;
                 Actions.UpdateItemEquipped?.Invoke("Eye_Describable", eyes);
             }
+
         }
 
         // check for equipping slot3
