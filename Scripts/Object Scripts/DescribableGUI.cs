@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DescribableGUI : MonoBehaviour
 {
 
     public Texture mouse_icon;
     private string message = "GUIDisplay base message";
-    public GUIStyle centered_style;
+    public TMP_Text describable_text;
 
     // Start is called before the first frame update
     void Start() {
@@ -16,26 +17,16 @@ public class DescribableGUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {}
-
-    void OnGUI() {
-
-        int mouse_size = 10;
-        // Show where the mouse is in the center of the screen
-        GUI.DrawTexture(new Rect(Input.mousePosition.x - mouse_size/2, Input.mousePosition.y - mouse_size/2, mouse_size, mouse_size), mouse_icon);
-
+    void Update() {
         // Print what the player is touching
         // message is set by Describable objects
+        describable_text.text = message;
+    }
 
-        int message_x = Screen.width / 2;
-        int message_y = Screen.height - 30;
-
-        GUI.color = Color.white;
-
-        GUI.Label(new Rect(0, Screen.height - 30, Screen.width, 20), message, centered_style);
-        // Text will be cut off if it is longer to display than the rectangle
-        // TODO: find a better way to display
-
+    void OnGUI() {
+        // Show where the mouse is in the center of the screen
+        int mouse_size = 10;
+        GUI.DrawTexture(new Rect(Input.mousePosition.x - mouse_size/2, Input.mousePosition.y - mouse_size/2, mouse_size, mouse_size), mouse_icon);
     }
 
     public void setMessage(string new_message) {
