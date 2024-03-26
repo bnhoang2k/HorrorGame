@@ -33,12 +33,18 @@ public class SenseController : MonoBehaviour
             {
                 if (describable)
                 {
-                    Material describableMaterial = describable.GetComponent<Renderer>().material;
-                    if (describableMaterial)
+                    Renderer describableRenderer = describable.GetComponent<Renderer>();
+                    if (describableRenderer)
                     {
-                        Color wireframeColor = describableMaterial.GetColor("_Wireframe_Color");
-                        Color newColor = new Color(wireframeColor.r, wireframeColor.g, wireframeColor.b, 1.0f);
-                        describableMaterial.SetColor("_Wireframe_Color", newColor);
+                        foreach (Material describableMaterial in describableRenderer.materials)
+                        {
+                            if (describableMaterial.HasProperty("_Wireframe_Color"))
+                            {
+                                Color wireframeColor = describableMaterial.GetColor("_Wireframe_Color");
+                                Color newColor = new Color(wireframeColor.r, wireframeColor.g, wireframeColor.b, 1.0f);
+                                describableMaterial.SetColor("_Wireframe_Color", newColor);
+                            }
+                        }
                     }
                 }
             }
@@ -51,12 +57,19 @@ public class SenseController : MonoBehaviour
             {
                 if (describable)
                 {
-                    Material describableMaterial = describable.GetComponent<Renderer>().material;
-                    if (describableMaterial)
+                    Renderer describableRenderer = describable.GetComponent<Renderer>();
+                    if (describableRenderer)
                     {
-                        Color wireframeColor = describableMaterial.GetColor("_Wireframe_Color");
-                        Color newColor = new Color(wireframeColor.r, wireframeColor.g, wireframeColor.b, 0.0f);
-                        describableMaterial.SetColor("_Wireframe_Color", newColor);
+                        foreach (Material describableMaterial in describableRenderer.materials)
+                        {
+                            if (describableMaterial.HasProperty("_Wireframe_Color"))
+                            {
+                                Color wireframeColor = describableMaterial.GetColor("_Wireframe_Color");
+                                // Debug.Log(describable.name + " | " + describableMaterial.name + " | " + wireframeColor.ToString());
+                                Color newColor = new Color(wireframeColor.r, wireframeColor.g, wireframeColor.b, 0.0f);
+                                describableMaterial.SetColor("_Wireframe_Color", newColor);
+                            }
+                        }
                     }
                 }
             }
