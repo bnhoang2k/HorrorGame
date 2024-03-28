@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
+    private GameObject GameController;
     private Camera player_camera;
     private GameObject player;
     private float arm_length;
@@ -12,6 +13,7 @@ public class PlayerInteract : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameController = GameObject.Find("GameController");
         player_camera = Camera.main;
         player = GameObject.Find("Player");
         arm_length = player.GetComponent<Reach>().arm_length;
@@ -20,7 +22,8 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) { Interact(); }
+        // if E or the left mouse button is pressed, the player is interacting with the object
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) { Interact(); }
     }
 
     void Interact()
@@ -29,7 +32,6 @@ public class PlayerInteract : MonoBehaviour
         // and returns true if it hits something.
         // We want to check if the player is looking at an object that can be picked up.
         // If it's describable, we want to "grab" it, remove it from the environment, and add it to the inventory.
-        // 2f is adjustable, but ideally we want it to be arm length.
         RaycastHit hit;
         Ray ray = player_camera.ScreenPointToRay(Input.mousePosition);
 
@@ -39,19 +41,22 @@ public class PlayerInteract : MonoBehaviour
             // if the object can be picked up, grab it
             if (describable && describable.isPickupable)
             {
-                //Debug.Log("Grabbed " + describable.gameObject.name);
                 Actions.UpdateInventory(describable);
-                Destroy(describable.gameObject);
+                //Destroy(describable.gameObject);
+                describable.gameObject.SetActive(false);
+
+                GameController.GetComponent<InstructionGUI>().setMessage("");
+
+                Debug.Log("Grabbed " + describable.gameObject.name);
             }
             // if the object can be opened, open it
             else if (describable && describable.isOpenable)
             {
-                if (describable.gameObject.name == "Door_Main1" || describable.gameObject.name == "Door_Knob") {
-                    describable.gameObject.GetComponent<DoorOpenable>().open();
-                }
+                describable.gameObject.GetComponent<Openable>().Open();
+
+                GameController.GetComponent<InstructionGUI>().setMessage("");
             }
         }
-
     }
 
 }

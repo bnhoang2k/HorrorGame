@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: A wooden table
+  description: Wooden table
   isPickupable: 0
   isOpenable: 0
 --- !u!33 &3111974618219902738

@@ -98,7 +98,7 @@ Material:
     - _Wireframe_WireVertexColor: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Wireframe_Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Wireframe_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Wireframe_ColorTexture_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _Wireframe_MainTex_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _Wireframe_Tessellation_DispTex_Scroll: {r: 0, g: 0, b: 0, a: 0}

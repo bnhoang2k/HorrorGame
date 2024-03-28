@@ -10,9 +10,11 @@ public class Describable : MonoBehaviour {
     private Camera player_camera;
     private GameObject player;
     private float arm_length;
-
     public bool isPickupable = false;
     public bool isOpenable = false;
+    private string unlock = "Press E to unlock";
+    private string open = "Press E to open";
+    private string grab = "Press E to pick up";
 
     private void Start() {
         GameController = GameObject.Find("GameController");
@@ -27,9 +29,6 @@ public class Describable : MonoBehaviour {
 
         // Raycast generates a ray from the origin in the direction of the camera
         // and returns true if it hits something.
-        // We want to check if the player is looking at an object that can be picked up.
-        // If it's describable, we want to "grab" it, remove it from the environment, and add it to the inventory.
-        // 2f is adjustable, but ideally we want it to be arm length.
         RaycastHit hit;
         Ray ray = player_camera.ScreenPointToRay(Input.mousePosition);
 
@@ -41,10 +40,24 @@ public class Describable : MonoBehaviour {
             {
                 // call a function from the script GUIDisplay to set the message
                 GameController.GetComponent<DescribableGUI>().setMessage(description);
+
+                if (isOpenable) {
+                    bool locked = gameObject.GetComponent<Openable>().locked;
+
+                    if (locked && GameController.GetComponent<InventoryManagement>().holdingItem(gameObject.GetComponent<Openable>().key)) {
+                        GameController.GetComponent<InstructionGUI>().setMessage(unlock);
+                    } else {
+                        GameController.GetComponent<InstructionGUI>().setMessage(open);
+                    }
+                }
+                else if (isPickupable) {
+                    GameController.GetComponent<InstructionGUI>().setMessage(grab);
+                }
             }
         } else {
             // object is out of reach
             GameController.GetComponent<DescribableGUI>().setMessage(default_message);
+            GameController.GetComponent<InstructionGUI>().setMessage("");
         }        
     }
 
@@ -53,6 +66,7 @@ public class Describable : MonoBehaviour {
 
         // call a function from the script GUIDisplay to set the message
         GameController.GetComponent<DescribableGUI>().setMessage(default_message);
+        GameController.GetComponent<InstructionGUI>().setMessage("");
 
     }
 }

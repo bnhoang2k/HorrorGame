@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2778696782159507809}
   - component: {fileID: 1054319687186579821}
-  - component: {fileID: 4283830110518247103}
   - component: {fileID: -1730412019000804759}
   m_Layer: 0
   m_Name: Door_Describable
@@ -58,19 +57,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4283830110518247103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498204609983339016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 954af72e7b4add943aed095312f242d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameController: {fileID: 0}
 --- !u!114 &-1730412019000804759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,8 +82,7 @@ GameObject:
   - component: {fileID: 6332791790715891544}
   - component: {fileID: 6789045006796169251}
   - component: {fileID: 8745051253724037652}
-  - component: {fileID: 5933501595686245011}
-  - component: {fileID: 4114457246472427205}
+  - component: {fileID: 337184516644693882}
   m_Layer: 0
   m_Name: Door_Knob
   m_TagString: Untagged
@@ -194,7 +179,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c86870b8815c152449efdb207dbe452d, type: 2}
---- !u!114 &5933501595686245011
+--- !u!114 &337184516644693882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,20 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Door knob
   isPickupable: 0
-  isOpenable: 1
---- !u!114 &4114457246472427205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555110380207502235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b998712baf8dd0478b9fc3a04a3c5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  root_door_name: Door_Describable
+  isOpenable: 0
 --- !u!1 &1914312295070531897
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +377,7 @@ GameObject:
   - component: {fileID: 592638649682667352}
   - component: {fileID: 2648792661377262203}
   - component: {fileID: 196635720075921997}
-  - component: {fileID: 8216238386180492038}
+  - component: {fileID: 7708798338533341041}
   m_Layer: 0
   m_Name: Door_Main1
   m_TagString: Untagged
@@ -516,7 +488,7 @@ MonoBehaviour:
   description: Door
   isPickupable: 0
   isOpenable: 1
---- !u!114 &8216238386180492038
+--- !u!114 &7708798338533341041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -525,10 +497,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4883185443088918067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b998712baf8dd0478b9fc3a04a3c5be, type: 3}
+  m_Script: {fileID: 11500000, guid: ba9f6df5ac2aa5d4aafa38e8c96539fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root_door_name: Door_Describable
+  root_name: Door_Describable
+  key: {fileID: 0}
+  open: 0
+  locked: 1
 --- !u!1 &5793726660931248982
 GameObject:
   m_ObjectHideFlags: 0

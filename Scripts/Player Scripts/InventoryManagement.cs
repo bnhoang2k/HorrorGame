@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class InventoryItem {
     public string itemName;
-    public InventoryItem (string name) {itemName = name;}
+    public bool equipped;
+    public InventoryItem (string name) {itemName = name; equipped = false;}
 }
 
 
@@ -16,12 +17,6 @@ public class InventoryManagement : MonoBehaviour
     public List<InventoryItem> inventory = new List<InventoryItem>();
 
     public SenseController senseController;
-
-    bool ears = false;
-    bool eyes = false;
-    bool slot3 = false;
-    bool slot4 = false;
-    bool slot5 = false;
     
     // Start is called before the first frame update
     void Start() {}
@@ -31,7 +26,7 @@ public class InventoryManagement : MonoBehaviour
     {
         
         // check for equipping slot1 (ears)
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {ears = !ears;}
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {}
 
         // check for equipping slot2 (eyes)
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
@@ -41,22 +36,22 @@ public class InventoryManagement : MonoBehaviour
             if (eyeItem != null) {
                 // equip/unequip eyes
                 // set if the player is blind or not
-                senseController.SetBlind(eyes);
+                senseController.SetBlind(eyeItem.equipped);
                 // change equipped status
-                eyes = !eyes;
-                Actions.UpdateItemEquipped?.Invoke("Eye_Describable", eyes);
+                eyeItem.equipped = !eyeItem.equipped;
+                Actions.UpdateItemEquipped?.Invoke("Eye_Describable", eyeItem.equipped);
             }
 
         }
 
         // check for equipping slot3
-        if (Input.GetKeyDown(KeyCode.Alpha3)) {slot3 = !slot3;}
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {}
 
         // check for equipping slot4
-        if (Input.GetKeyDown(KeyCode.Alpha4)) {slot4 = !slot4;}
+        if (Input.GetKeyDown(KeyCode.Alpha4)) {}
 
         // check for equipping slot5
-        if (Input.GetKeyDown(KeyCode.Alpha5)) {slot5 = !slot5;}
+        if (Input.GetKeyDown(KeyCode.Alpha5)) {}
 
         // Debug function to check inventory
         if (Input.GetKeyDown(KeyCode.I)) {
@@ -65,7 +60,7 @@ public class InventoryManagement : MonoBehaviour
             }
         }
 
-        // Cheat add everything
+        // Cheat add eyes
         if (Input.GetKeyDown(KeyCode.C)) {
             Debug.Log("Cheat activated");
             Actions.UpdateInventory?.Invoke(GameObject.Find("Eye_Describable").GetComponent<Describable>());
@@ -73,10 +68,21 @@ public class InventoryManagement : MonoBehaviour
 
     }
 
-    public bool hasKey(string object_name) {
-        // TODO: implement
-        // add pairs of objects and their corresponding keys to see if the player has the right key
-        return true;
+    public bool holdingItem(GameObject obj) {
+        // get the item from inventory list
+        InventoryItem invItem = inventory.Find(item => item.itemName == obj.name);
+
+        // DEBUGGING //
+        // actually implement later, how to equip items generally
+        Debug.Log("Manually setting equipped for true in holdingItem function for debugging purposes, need to actually implement equipping");
+        invItem.equipped = true;
+
+        // check if it exists and is equipped
+        if (invItem != null && invItem.equipped == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void OnEnable() {
