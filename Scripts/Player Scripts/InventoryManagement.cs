@@ -60,10 +60,11 @@ public class InventoryManagement : MonoBehaviour
             }
         }
 
-        // Cheat add eyes
+        // Cheat add items
         if (Input.GetKeyDown(KeyCode.C)) {
             Debug.Log("Cheat activated");
             Actions.UpdateInventory?.Invoke(GameObject.Find("Eye_Describable").GetComponent<Describable>());
+            Actions.UpdateInventory?.Invoke(GameObject.Find("Key_Describable").GetComponent<Describable>());
         }
 
     }

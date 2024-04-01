@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 5202569985540634299}
   - component: {fileID: -6221485580448653128}
   m_Layer: 0
-  m_Name: plant3 Variant
+  m_Name: Plant_Describable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

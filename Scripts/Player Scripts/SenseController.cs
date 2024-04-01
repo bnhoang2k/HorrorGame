@@ -20,7 +20,7 @@ public class SenseController : MonoBehaviour
     {
         // TODO: Currently hardcoded for just the directional light.
         // However, we want to disable all lights in the scene in the future.
-        // After turning on/off the lights, we want to update all describables in the scene.
+        // After turning on/off the lights, we want to update the shaders for all describables within the scene.
         // We want to hide the wireframe property of the describable objects if the player can see.
         Light directionalLight = GameObject.Find("Directional Light").GetComponent<Light>();
         Describable[] allDescribables = gameController.GetComponent<GameController>().GetDescribables();
@@ -41,6 +41,9 @@ public class SenseController : MonoBehaviour
         }
     }
 
+    // All describable objects must have a mesh renderer in order for the mesh wireframe to be visible.
+    // This function sets the wireframe property of the describable objects to be visible or invisible by setting the
+    // alpha color of the wireframe color to 1 or 0, respectively.
     private void SetWireFrame(GameObject obj, bool isBlind)
     {
         Renderer[] renderers = obj.GetComponentsInChildren<Renderer>(true);
@@ -50,11 +53,9 @@ public class SenseController : MonoBehaviour
             {
                 if (describableMaterial.HasProperty("_Wireframe_Color"))
                 {
-                    Debug.Log("Material: " + describableMaterial.name + " has wireframe color property.");
                     Color wireframeColor = describableMaterial.GetColor("_Wireframe_Color");
                     Color newColor = new Color(wireframeColor.r, wireframeColor.g, wireframeColor.b, isBlind ? 1.0f : 0.0f);
                     describableMaterial.SetColor("_Wireframe_Color", newColor);
-                    Debug.Log("Material: " + describableMaterial.name + " wireframe color set to: " + newColor);
                 }
             }
         }
