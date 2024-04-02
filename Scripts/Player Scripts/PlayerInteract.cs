@@ -55,6 +55,8 @@ public class PlayerInteract : MonoBehaviour
                 describable.gameObject.GetComponent<Openable>().Open();
 
                 GameController.GetComponent<InstructionGUI>().setMessage("");
+
+                Debug.Log("Opened " + describable.gameObject.name);
             }
         }
     }

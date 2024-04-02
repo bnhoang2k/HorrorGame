@@ -43,19 +43,31 @@ public class HUD : MonoBehaviour
     void UpdateHUD(Describable item) {
         // Update the HUD with the new item
         // TODO: Add more stuff here as we expand the inventory system
-        if (item.name == "Eye_Describable") {
-            eyeImage.enabled = true;
-            Color color = eyeImage.color;
-            color.a = inventory.HasItem("Eye_Describable") ? 1 : 0.5f;
-            eyeImage.color = color;
-        }
+        // if (item.name == "Eye_Describable") {
+        //     eyeImage.enabled = true;
+        //     Color color = eyeImage.color;
+        //     color.a = inventory.HasItem("Eye_Describable") ? 1 : 0.5f;
+        //     eyeImage.color = color;
+        // }
     }
 
-    void ShowEquipped(string item_name, bool equipped) {
-        if (item_name == "Eye_Describable" && eyeImage) {
-            Color color = eyeImage.color;
-            color.a = equipped ? 1 : 0.5f;
-            eyeImage.color = color;
+    void ShowEquipped(InventoryItem item) {
+
+        if (item.equipped) {
+            item.slot.transform.GetChild(0).GetComponent<RawImage>().color = Color.white;
+        } else {
+            item.slot.transform.GetChild(0).GetComponent<RawImage>().color = Color.grey;
         }
+
+        if (item.itemName == "Eye_Describable") {
+            eyeImage.enabled = !eyeImage.enabled;
+        }
+
+
+        // if (item.itemName == "Eye_Describable" && eyeImage) {
+        //     Color color = eyeImage.color;
+        //     color.a = item.equipped ? 1 : 0;
+        //     eyeImage.color = color;
+        // }
     }
 }

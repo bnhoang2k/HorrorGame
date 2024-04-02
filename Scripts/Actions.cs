@@ -8,6 +8,6 @@ public static class Actions
 {
     // Inventory Actions
     public static Action<Describable> UpdateInventory;
-    public static Action<string, bool> UpdateItemEquipped;
+    public static Action<InventoryItem> UpdateItemEquipped;
 
 }

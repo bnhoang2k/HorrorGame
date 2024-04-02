@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8925885646941710283}
   - component: {fileID: 1095973929131484463}
   - component: {fileID: -7886495268980199383}
+  - component: {fileID: 933724882367306146}
   m_Layer: 0
   m_Name: Eye_Describable
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.053335, y: 0.053335007, z: 0.053335007}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -138,3 +139,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectPath: Assets/DescribablePrefabs/Eye_Describable_prefab/Eye_Describable.prefab
+--- !u!114 &933724882367306146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3516036053828677026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3e9f7acf53dd846b568ea9e12ce503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: eacef8bf23785344ca219d87861ea749, type: 3}
+  x: 0
+  y: -5
+  x_scale: 0.9
+  y_scale: 0.5

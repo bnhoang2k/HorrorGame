@@ -35,7 +35,9 @@ public class Openable : MonoBehaviour
         // the object is unlocked, so it can be opened
         if (!locked) {
             open = !open;
+            Debug.Log("open: " + open);
             animator.SetBool("open", open);
+            Debug.Log(animator);
         }
         else if (locked) {
             unlock();

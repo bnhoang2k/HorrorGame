@@ -13,6 +13,7 @@ public class Describable : MonoBehaviour {
     public bool isPickupable = false;
     public bool isOpenable = false;
     private string unlock = "Press E to unlock";
+    private string locked_message = "Locked";
     private string open = "Press E to open";
     private string grab = "Press E to pick up";
 
@@ -46,6 +47,8 @@ public class Describable : MonoBehaviour {
 
                     if (locked && GameController.GetComponent<InventoryManagement>().holdingItem(gameObject.GetComponent<Openable>().key)) {
                         GameController.GetComponent<InstructionGUI>().setMessage(unlock);
+                    } else if (locked) {
+                        GameController.GetComponent<InstructionGUI>().setMessage(locked_message);
                     } else {
                         GameController.GetComponent<InstructionGUI>().setMessage(open);
                     }
