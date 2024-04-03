@@ -1220,7 +1220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7422064740606740510}
   m_Layer: 0
-  m_Name: Wall with Door
+  m_Name: Wall_Door_Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

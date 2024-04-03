@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1057281024916745066
+--- !u!1 &4450329057614840186
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,64 +8,64 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6753699149999886830}
-  - component: {fileID: 5503712376617732322}
-  - component: {fileID: 3476686591433645376}
-  - component: {fileID: 1839838245833248617}
-  - component: {fileID: 6580973790679543632}
-  - component: {fileID: 6297612992121704930}
+  - component: {fileID: 2315176600359406540}
+  - component: {fileID: 2352870526226609848}
+  - component: {fileID: 2879955605988651268}
+  - component: {fileID: 8645832198457876002}
+  - component: {fileID: 3033382333042387071}
+  - component: {fileID: -6262053560064584802}
   m_Layer: 0
-  m_Name: Wall_Describable
+  m_Name: Guardrail_Describable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6753699149999886830
+--- !u!4 &2315176600359406540
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057281024916745066}
+  m_GameObject: {fileID: 4450329057614840186}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 5, z: 0.1}
+  m_LocalPosition: {x: 0, y: 5.83, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5503712376617732322
+--- !u!114 &2352870526226609848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057281024916745066}
+  m_GameObject: {fileID: 4450329057614840186}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Wall
+  description: Guardrail
   isPickupable: 0
   isOpenable: 0
---- !u!33 &3476686591433645376
+--- !u!33 &2879955605988651268
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057281024916745066}
-  m_Mesh: {fileID: 4300000, guid: b26fa7f0ca7f04e419695190fe3a68ba, type: 2}
---- !u!23 &1839838245833248617
+  m_GameObject: {fileID: 4450329057614840186}
+  m_Mesh: {fileID: 4300000, guid: 2b688fb4adb969a46ab45c1d0e9c1867, type: 2}
+--- !u!23 &8645832198457876002
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057281024916745066}
+  m_GameObject: {fileID: 4450329057614840186}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -81,7 +81,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: abb35e86f93388445bf963b19970bc0f, type: 2}
+  - {fileID: 2100000, guid: d7fc768883d9cad41be69e439e9da865, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,13 +103,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6580973790679543632
+--- !u!64 &3033382333042387071
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057281024916745066}
+  m_GameObject: {fileID: 4450329057614840186}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -124,17 +124,17 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: b26fa7f0ca7f04e419695190fe3a68ba, type: 2}
---- !u!114 &6297612992121704930
+  m_Mesh: {fileID: 4300000, guid: 2b688fb4adb969a46ab45c1d0e9c1867, type: 2}
+--- !u!114 &-6262053560064584802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057281024916745066}
+  m_GameObject: {fileID: 4450329057614840186}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -2065496115, guid: cb9c325382ec9464b8e020d7ddfb97b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabProjectPath: Assets/DescribablePrefabs/Wall_Describable_prefab/Wall_Describable.prefab
+  prefabProjectPath: Assets/DescribablePrefabs/Prefabs/Non-Furniture Prefabs/Guardrail_Describable_prefab/Guardrail_Describable.prefab
