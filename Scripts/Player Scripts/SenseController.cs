@@ -61,4 +61,9 @@ public class SenseController : MonoBehaviour
         }
     }
 
+    public void SetDeaf(bool isDeaf)
+    {
+
+    }
+
 }
