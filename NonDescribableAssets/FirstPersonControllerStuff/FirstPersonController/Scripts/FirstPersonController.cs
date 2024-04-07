@@ -74,6 +74,15 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
+		// Audio Variables
+		[Header("Audio Variables")]
+		[SerializeField] public bool useFootsteps = false;
+		[SerializeField] private float baseStepSpeed = 0.5f;
+		[SerializeField] private AudioSource footstepAudioSource = default;
+		[SerializeField] private AudioClip[] woodClips = default;
+		private float footstepTimer;
+		private float GetCurrentOffset => baseStepSpeed;
+
 		private bool IsCurrentDeviceMouse
 		{
 			get
@@ -115,6 +124,10 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			if(useFootsteps) 
+			{
+				Handle_Footsteps();
+			}
 		}
 
 		private void LateUpdate()
@@ -264,5 +277,21 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
+
+		private void Handle_Footsteps()
+		{
+			if (!Grounded) {return;}
+			if (_input.move == Vector2.zero) {return;}
+			footstepTimer -= Time.deltaTime;
+			if (footstepTimer <= 0)
+			{
+				if (Physics.Raycast(_controller.transform.position, Vector3.down, out RaycastHit hit, 3))
+				{
+					footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length)]);
+				}
+				footstepTimer = GetCurrentOffset;
+			}
+		}
+
 	}
 }

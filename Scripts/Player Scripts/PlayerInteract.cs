@@ -46,7 +46,6 @@ public class PlayerInteract : MonoBehaviour
                 describable.gameObject.SetActive(false);
 
                 GameController.GetComponent<InstructionGUI>().setMessage("");
-
                 Debug.Log("Grabbed " + describable.gameObject.name);
             }
             // if the object can be opened, open it

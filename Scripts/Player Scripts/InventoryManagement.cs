@@ -52,7 +52,6 @@ public class InventoryManagement : MonoBehaviour
         // check for equipping slot1 (ears)
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             InventoryItem earItem = inventory.Find(item => item.itemName == "Ear_Describable");
-            
             // check if player has ears in their inventory
             if (earItem != null) {
                 // equip/unequip ears
