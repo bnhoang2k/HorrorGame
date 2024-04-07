@@ -7,6 +7,7 @@ public class DescribableGUI : MonoBehaviour
 {
 
     public Texture mouse_icon;
+    private int mouse_size = 30;
     private string message = "GUIDisplay base message";
     public TMP_Text describable_text;
 
@@ -25,7 +26,6 @@ public class DescribableGUI : MonoBehaviour
 
     void OnGUI() {
         // Show where the mouse is in the center of the screen
-        int mouse_size = 10;
         GUI.DrawTexture(new Rect(Input.mousePosition.x - mouse_size/2, Input.mousePosition.y - mouse_size/2, mouse_size, mouse_size), mouse_icon);
     }
 

@@ -8,20 +8,14 @@ public class HUD : MonoBehaviour
 
     public InventoryManagement inventory;
     public RawImage eyeImage;
-    // public RawImage earImage;
-    // public RawImage slot3Image;
-    // public RawImage slot4Image;
-    // public RawImage slot5Image;
+    public RawImage earImage;
 
     // Start is called before the first frame update
     void Start()
     {
         // Hide all the images at the start
         eyeImage.enabled = false;
-        // earImage.enabled = false;
-        // slot3Image.enabled = false;
-        // slot4Image.enabled = false;
-        // slot5Image.enabled = false;
+        earImage.enabled = false;
     }
 
     // Update is called once per frame
@@ -62,12 +56,8 @@ public class HUD : MonoBehaviour
         if (item.itemName == "Eye_Describable") {
             eyeImage.enabled = !eyeImage.enabled;
         }
-
-
-        // if (item.itemName == "Eye_Describable" && eyeImage) {
-        //     Color color = eyeImage.color;
-        //     color.a = item.equipped ? 1 : 0;
-        //     eyeImage.color = color;
-        // }
+        else if (item.itemName == "Ear_Describable") {
+            earImage.enabled = !earImage.enabled;
+        }
     }
 }

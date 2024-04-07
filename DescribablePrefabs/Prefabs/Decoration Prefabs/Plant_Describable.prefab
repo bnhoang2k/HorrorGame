@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 45331209221720032}
   - component: {fileID: 3740445832652414425}
   - component: {fileID: 5520423315881716981}
+  - component: {fileID: 1575183760413850876}
   m_Layer: 0
   m_Name: Box013
   m_TagString: Untagged
@@ -59,8 +60,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -108,6 +107,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 2fddbc5b50ce72140a5072419ae85d3b, type: 2}
+--- !u!114 &1575183760413850876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259683843610329736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Plant
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueOpenable: 0
 --- !u!1 &1597140322857812256
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +134,8 @@ GameObject:
   - component: {fileID: 5731319389218172894}
   - component: {fileID: 2859884738277651027}
   - component: {fileID: 7022976533925186205}
+  - component: {fileID: 553131139557349011}
+  - component: {fileID: 5424315576106489422}
   m_Layer: 0
   m_Name: Box015
   m_TagString: Untagged
@@ -166,8 +183,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -194,6 +209,44 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &553131139557349011
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597140322857812256}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 24f91d07e71db1b4183cb76cb943b5b6, type: 2}
+--- !u!114 &5424315576106489422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597140322857812256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Plant pot
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueOpenable: 0
 --- !u!1 &6054693671106557848
 GameObject:
   m_ObjectHideFlags: 0

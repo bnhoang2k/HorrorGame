@@ -8,20 +8,15 @@ public class Describable : MonoBehaviour {
     public string description = "EMPTY";
     private GameObject GameController;
     private Camera player_camera;
-    private GameObject player;
     private float arm_length;
     public bool isPickupable = false;
     public bool isOpenable = false;
-    private string unlock = "Press E to unlock";
-    private string locked_message = "Locked";
-    private string open = "Press E to open";
-    private string grab = "Press E to pick up";
+    public bool isUniqueOpenable = false;
 
     private void Start() {
         GameController = GameObject.Find("GameController");
         player_camera = Camera.main;
-        player = GameObject.Find("Player");
-        arm_length = player.GetComponent<Reach>().arm_length;
+        arm_length = GameObject.Find("Player").GetComponent<Reach>().arm_length;
     }
     private void Update() {}
 
@@ -41,26 +36,10 @@ public class Describable : MonoBehaviour {
             {
                 // call a function from the script GUIDisplay to set the message
                 GameController.GetComponent<DescribableGUI>().setMessage(description);
-
-                if (isOpenable) {
-                    bool locked = gameObject.GetComponent<Openable>().locked;
-
-                    if (locked && GameController.GetComponent<InventoryManagement>().holdingItem(gameObject.GetComponent<Openable>().key)) {
-                        GameController.GetComponent<InstructionGUI>().setMessage(unlock);
-                    } else if (locked) {
-                        GameController.GetComponent<InstructionGUI>().setMessage(locked_message);
-                    } else {
-                        GameController.GetComponent<InstructionGUI>().setMessage(open);
-                    }
-                }
-                else if (isPickupable) {
-                    GameController.GetComponent<InstructionGUI>().setMessage(grab);
-                }
             }
         } else {
             // object is out of reach
             GameController.GetComponent<DescribableGUI>().setMessage(default_message);
-            GameController.GetComponent<InstructionGUI>().setMessage("");
         }        
     }
 
@@ -69,7 +48,6 @@ public class Describable : MonoBehaviour {
 
         // call a function from the script GUIDisplay to set the message
         GameController.GetComponent<DescribableGUI>().setMessage(default_message);
-        GameController.GetComponent<InstructionGUI>().setMessage("");
 
     }
 }

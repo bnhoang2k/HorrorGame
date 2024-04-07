@@ -116,6 +116,7 @@ public class InventoryManagement : MonoBehaviour
             Debug.Log("Cheat activated");
             Actions.UpdateInventory?.Invoke(GameObject.Find("Eye_Describable").GetComponent<Describable>());
             Actions.UpdateInventory?.Invoke(GameObject.Find("Key_Describable").GetComponent<Describable>());
+            Actions.UpdateInventory?.Invoke(GameObject.Find("Ear_Describable").GetComponent<Describable>());
         }
 
     }

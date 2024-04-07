@@ -56,7 +56,21 @@ public class PlayerInteract : MonoBehaviour
 
                 GameController.GetComponent<InstructionGUI>().setMessage("");
 
-                Debug.Log("Opened " + describable.gameObject.name);
+                Debug.Log("Opened or unlocked " + describable.gameObject.name);
+            }
+            // if the object can't use the Openable script, but can be opened
+            // needs to be hard coded at the moment
+            else if (describable && describable.isUniqueOpenable)
+            {
+                // open the floorboard compartment
+                if (describable.name == "Hole_Describable") {
+
+                    describable.gameObject.GetComponent<OpenFloorboard>().Open();
+                    Debug.Log("Opened " + describable.gameObject.name);
+                }
+
+                GameController.GetComponent<InstructionGUI>().setMessage("");
+
             }
         }
     }

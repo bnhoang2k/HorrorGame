@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 8471276954885927667}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.317278, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85,8 +85,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1953,7 +1951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6882999388663600728, guid: 52c925280022e384bb74766c85694db1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.1288967
+      value: -1.16
       objectReference: {fileID: 0}
     - target: {fileID: 6882999388663600728, guid: 52c925280022e384bb74766c85694db1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2015,7 +2013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6882999388663600728, guid: 52c925280022e384bb74766c85694db1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.1288967
+      value: -1.16
       objectReference: {fileID: 0}
     - target: {fileID: 6882999388663600728, guid: 52c925280022e384bb74766c85694db1, type: 3}
       propertyPath: m_LocalPosition.z
