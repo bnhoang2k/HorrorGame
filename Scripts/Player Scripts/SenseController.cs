@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 using UnityEngine.UI;
@@ -63,7 +64,8 @@ public class SenseController : MonoBehaviour
 
     public void SetDeaf(bool isDeaf)
     {
-
+        FirstPersonController playerController = player.transform.Find("PlayerCapsule").GetComponent<FirstPersonController>();
+        playerController.useFootsteps = !isDeaf;
     }
 
 }
