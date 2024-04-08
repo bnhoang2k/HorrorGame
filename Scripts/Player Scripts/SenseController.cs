@@ -23,17 +23,16 @@ public class SenseController : MonoBehaviour
         // However, we want to disable all lights in the scene in the future.
         // After turning on/off the lights, we want to update the shaders for all describables within the scene.
         // We want to hide the wireframe property of the describable objects if the player can see.
-        Light directionalLight = GameObject.Find("Directional Light").GetComponent<Light>();
         Describable[] allDescribables = gameController.GetComponent<GameController>().GetDescribables();
         if (isBlind)
         {
-            directionalLight.enabled = false;
+            gameController.GetComponent<ControlLights>().ToggleAllLights(!isBlind);
             player.GetComponentInChildren<Camera>().clearFlags = CameraClearFlags.Color;
             player.GetComponentInChildren<Camera>().backgroundColor = Color.black;
         }
         else
         {
-            directionalLight.enabled = true;
+            gameController.GetComponent<ControlLights>().ToggleAllLights(!isBlind);
             player.GetComponentInChildren<Camera>().clearFlags = CameraClearFlags.Skybox;
         }
         foreach (Describable describable in allDescribables)

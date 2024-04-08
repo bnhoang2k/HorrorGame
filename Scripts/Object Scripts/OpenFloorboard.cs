@@ -39,8 +39,9 @@ public class OpenFloorboard : MonoBehaviour
             Destroy(solid_floor);
 
             gameObject.GetComponent<Describable>().description = "Hole in the floor";
+            
         } else if (locked) {
-            Debug.Log("Need to add sound and implement 'unlocking' the floor board in OpenFloorBoard.cs");
+            Debug.Log("Need to add sound and implement 'unlocking' the floorboard in OpenFloorBoard.cs");
             // TODO: change the description from Floor to Hollow Floorboard once the player makes it make a sound
         }
         

@@ -11,7 +11,7 @@ public class Describable : MonoBehaviour {
     private float arm_length;
     public bool isPickupable = false;
     public bool isOpenable = false;
-    public bool isUniqueOpenable = false;
+    public bool isUniqueInteractable = false;
 
     private void Start() {
         GameController = GameObject.Find("GameController");
