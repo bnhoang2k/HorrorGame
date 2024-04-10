@@ -6,7 +6,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: plant3 Variant Box015
+  m_Name: Pot_Describable
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2

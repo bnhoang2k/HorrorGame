@@ -17,6 +17,17 @@ public class SenseController : MonoBehaviour
         gameController = GameObject.Find("GameController");
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            foreach (Describable describable in gameController.GetComponent<GameController>().GetDescribables())
+            {
+                Debug.Log(describable.gameObject.name);
+            }
+        }
+    }
+
     public void SetBlind(bool isBlind)
     {
         // TODO: Currently hardcoded for just the directional light.

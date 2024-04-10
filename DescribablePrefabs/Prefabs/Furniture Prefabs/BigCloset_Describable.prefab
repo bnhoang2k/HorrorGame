@@ -15,7 +15,11 @@ GameObject:
   - component: {fileID: -2028014990973812298}
   - component: {fileID: 5217304416668444673}
   m_Layer: 0
+<<<<<<<< HEAD:DescribablePrefabs/Material needs to be fixed/Key/Key_Original.prefab
+  m_Name: Key_Original
+========
   m_Name: BigCloset_Describable
+>>>>>>>> c5137f8cc0d147c81a397f8c628c508d174ea8fb:DescribablePrefabs/Prefabs/Furniture Prefabs/BigCloset_Describable.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,6 +65,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -134,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Armoire
+  description: A big closet.
   isPickupable: 0
   isOpenable: 0
-  isUniqueOpenable: 0
+  isUniqueInteractable: 0
