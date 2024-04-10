@@ -124,10 +124,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-			if(useFootsteps) 
-			{
-				Handle_Footsteps();
-			}
+			Handle_Footsteps();
 		}
 
 		private void LateUpdate()

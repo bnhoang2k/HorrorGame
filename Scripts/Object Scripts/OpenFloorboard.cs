@@ -18,6 +18,7 @@ public class OpenFloorboard : MonoBehaviour
     private float arm_length;
     private string open_message = "Press E to pry up";
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,13 +38,10 @@ public class OpenFloorboard : MonoBehaviour
         if (!locked && !open) {
             open = !open;
             Destroy(solid_floor);
-
-            gameObject.GetComponent<Describable>().description = "Hole in the floor";
-            
-        } else if (locked) {
-            Debug.Log("Need to add sound and implement 'unlocking' the floorboard in OpenFloorBoard.cs");
-            // TODO: change the description from Floor to Hollow Floorboard once the player makes it make a sound
+            Destroy(gameObject);
         }
+        // the cmpartment is unlocked when the player hears the creak
+        // this code is in FloorboardSound.cs
         
     }
 

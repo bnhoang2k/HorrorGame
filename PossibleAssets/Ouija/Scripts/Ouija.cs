@@ -64,6 +64,8 @@ public class Ouija : MonoBehaviour
             }
         }
         moving = false;
+
+        gameObject.GetComponent<OuijaInteract>().Open();
     }
 
     public void CallSpell(string message) // CALL THIS METHOD TO USE
@@ -87,7 +89,8 @@ public class Ouija : MonoBehaviour
 
     private void Update()
     {
-        if (moving)
+        if (moving) {
             MoveMarker();
+        }
     }
 }

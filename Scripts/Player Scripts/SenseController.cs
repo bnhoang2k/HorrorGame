@@ -26,18 +26,22 @@ public class SenseController : MonoBehaviour
         Describable[] allDescribables = gameController.GetComponent<GameController>().GetDescribables();
         if (isBlind)
         {
-            gameController.GetComponent<ControlLights>().ToggleAllLights(!isBlind);
+            gameController.GetComponent<LightController>().ToggleAllLights(!isBlind);
             player.GetComponentInChildren<Camera>().clearFlags = CameraClearFlags.Color;
             player.GetComponentInChildren<Camera>().backgroundColor = Color.black;
         }
         else
         {
-            gameController.GetComponent<ControlLights>().ToggleAllLights(!isBlind);
+            gameController.GetComponent<LightController>().ToggleAllLights(!isBlind);
             player.GetComponentInChildren<Camera>().clearFlags = CameraClearFlags.Skybox;
         }
         foreach (Describable describable in allDescribables)
         {
-            SetWireFrame(describable.gameObject, isBlind);
+            // make sure the object still exists
+            if (describable) {
+                // turn the object's wire frame on/off
+                SetWireFrame(describable.gameObject, isBlind);
+            }
         }
     }
 
@@ -63,8 +67,7 @@ public class SenseController : MonoBehaviour
 
     public void SetDeaf(bool isDeaf)
     {
-        FirstPersonController playerController = player.transform.Find("PlayerCapsule").GetComponent<FirstPersonController>();
-        playerController.useFootsteps = !isDeaf;
+        gameController.GetComponent<SoundController>().ToggleAllSounds(!isDeaf);
     }
 
 }

@@ -121,8 +121,12 @@ public class InventoryManagement : MonoBehaviour
     }
 
     public bool holdingItem(GameObject obj) {
+        return holdingItem(obj.name);
+    }
+
+    public bool holdingItem(string objName) {
         // get the item from inventory list
-        InventoryItem item = inventory.Find(item => item.itemName == obj.name);
+        InventoryItem item = inventory.Find(item => item.itemName == objName);
 
         // check if it exists and is equipped
         if (item != null && item.equipped == true) {

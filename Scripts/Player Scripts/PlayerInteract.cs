@@ -68,11 +68,18 @@ public class PlayerInteract : MonoBehaviour
                     describable.gameObject.GetComponent<OpenFloorboard>().Open();
                     Debug.Log("Opened " + describable.gameObject.name);
                 }
+                // toggle a light switch
                 else if (describable.gameObject.GetComponent<LightSwitch>()) {
 
                     describable.gameObject.GetComponent<LightSwitch>().Switch();
                     Debug.Log("Switched " + describable.gameObject.name);
 
+                }
+                // interact with the Ouiji board
+                else if (describable.gameObject.GetComponent<OuijaInteract>()) {
+                    
+                    describable.gameObject.GetComponent<OuijaInteract>().DoInput();
+                    Debug.Log("Interacted with " + describable.gameObject.name);
                 }
 
                 GameController.GetComponent<InstructionGUI>().setMessage("");
