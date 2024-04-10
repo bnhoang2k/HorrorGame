@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4310033027480133899}
   - component: {fileID: 6585531003999560156}
   - component: {fileID: 5755519997274778104}
+  - component: {fileID: 2617865784036472524}
   - component: {fileID: 8696416111481689960}
   m_Layer: 0
   m_Name: GameController
@@ -77,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af817430a71f8194f9a51351809aee95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionalLight: {fileID: 0}
 --- !u!114 &6585531003999560156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +101,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c533b7ad4f47d046986ff2b5ede6535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2617865784036472524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519814689947679289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57459a2474cf824597612f7cc19d8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8696416111481689960

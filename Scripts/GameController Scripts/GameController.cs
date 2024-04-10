@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public Light directionalLight;
     private GameObject player;
     private Camera playerCamera;
     private Describable[] allDescribables;

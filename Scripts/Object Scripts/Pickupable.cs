@@ -13,6 +13,7 @@ public class Pickupable : MonoBehaviour
     private Camera player_camera;
     private float arm_length;
     private string grab_message = "Press E to pick up";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,7 @@ public class Pickupable : MonoBehaviour
             if (pickupable)
             {
                 GameController.GetComponent<InstructionGUI>().setMessage(grab_message);
+                Debug.Log("Changed instruction text to: " + grab_message);
             }
         } else {
             // object is out of reach

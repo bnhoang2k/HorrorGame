@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7214350755899499650}
   - component: {fileID: 6817631574151160487}
   - component: {fileID: 5401607019996698282}
+  - component: {fileID: 2253767794199899820}
+  - component: {fileID: 7616704166168564636}
   m_Layer: 0
   m_Name: Hole_Describable
   m_TagString: Untagged
@@ -29,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5, y: -0.16, z: -0.01}
-  m_LocalScale: {x: 1, y: 0.320831, z: 6}
+  m_LocalScale: {x: 1, y: 0.85, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5580458191073655266}
@@ -49,11 +51,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &6817631574151160487
@@ -68,10 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Floor (DEBUG HOLE)
+  description: Floor
   isPickupable: 0
   isOpenable: 0
-  isUniqueInteractable: 0
+  isUniqueInteractable: 1
 --- !u!114 &5401607019996698282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +88,116 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solid_floor: {fileID: 0}
   open: 0
-  locked: 0
+  locked: 1
+--- !u!114 &2253767794199899820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271641006164805035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a411b32df117c94f96d51c2567fff7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creak: {fileID: 8300000, guid: 14e3569812a30c241addb75c9217b335, type: 3}
+--- !u!82 &7616704166168564636
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271641006164805035}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1575034815634348740
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,11 +211,11 @@ GameObject:
   - component: {fileID: 9194411768512784626}
   - component: {fileID: 6469167920996469059}
   - component: {fileID: 543470073689811836}
-  - component: {fileID: 7687664609667341426}
   - component: {fileID: 7878423619522239318}
   - component: {fileID: 1479313251127417588}
   - component: {fileID: 3398210533282451937}
   - component: {fileID: 1475367493629004650}
+  - component: {fileID: 8153339325980574755}
   m_Layer: 0
   m_Name: FloorWithHole_Describable
   m_TagString: Untagged
@@ -3929,22 +4040,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!114 &7687664609667341426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1575034815634348740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  description: Floor
-  isPickupable: 0
-  isOpenable: 0
-  isUniqueInteractable: 0
 --- !u!65 &7878423619522239318
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4029,6 +4124,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.9534762, y: 0.18134046, z: 10}
   m_Center: {x: 2.9829183, y: -0.09066546, z: 0}
+--- !u!114 &8153339325980574755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575034815634348740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86430088067c67d4b9cc8c89e14e4c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solid_floor: {fileID: 0}
+  open: 0
+  locked: 1
 --- !u!1001 &8633510677057922711
 PrefabInstance:
   m_ObjectHideFlags: 0

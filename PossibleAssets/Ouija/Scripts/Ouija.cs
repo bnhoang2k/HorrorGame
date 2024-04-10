@@ -24,6 +24,8 @@ public class Ouija : MonoBehaviour
     public float markerSpeed;
     public float transitionTime;
     public string test;
+    
+    private string lastMessage;
 
     void Start()
     {
@@ -65,11 +67,15 @@ public class Ouija : MonoBehaviour
         }
         moving = false;
 
-        gameObject.GetComponent<OuijaInteract>().Open();
+        if (lastMessage != "*NO@*") {
+            gameObject.GetComponent<OuijaInteract>().Open();
+        }
     }
 
     public void CallSpell(string message) // CALL THIS METHOD TO USE
     {
+        lastMessage = message;
+
         if(!moving)
         StartCoroutine("MoveToPosition", message.ToUpper());
     }

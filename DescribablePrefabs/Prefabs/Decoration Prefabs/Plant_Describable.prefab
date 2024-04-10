@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7992244266730030363}
   - component: {fileID: 3565891498207583516}
   - component: {fileID: 384205836110271680}
+  - component: {fileID: 5700360146552732723}
   m_Layer: 0
   m_Name: Box015
   m_TagString: Untagged
@@ -58,8 +59,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -86,6 +85,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5700360146552732723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074245165528124427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Plant
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueInteractable: 0
 --- !u!1 &4565541643215783766
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,6 +113,7 @@ GameObject:
   - component: {fileID: 6294318167114321740}
   - component: {fileID: 6657865056530815492}
   - component: {fileID: 7028040923363653609}
+  - component: {fileID: 6945832994510347391}
   m_Layer: 0
   m_Name: Box013
   m_TagString: Untagged
@@ -145,8 +161,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -194,6 +208,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 046e520b9b1f0204894e004cff49235c, type: 2}
+--- !u!114 &6945832994510347391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565541643215783766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Plant
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueInteractable: 0
 --- !u!1 &8208387798866642484
 GameObject:
   m_ObjectHideFlags: 0

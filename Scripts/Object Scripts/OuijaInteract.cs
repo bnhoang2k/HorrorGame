@@ -60,7 +60,7 @@ public class OuijaInteract : MonoBehaviour
                 Debug.Log("Code correct, unlocking bookcase");
             } else {
                 // spell out "NO GOODBYE" on the ouija board, starting and ending at the center
-                gameObject.GetComponent<Ouija>().CallSpell("*NO*@*");
+                gameObject.GetComponent<Ouija>().CallSpell("*NO@*");
             }
         }
     }
