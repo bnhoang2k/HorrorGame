@@ -60,12 +60,15 @@ GameObject:
   - component: {fileID: 5876318948736789926}
   - component: {fileID: 6800043540175601332}
   - component: {fileID: 2464921126568019667}
+  - component: {fileID: 9199789218633311613}
+  - component: {fileID: 2077835370769249482}
+  - component: {fileID: 3286096924339489431}
   m_Layer: 0
-  m_Name: Drawer (1)
+  m_Name: Bottom Drawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2651361178727012573
 Transform:
@@ -76,7 +79,7 @@ Transform:
   m_GameObject: {fileID: 2312468661686974018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5959997, y: -0.038999975, z: 0.44099998}
+  m_LocalPosition: {x: -0.5899992, y: -0.02999908, z: 0.22518682}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107,6 +110,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -144,10 +149,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Desk drawer
+  description: Bottom Desk Drawer
   isPickupable: 0
   isOpenable: 0
-  isUniqueInteractable: 0
+  isUniqueInteractable: 1
+--- !u!114 &9199789218633311613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2312468661686974018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1375211a50ecc4a4ba7717d4562fb6cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ANI: {fileID: 2077835370769249482}
+--- !u!95 &2077835370769249482
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2312468661686974018}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 10f088493be308f4c9f5c9b1a98256a8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!64 &3286096924339489431
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2312468661686974018}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 8c88b83de44a0b14f88f7d8cf4ce95c0, type: 2}
 --- !u!1 &2541545467186279297
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +222,7 @@ GameObject:
   - component: {fileID: 5160893177691170313}
   - component: {fileID: 3033142284919403319}
   - component: {fileID: 8591050437547789617}
+  - component: {fileID: 6220888788377565934}
   m_Layer: 0
   m_Name: Teacher_Desk
   m_TagString: Untagged
@@ -207,6 +270,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -248,6 +313,28 @@ MonoBehaviour:
   isPickupable: 0
   isOpenable: 0
   isUniqueInteractable: 0
+--- !u!64 &6220888788377565934
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2541545467186279297}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: adefea9ae72632d4abd0b3e4fe3700b3, type: 2}
 --- !u!1 &7198660495386386707
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,12 +347,15 @@ GameObject:
   - component: {fileID: 7287288276199587741}
   - component: {fileID: 809998457824363625}
   - component: {fileID: 5870464533943971183}
+  - component: {fileID: 2030916650781172442}
+  - component: {fileID: 3712893714810678455}
+  - component: {fileID: 652101056050286384}
   m_Layer: 0
-  m_Name: Drawer (2)
+  m_Name: Top Drawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4362926246513745397
 Transform:
@@ -276,7 +366,7 @@ Transform:
   m_GameObject: {fileID: 7198660495386386707}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5909996, y: 0.21900004, z: 0.342}
+  m_LocalPosition: {x: -0.5899992, y: 0.2166676, z: 0.22518682}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -307,6 +397,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -344,7 +436,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Desk drawer
+  description: Top Desk Drawer
   isPickupable: 0
   isOpenable: 0
-  isUniqueInteractable: 0
+  isUniqueInteractable: 1
+--- !u!114 &2030916650781172442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7198660495386386707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1375211a50ecc4a4ba7717d4562fb6cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ANI: {fileID: 3712893714810678455}
+--- !u!95 &3712893714810678455
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7198660495386386707}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 579f39180bf0b7b419ab6f9f23b44f08, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!64 &652101056050286384
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7198660495386386707}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 8c88b83de44a0b14f88f7d8cf4ce95c0, type: 2}
