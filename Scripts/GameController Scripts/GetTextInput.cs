@@ -26,13 +26,10 @@ public class GetTextInput : MonoBehaviour
     public void EnableInput(bool enable) {
         gameObject.SetActive(enable);
         inputField.ActivateInputField();
-
-        Debug.Log(gameObject.name + " active: " + enable);
     }
 
     public void GetInput(string input) {
         inputText = input;
-        Debug.Log("Text input: " + input);
 
         ouija.GetComponent<OuijaInteract>().Interact(input);
     }

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class OuijaInteract : MonoBehaviour
 {
     public GetTextInput getInput;
-    public string code;
+    public TMP_Text codeText;
+    private string code;
     private GameObject GameController;
     private Camera player_camera;
     private float arm_length;
@@ -22,6 +24,7 @@ public class OuijaInteract : MonoBehaviour
         // find the camera and arm length
         player_camera = Camera.main;
         arm_length = GameObject.Find("Player").GetComponent<Reach>().arm_length;
+        code = codeText.text.ToLower();
     }
 
     // Update is called once per frame
@@ -45,7 +48,7 @@ public class OuijaInteract : MonoBehaviour
         gameObject.GetComponent<Ouija>().CallSpell(text);
 
         // store what was input into the oujia
-        input = text;
+        input = text.ToLower();
 
     }
 
@@ -61,6 +64,7 @@ public class OuijaInteract : MonoBehaviour
             } else {
                 // spell out "NO GOODBYE" on the ouija board, starting and ending at the center
                 gameObject.GetComponent<Ouija>().CallSpell("*NO@*");
+                Debug.Log("Code incorrect");
             }
         }
     }

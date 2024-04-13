@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class LightController : MonoBehaviour
 {
     public class LightControl {
         public Light light;
-        public float original_range;
+        public float original_intensity;
 
-        public LightControl(Light l, float r) { light = l; original_range = r; }
+        public LightControl(Light l, float i) { light = l; original_intensity = i; }
     }
 
     private Light[] all_base_lights;
@@ -19,12 +20,27 @@ public class LightController : MonoBehaviour
     {
         // find all the lights in the scene
         all_base_lights = FindObjectsOfType<Light>();
+
         all_lights = new List<LightControl>();
 
         foreach(Light light in all_base_lights) {
-            LightControl lc = new LightControl(light, light.range);
+            LightControl lc = new LightControl(light, light.intensity);
             all_lights.Add(lc);
         }
+
+        // DEBUGGING //
+        string base_lights = "";
+        string all_l = "";
+        foreach (Light light in all_base_lights) {
+            base_lights += ", " + light.name;
+        }
+        foreach (LightControl lc in all_lights) {
+            all_l += ", " + lc.light.name + ": " + lc.original_intensity;
+        }
+        Debug.Log("Base lights: " + base_lights);
+        Debug.Log("LC lights: " + all_l);
+
+        ////
 
         // turn all the lights off at first
         ToggleAllLights(false);
@@ -39,12 +55,12 @@ public class LightController : MonoBehaviour
     public void ToggleAllLights(bool on) {
 
         foreach (LightControl lc in all_lights) {
-            // if the lights are off, set the range to 0
+            // if the lights are off, set the intensity to 0
             if (!on) {
-                lc.light.range = 0;
+                lc.light.intensity = 0;
             } else {
-                // set the range to the original range
-                lc.light.range = lc.original_range;
+                // set the intensity to the original instensity
+                lc.light.intensity = lc.original_intensity;
             }
         }
     }

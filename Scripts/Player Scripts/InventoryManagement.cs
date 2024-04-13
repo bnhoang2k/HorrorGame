@@ -114,7 +114,6 @@ public class InventoryManagement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C)) {
             Debug.Log("Cheat activated");
             Actions.UpdateInventory?.Invoke(GameObject.Find("Eye_Describable").GetComponent<Describable>());
-            Actions.UpdateInventory?.Invoke(GameObject.Find("Key_Describable").GetComponent<Describable>());
             Actions.UpdateInventory?.Invoke(GameObject.Find("Ear_Describable").GetComponent<Describable>());
         }
 

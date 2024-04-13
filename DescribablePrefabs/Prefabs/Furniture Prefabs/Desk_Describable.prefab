@@ -27,11 +27,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.9, y: -0.40000004, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2651361178727012573}
   - {fileID: 4362926246513745397}
+  - {fileID: 2651361178727012573}
   - {fileID: 7382812705989790369}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60,9 +60,9 @@ GameObject:
   - component: {fileID: 5876318948736789926}
   - component: {fileID: 6800043540175601332}
   - component: {fileID: 2464921126568019667}
-  - component: {fileID: 9199789218633311613}
   - component: {fileID: 2077835370769249482}
   - component: {fileID: 3286096924339489431}
+  - component: {fileID: 8633944780237063239}
   m_Layer: 0
   m_Name: Bottom Drawer
   m_TagString: Untagged
@@ -110,8 +110,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -149,26 +147,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Bottom Desk Drawer
+  description: Desk drawer
   isPickupable: 0
-  isOpenable: 0
-  isUniqueInteractable: 1
---- !u!114 &9199789218633311613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2312468661686974018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1375211a50ecc4a4ba7717d4562fb6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ANI: {fileID: 2077835370769249482}
+  isOpenable: 1
+  isUniqueInteractable: 0
 --- !u!95 &2077835370769249482
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -182,7 +167,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -210,6 +194,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8c88b83de44a0b14f88f7d8cf4ce95c0, type: 2}
+--- !u!114 &8633944780237063239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2312468661686974018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9f6df5ac2aa5d4aafa38e8c96539fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root_name: Bottom Drawer
+  key: {fileID: 0}
+  open: 0
+  locked: 0
 --- !u!1 &2541545467186279297
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,8 +270,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -347,8 +345,8 @@ GameObject:
   - component: {fileID: 7287288276199587741}
   - component: {fileID: 809998457824363625}
   - component: {fileID: 5870464533943971183}
-  - component: {fileID: 2030916650781172442}
   - component: {fileID: 3712893714810678455}
+  - component: {fileID: 6788298693368377509}
   - component: {fileID: 652101056050286384}
   m_Layer: 0
   m_Name: Top Drawer
@@ -369,7 +367,8 @@ Transform:
   m_LocalPosition: {x: -0.5899992, y: 0.2166676, z: 0.22518682}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 925318595371074470}
   m_Father: {fileID: 641850144293783573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7287288276199587741
@@ -397,8 +396,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -436,26 +433,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Top Desk Drawer
+  description: Desk drawer
   isPickupable: 0
-  isOpenable: 0
-  isUniqueInteractable: 1
---- !u!114 &2030916650781172442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7198660495386386707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1375211a50ecc4a4ba7717d4562fb6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ANI: {fileID: 3712893714810678455}
+  isOpenable: 1
+  isUniqueInteractable: 0
 --- !u!95 &3712893714810678455
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -469,12 +453,27 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6788298693368377509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7198660495386386707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9f6df5ac2aa5d4aafa38e8c96539fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root_name: Top Drawer
+  key: {fileID: 0}
+  open: 0
+  locked: 1
 --- !u!64 &652101056050286384
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -497,3 +496,65 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8c88b83de44a0b14f88f7d8cf4ce95c0, type: 2}
+--- !u!1001 &7266806753588582282
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4362926246513745397}
+    m_Modifications:
+    - target: {fileID: 3224720142225627822, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_Name
+      value: DrawerLock_Describable
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.13590002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.011600003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.17799997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+--- !u!4 &925318595371074470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7498359658351334444, guid: eae5e423c750ab7428f670df4be99ba6, type: 3}
+  m_PrefabInstance: {fileID: 7266806753588582282}
+  m_PrefabAsset: {fileID: 0}
