@@ -1,24 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class OpenFloorboard : MonoBehaviour
+public class MissingBookcaseItem : MonoBehaviour
 {
-    // All openable objects need an Animator on the root object
-    // The root_name is the name of which object has the Animator
-    // The Animator must have a boolean "open" that controls the animation
-
-    // Any other objects need to have it harcoded to call their unique script
-
-    public GameObject solid_floor;
-    public GameObject open_floor;
+    public GameObject missingItem;
+    public GameObject bookcasePuzzle;
     private GameObject GameController;
-    public bool open = false;
-    public bool locked = true;
     private Camera player_camera;
     private float arm_length;
-    private string open_message = "Press E to pry up";
-
+    private string place_message = "Press E to place";
 
     // Start is called before the first frame update
     void Start()
@@ -29,27 +21,26 @@ public class OpenFloorboard : MonoBehaviour
         player_camera = Camera.main;
         arm_length = GameObject.Find("Player").GetComponent<Reach>().arm_length;
 
-        // deactivate self (floor with hole in it)
-        open_floor.GetComponent<Renderer>().enabled = false;
+        // set self as invisible
+        gameObject.GetComponent<Renderer>().enabled = false;
     }
 
     // Update is called once per frame
-    void Update() {}
+    void Update()
+    {
+        
+    }
 
-    public void Open() {
-        
-        // the object is unlocked, so it can be opened
-        if (!locked && !open) {
-            open = !open;
-            // activate floor
-            open_floor.GetComponent<Renderer>().enabled = true;
-            // destroy solid floor and self (cube collider in the hole)
-            Destroy(solid_floor);
-            Destroy(gameObject);
+    public void Place() {
+
+        if (GameController.GetComponent<InventoryManagement>().holdingItem(missingItem)) {
+            // make self visible
+            gameObject.GetComponent<Renderer>().enabled = true;
+
+            // tell the bookcase the object is no longer missing
+            bookcasePuzzle.GetComponent<OpenBookcase>().RemoveMissingItem(gameObject);
         }
-        // the compartment is unlocked when the player hears the creak
-        // this code is in FloorboardSound.cs
-        
+
     }
 
     private void OnMouseOver() {
@@ -62,12 +53,12 @@ public class OpenFloorboard : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, arm_length)) {
 
-            OpenFloorboard floorboard = hit.collider.GetComponent<OpenFloorboard>();
+            MissingBookcaseItem item = hit.collider.GetComponent<MissingBookcaseItem>();
             // if the object is within reach, the player can feel it
-            if (floorboard)
+            if (item)
             {
-                if (!locked && !open) {
-                    GameController.GetComponent<InstructionGUI>().setMessage(open_message);
+                if (GameController.GetComponent<InventoryManagement>().holdingItem(missingItem)) {
+                    GameController.GetComponent<InstructionGUI>().setMessage(place_message);
                 }
             }
         } else {

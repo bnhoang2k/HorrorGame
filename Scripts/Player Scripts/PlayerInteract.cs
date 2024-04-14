@@ -81,12 +81,11 @@ public class PlayerInteract : MonoBehaviour
                     describable.gameObject.GetComponent<OuijaInteract>().DoInput();
                     Debug.Log("Interacted with " + describable.gameObject.name);
                 }
-                // interact with Desk_Describable
-                else if (describable.gameObject.GetComponent<OpenDrawer>()) {
-                    bool open = describable.gameObject.GetComponent<OpenDrawer>().GetState();
-                    if (open) {describable.gameObject.GetComponent<OpenDrawer>().Close();}
-                    else {describable.gameObject.GetComponent<OpenDrawer>().Open();}
-                    Debug.Log("Opened " + describable.gameObject.name);
+                // place a missing item on the bookcase
+                else if (describable.gameObject.GetComponent<MissingBookcaseItem>()) {
+
+                    describable.gameObject.GetComponent<MissingBookcaseItem>().Place();
+                    Debug.Log("Placed with " + describable.gameObject.name);
                 }
 
                 GameController.GetComponent<InstructionGUI>().setMessage("");
