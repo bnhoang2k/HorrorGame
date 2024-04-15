@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class MissingBookcaseItem : MonoBehaviour
 {
     public GameObject missingItem;
-    public GameObject bookcasePuzzle;
+    private GameObject bookcasePuzzle;
     private GameObject GameController;
     private Camera player_camera;
     private float arm_length;
@@ -23,6 +23,9 @@ public class MissingBookcaseItem : MonoBehaviour
 
         // set self as invisible
         gameObject.GetComponent<Renderer>().enabled = false;
+
+        // get bookcase puzzle
+        bookcasePuzzle = GameObject.Find("BigBookcasePuzzle");
     }
 
     // Update is called once per frame
@@ -39,6 +42,10 @@ public class MissingBookcaseItem : MonoBehaviour
 
             // tell the bookcase the object is no longer missing
             bookcasePuzzle.GetComponent<OpenBookcase>().RemoveMissingItem(gameObject);
+
+            // destroy the item and remove from inventory
+            GameController.GetComponent<InventoryManagement>().RemoveItem(missingItem);
+            Destroy(missingItem);
         }
 
     }

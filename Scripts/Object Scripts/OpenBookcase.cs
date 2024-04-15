@@ -5,15 +5,17 @@ using UnityEngine;
 public class OpenBookcase : MonoBehaviour
 {
     public GameObject openableBookcase;
-    public GameObject[] missingItems;
+    private MissingBookcaseItem[] missingItems;
     private List<GameObject> missingItemsList;
     // Start is called before the first frame update
     void Start()
     {
+        missingItems = FindObjectsOfType<MissingBookcaseItem>();
+
         missingItemsList = new List<GameObject>();
 
-        foreach (GameObject item in missingItems) {
-            missingItemsList.Add(item);
+        foreach (MissingBookcaseItem item in missingItems) {
+            missingItemsList.Add(item.gameObject);
         }
     }
 

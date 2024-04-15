@@ -7,16 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Plant_Describable
-  m_Shader: {fileID: 4800000, guid: 9e76aee9f9b45cb4ab4566a324fc18e4, type: 3}
+  m_Name: Glass_Jar_02
+  m_Shader: {fileID: 4800000, guid: 1829b7a5a473bbf4192595624aafa19d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - WIREFRAME_DISTANCE_FADE_ON
-  - WIREFRAME_NORMALIZE_EDGES_ON
-  - WIREFRAME_TRY_QUAD_ON
-  m_InvalidKeywords:
-  - _ALPHATEST_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -27,40 +24,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d41077540bcfac54a9ed1e1076d50fef, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 96674c4c0c3248708166abf9d9fd90a7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Wireframe_AmbientOcclusionMap:
@@ -81,23 +46,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BumpScale: 1
     - _Cull: 2
     - _CurvedWorldTitle: 0
-    - _Cutoff: 0.97
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
     - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 1
-    - _Mode: 1
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
+    - _Metallic: 0
     - _WireframeShader_Diameter: 1
     - _WireframeShader_Smoothness: 0
     - _WireframeShader_Thickness: 0.01
@@ -107,7 +59,7 @@ Material:
     - _Wireframe_BumpEnumID: 0
     - _Wireframe_ColorEmissionStrength: 0
     - _Wireframe_DistanceFade: 0
-    - _Wireframe_DistanceFadeEnd: 2.5
+    - _Wireframe_DistanceFadeEnd: 3
     - _Wireframe_DistanceFadeStart: 2
     - _Wireframe_DynamicMaskEdgeSmooth: 0
     - _Wireframe_DynamicMaskEffectsBaseTexEnumID: 0
@@ -119,12 +71,11 @@ Material:
     - _Wireframe_FresnelEnumID: 0
     - _Wireframe_FresnelInvert: 0
     - _Wireframe_FresnelPow: 1
-    - _Wireframe_ImprovedBlendEnumID: 0
     - _Wireframe_IncludeLightEnumID: 0
     - _Wireframe_MetaPassMultiplier: 0
     - _Wireframe_NormalReconstruct: 0
     - _Wireframe_NormalScale: 1
-    - _Wireframe_NormalizeEdges: 1
+    - _Wireframe_NormalizeEdges: 0
     - _Wireframe_RenderingOptions_PBREnumID: 0
     - _Wireframe_Tessellation: 1
     - _Wireframe_TessellationEnumID: 0
@@ -144,12 +95,10 @@ Material:
     - _Wireframe_Transparency_M_Options: 0
     - _Wireframe_TransparentTex_Alpha_Offset: 0
     - _Wireframe_TransparentTex_Invert: 0
-    - _Wireframe_TryQuad: 1
+    - _Wireframe_TryQuad: 0
     - _Wireframe_WireVertexColor: 0
-    - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Wireframe_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Wireframe_ColorTexture_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _Wireframe_MainTex_Scroll: {r: 0, g: 0, b: 0, a: 0}

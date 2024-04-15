@@ -63,7 +63,9 @@ public class Openable : MonoBehaviour
             // unlock the object
             locked = false;
 
-            // maybe destroy the key after and remove from inventory?
+            // destroy the key and remove from inventory
+            GameController.GetComponent<InventoryManagement>().RemoveItem(key);
+            Destroy(key);
         }  
     }
 

@@ -42,8 +42,6 @@ public class PlayerInteract : MonoBehaviour
             if (describable && describable.isPickupable)
             {
                 Actions.UpdateInventory(describable);
-                // Destroy(describable.gameObject);
-                describable.gameObject.SetActive(false);
 
                 GameController.GetComponent<InstructionGUI>().setMessage("");
                 Debug.Log("Grabbed " + describable.gameObject.name);

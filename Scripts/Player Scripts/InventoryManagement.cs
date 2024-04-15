@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,28 +22,36 @@ public class InventoryItem {
     }
 }
 
+public class InventorySlot {
+    public GameObject slot;
+    public int index;
+    public bool full = false;
+    public InventorySlot(GameObject s, int i) { slot = s; index = i; }
+}
+
 
 
 public class InventoryManagement : MonoBehaviour
 {
-    
+    private GameObject GameController;
     public List<InventoryItem> inventory = new List<InventoryItem>();
-    public List<GameObject> invSlots = new List<GameObject>();
+    public List<InventorySlot> invSlots = new List<InventorySlot>();
     private int num_slots = 5;
     public SenseController senseController;
     // index of the next open slot in the list, ears = 0 and eyes = 1
-    private int next_slot = 2;
-
-    // TODO: may need to add a check to make sure the inventory doesn't overfill (or just add as many slots as items that can be picked up)
-    // TODO: need to figure out how UpdateSlot will work when removing an item
+    private int slot_start = 2;
     
     // Start is called before the first frame update
     void Start() {
         // initialize inventory slots
         for (int i = 0; i < num_slots; i++) {
             
-            invSlots.Add(GameObject.Find("Slot" + (i+1).ToString()));
+            InventorySlot slot = new InventorySlot(GameObject.Find("Slot" + (i+1).ToString()), i);
+            invSlots.Add(slot);
         }
+
+        // get the GameController
+        GameController = GameObject.Find("GameController");
     }
 
     // Update is called once per frame
@@ -81,7 +90,7 @@ public class InventoryManagement : MonoBehaviour
 
         // check for equipping slot3
         if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            GameObject slot = invSlots[2];
+            GameObject slot = invSlots[2].slot;
             InventoryItem item = inventory.Find(item => item.slot == slot);
             item.equipped = !item.equipped;
             Actions.UpdateItemEquipped?.Invoke(item);
@@ -89,7 +98,7 @@ public class InventoryManagement : MonoBehaviour
 
         // check for equipping slot4
         if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            GameObject slot = invSlots[3];
+            GameObject slot = invSlots[3].slot;
             InventoryItem item = inventory.Find(item => item.slot == slot);
             item.equipped = !item.equipped;
             Actions.UpdateItemEquipped?.Invoke(item);
@@ -97,7 +106,7 @@ public class InventoryManagement : MonoBehaviour
 
         // check for equipping slot5
         if (Input.GetKeyDown(KeyCode.Alpha5)) {
-            GameObject slot = invSlots[4];
+            GameObject slot = invSlots[4].slot;
             InventoryItem item = inventory.Find(item => item.slot == slot);
             item.equipped = !item.equipped;
             Actions.UpdateItemEquipped?.Invoke(item);
@@ -160,12 +169,37 @@ public class InventoryManagement : MonoBehaviour
         int slot;
         if (item.name == "Eye_Describable") {slot = 1;}
         else if (item.name == "Ear_Describable") {slot = 0;}
-        else {slot = next_slot; next_slot++;}
+        else {
+            slot = GetNextEmptySlotIndex();
+            if (slot < 0) {
+                Debug.Log("Inventory full");
+                return;
+            }
+        }
 
-        InventoryItem new_item = new InventoryItem(item.name, invSlots[slot], icon, x, y, x_scale, y_scale);
+        InventoryItem new_item = new InventoryItem(item.name, invSlots[slot].slot, icon, x, y, x_scale, y_scale);
+        invSlots[slot].full = true;
         inventory.Add(new_item);
         // Debug.Log("Added " + item.name + " to inventory");
         UpdateSlot(new_item);
+        // deactivate the object in the world (do not destory)
+        item.gameObject.SetActive(false);
+    }
+
+    public void RemoveItem(GameObject obj) {
+
+        // get the item from inventory list
+        InventoryItem item = inventory.Find(item => item.itemName == obj.name);
+        // make sure the item is not equipped
+        item.equipped = !item.equipped;
+        Actions.UpdateItemEquipped?.Invoke(item);
+        // remove the icon from the inventory slot and mark slot as empty
+        InventorySlot slot = invSlots.Find(slot => slot.slot.name == item.slot.name);
+        slot.full = false;
+        GameObject icon = GameObject.Find(item.slot.name + "/ItemIcon");
+        Destroy(icon);
+        // remove the item from inventory
+        inventory.Remove(item);
     }
 
     public void UpdateSlot(InventoryItem item) {
@@ -181,6 +215,18 @@ public class InventoryManagement : MonoBehaviour
         // move and size the image appropriately
         slotImage.GetComponent<RectTransform>().localPosition = new Vector3(item.x, item.y, 0);
         slotImage.GetComponent<RectTransform>().localScale = new Vector3(item.x_scale, item.y_scale, 1);
+    }
+
+    public int GetNextEmptySlotIndex() {
+        foreach (InventorySlot slot in invSlots) {
+            // if the slot is not reserved for the eyes and ears
+            // and if the slot is empty
+            if (slot.index >= slot_start && !slot.full) { 
+                return slot.index;
+            }
+        }
+        // no slots are empty
+        return -1;
     }
 
 }
