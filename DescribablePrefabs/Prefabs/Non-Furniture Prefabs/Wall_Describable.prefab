@@ -51,6 +51,7 @@ MonoBehaviour:
   description: Wall
   isPickupable: 0
   isOpenable: 0
+  isUniqueInteractable: 0
 --- !u!33 &3476686591433645376
 MeshFilter:
   m_ObjectHideFlags: 0

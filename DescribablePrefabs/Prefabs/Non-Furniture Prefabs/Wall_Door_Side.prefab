@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3698406514879735384}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0000009536743, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53,6 +53,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1197,7 +1199,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 8
+  m_VersionIndex: 11
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1247,6 +1249,7 @@ MonoBehaviour:
   description: Wall
   isPickupable: 0
   isOpenable: 0
+  isUniqueInteractable: 0
 --- !u!1 &4316825927384037005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1290,7 +1293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1498204609983339016, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: m_Name
-      value: Bedroom1_Door
+      value: Door1
       objectReference: {fileID: 0}
     - target: {fileID: 2778696782159507809, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1326,15 +1329,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2778696782159507809, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2778696782159507809, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2778696782159507809, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -89.981
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 2778696782159507809, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1350,7 +1353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7708798338533341041, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: root_name
-      value: Bedroom1_Door
+      value: Door1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

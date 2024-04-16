@@ -284,7 +284,7 @@ namespace StarterAssets
 			{
 				if (Physics.Raycast(_controller.transform.position, Vector3.down, out RaycastHit hit, 3))
 				{
-					footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length)]);
+					footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length - 1)]);
 				}
 				footstepTimer = GetCurrentOffset;
 			}

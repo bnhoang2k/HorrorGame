@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6280196502243308866}
   - component: {fileID: 5590345150672542043}
   - component: {fileID: 604189811987163904}
+  - component: {fileID: 8970095103332392058}
   m_Layer: 0
   m_Name: MirrorComode_Describable
   m_TagString: Untagged
@@ -51,6 +52,7 @@ MonoBehaviour:
   description: A dresser with a mirror
   isPickupable: 0
   isOpenable: 0
+  isUniqueInteractable: 0
 --- !u!33 &1960941709227881241
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -138,3 +140,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectPath: Assets/DescribablePrefabs/MirrorComode_Describable_prefab/MirrorComode_Describable.prefab
+--- !u!208 &8970095103332392058
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495985261667495536}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1, y: 1.1730001, z: 0.33900002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.1860001, z: 1.0550001}
+  m_TimeToStationary: 0.5
