@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -62,21 +63,27 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
+        KillClose();
         enemyMovementController.LookAtPlayer();
         CheckForPlayer();
         CheckForEnemy();
-        if (!enemyDetected && !isStalking)
+        if (!enemyDetected && !isStalking && !isHunting)
         {
             enemyMovementController.MoveToPlayer();
         }
         else if (isStalking)
         {
             StalkPlayer();
+            Debug.Log("Stalking Player: " + timeStalked + " seconds | Gaze Timer: " + gazeTimer + " seconds");
         }
         if (timeStalked >= killTime)
         {
             isStalking = false;
-            isHunting = true;
+            if (!isHunting)
+            {
+                isHunting = true;
+                enemyMovementController.HuntPlayer();
+            }
         }
         if (gazeTimer >= gazeDuration)
         {
@@ -85,14 +92,20 @@ public class EnemyBehavior : MonoBehaviour
         }
         if (isHunting)
         {
-            enemyMovementController.HuntPlayer();
+            enemyMovementController.UpdateHunting();
         }
     }
 
-    // Get player detected
+    // Get enemy detected
     public bool GetEnemyDetected()
     {
         return enemyDetected;
+    }
+    
+    // Get player detected
+    public bool GetPlayerDetected()
+    {
+        return playerDetected;
     }
 
     // Change value of isStalking
@@ -227,12 +240,27 @@ public class EnemyBehavior : MonoBehaviour
         }
         if (holdingEye)
         {
-            timeStalked += Time.deltaTime * 3;
+            timeStalked += Time.deltaTime * 10;
         }
-        else
+        else if (!holdingEye && playerDetected && !enemyDetected)
         {
             timeStalked += Time.deltaTime;
         }
+    }
+
+    public void KillClose()
+    {
+        Debug.Log("bruh");
+        if (Vector3.Distance(transform.position, playerCapsule.transform.position) < 0.5f)
+        {
+            KillPlayer();
+        }
+    }
+
+    public void KillPlayer()
+    {
+        EditorApplication.isPlaying = false;
+        EditorApplication.ExitPlaymode();
     }
 
     public void RestartCycle()

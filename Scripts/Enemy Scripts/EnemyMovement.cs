@@ -107,9 +107,9 @@ public class EnemyMovement : MonoBehaviour
 
         // Set the destination of the enemy to the target position
         navAgent.SetDestination(targetPosition);
-        if ((Vector3.Distance(transform.position, playerPosition) > stopRadius) && !enemyBehaviorController.GetEnemyDetected())
+        if ((Vector3.Distance(transform.position, playerPosition) > stopRadius) && !enemyBehaviorController.GetPlayerDetected())
         {
-            NavSpeedToAnim(maxSpeed);
+            NavSpeedToAnim(maxSpeed - 2.5f);
         }
         else
         {
@@ -123,8 +123,20 @@ public class EnemyMovement : MonoBehaviour
     public void HuntPlayer()
     {
         // Set the destination of the enemy to the player's position
-        navAgent.SetDestination(playerCapsule.transform.position);
+        navAgent.destination = playerCapsule.transform.position; // Set the destination only once or conditionally.
+        navAgent.isStopped = false;
         NavSpeedToAnim(maxSpeed * 1.5f);
+        enemyBehaviorController.KillClose();
+    }
+
+    public void UpdateHunting()
+    {
+        if (Vector3.Distance(navAgent.destination, playerCapsule.transform.position) > 0.5f)
+        {
+            navAgent.ResetPath();
+            navAgent.SetDestination(playerCapsule.transform.position);
+        }
+        enemyBehaviorController.KillClose();
     }
 
     // Makes the enemy rotate to look at the player when called

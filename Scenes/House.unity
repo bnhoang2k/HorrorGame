@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 343568e83102384498f6bbcd811634a3, type: 2}
   m_LightingSettings: {fileID: 904436589}
 --- !u!196 &4
 NavMeshSettings:
@@ -5885,28 +5885,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 950579350111316954, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
   m_PrefabInstance: {fileID: 6825208570491953720}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1127082836
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127082830}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -371481341812892972, guid: 014342cbdc59b314597bd6508bcc4612, type: 3}
 --- !u!114 &1127082837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5922,7 +5900,7 @@ MonoBehaviour:
   player: {fileID: 439036079}
   playerCapsule: {fileID: 795562724}
   aiCamera: {fileID: 129109921}
-  stopRadius: 3
+  stopRadius: 5
 --- !u!114 &1127082838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5941,9 +5919,30 @@ MonoBehaviour:
   gameController: {fileID: 162307470}
   HoldingCell: {fileID: 1036456840}
   detectionDistance: 10
-  killTime: 3
+  killTime: 15
   gazeDuration: 3
-  cooldownTimer: 10
+  cooldownTimer: 0
+--- !u!65 &1127082839
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127082830}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.79306793, y: 2.121312, z: 0.98976135}
+  m_Center: {x: -0.019001007, y: 1.0574986, z: 0.18180084}
 --- !u!1 &1131414111
 GameObject:
   m_ObjectHideFlags: 0
@@ -5959,7 +5958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1131414112
 Transform:
   m_ObjectHideFlags: 0
@@ -10175,7 +10174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5232183902962818988, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6402229840419069347, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: aiHead
@@ -10234,13 +10233,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 950579350111316954, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1127082836}
-    - targetCorrespondingSourceObject: {fileID: 950579350111316954, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1127082838}
     - targetCorrespondingSourceObject: {fileID: 950579350111316954, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1127082837}
+    - targetCorrespondingSourceObject: {fileID: 950579350111316954, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1127082839}
     - targetCorrespondingSourceObject: {fileID: 5468622845847110626, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 129109921}
