@@ -1,123 +1,140 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    // Scene Variables
+    // Scene Variables: Stuff we may need from the Scene
     public GameObject player;
     public GameObject playerCapsule;
-    public Camera aiHead;
+    private Camera mainCamera;
+    public Camera aiCamera;
 
-    // Spatial Variables
+    // Spatial Variables: Navigation, Physics, Raycast, etc.
     private NavMeshAgent navAgent;
 
-    // Enemy Variables
+    // Enemy Variables: Anything related to the enemy
     private EnemyBehavior enemyBehaviorController;
     private Animator animator;
 
-    // Player Interaction Variables
+    private float maxSpeed;
+
+    // Player Interaction Variables: Anything related to the player-enemy interaction
     public float stopRadius = 5.0f;
-    // Start is called before the first frame update
+
     void Start()
     {
-        animator = GetComponent<Animator>();
+        // Scene Variables
+        mainCamera = Camera.main;
+
+        // Spatial Variables
         navAgent = GetComponent<NavMeshAgent>();
+
+        // Enemy Variables
         enemyBehaviorController = GetComponent<EnemyBehavior>();
-        animator.SetBool("isIdle", true);
-        animator.SetBool("isWalking", false);
-        animator.SetBool("isRunning", false);
-    }
-    void Update()
-    {
+        animator = GetComponent<Animator>();
+        FirstPersonController playerController = playerCapsule.GetComponent<FirstPersonController>();
+        maxSpeed = playerController.MoveSpeed;
 
+        // Set the enemy to idle
+        SetIdle();
     }
 
+    // Animator Fuctions
     public void SetIdle()
     {
+        animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
-        animator.SetBool("isIdle", true);
     }
 
     public void SetWalking()
     {
+        animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", true);
         animator.SetBool("isRunning", false);
-        animator.SetBool("isIdle", false);
     }
 
     public void SetRunning()
     {
+        animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", true);
-        animator.SetBool("isIdle", false);
     }
 
+    public void NavSpeedToAnim(float speedValue)
+    {
+        if (speedValue == 0)
+        {
+            SetIdle();
+        }
+        else if (speedValue > 0 && speedValue <= maxSpeed)
+        {
+            SetWalking();
+        }
+        else if (speedValue > maxSpeed)
+        {
+            SetRunning();
+        }
+        navAgent.speed = speedValue;
+    }
+
+    // Find a path to the player and the stride accordingly
     public void MoveToPlayer()
     {
+        /*
+        The goal of this function is to create a path in which the enemy will try to sneak
+        up behind the player.
+        */
         Vector3 playerPosition = playerCapsule.transform.position;
         Vector3 playerForward = playerCapsule.transform.forward;
-        float playerFOV = player.GetComponentInChildren<Camera>().fieldOfView;
-        Vector3 toPlayer = transform.position - playerPosition;
-
-        // Calculate distance behind the player to sneak up to
-        Vector3 targetPosition = (playerPosition - playerForward) * stopRadius;
-
-        // Check if the point is within the player's fieldOfView
-        if (Vector3.Angle(-toPlayer, playerForward) <= playerFOV / 2)
+        Vector3 targetPosition = playerPosition - (playerForward * stopRadius);
+        
+        // Check if targetPosition is within player's field of view
+        Vector3 fromPlayerToTargetDir = (targetPosition - playerPosition).normalized;
+        float angle = Vector3.Angle(playerForward, fromPlayerToTargetDir);
+        float playerFOV = mainCamera.fieldOfView;
+        if (angle <= playerFOV / 2)
         {
             // If within FOV, find a new point to approach from
-            targetPosition = playerPosition + Quaternion.Euler(0, 90, 0) * -playerForward * stopRadius * 1.5f; // Approach from side
+            NavSpeedToAnim(0.0f);
+            navAgent.isStopped = true;
+            navAgent.SetDestination(transform.position);
+            return;
         }
 
-        // Check distance and set navigation
-        if (Vector3.Distance(transform.position, playerPosition) > stopRadius)
+        // Set the destination of the enemy to the target position
+        navAgent.SetDestination(targetPosition);
+        if ((Vector3.Distance(transform.position, playerPosition) > stopRadius) && !enemyBehaviorController.GetEnemyDetected())
         {
-            navAgent.SetDestination(targetPosition);
-            SetWalking();
+            NavSpeedToAnim(maxSpeed);
         }
         else
         {
-            SetIdle();
-            navAgent.ResetPath();  // Stop the NavMeshAgent from moving
+            NavSpeedToAnim(0.0f);
+            navAgent.isStopped = true;
+            navAgent.SetDestination(transform.position);
+            enemyBehaviorController.SetStalking(true);
         }
     }
-
-    public void LookAtPlayer()
-    {
-        Vector3 playerPosition = playerCapsule.transform.position;
-        Vector3 enemyPosition = aiHead.transform.position;
-
-        // Zero out the y component to ignore height differences
-        playerPosition.y = enemyPosition.y;
-
-        Vector3 lookDirection = playerPosition - enemyPosition;
-        Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
-    
-        // Apply the rotation only if there is a valid direction (not zero)
-        if (lookDirection != Vector3.zero)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-        }
-    }
-
 
     public void HuntPlayer()
     {
-        SetRunning();
-        stopRadius = 0;
-        navAgent.speed += 2;
+        // Set the destination of the enemy to the player's position
         navAgent.SetDestination(playerCapsule.transform.position);
-        // Once the enemy touches the player, the player dies
-        // Figure this out again this week
-        if (Vector3.Distance(transform.position, playerCapsule.transform.position) < 1.0f)
-        {
-            Debug.Log("you died.");
-        }
+        NavSpeedToAnim(maxSpeed * 1.5f);
     }
 
+    // Makes the enemy rotate to look at the player when called
+    public void LookAtPlayer()
+    {
+        Vector3 playerDirection = playerCapsule.transform.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(playerDirection);
+        if (playerDirection != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.0f);
+        }
+    }
 }

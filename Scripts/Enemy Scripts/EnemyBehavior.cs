@@ -6,140 +6,198 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    // Scene Variables
+    // Scene Variables: Stuff we may need from the Scene
     public GameObject player;
     public GameObject playerCapsule;
-    private Camera playerCamera;
+    private Camera mainCamera;
+    public Camera aiCamera;
     public GameObject gameController;
-    public Camera aiHead;
     private GameObject[] insideSpawns;
     private GameObject[] outsideSpawns;
-
-    // Spatial Variables
-    private bool outside = false;
-    private NavMeshAgent agent;
-
     public GameObject HoldingCell;
 
-    // Enemy Variables
-    private EnemyMovement enemyMovementController;
-    public float viewDistance = 30.0f;
+    // Spatial Variables: Navigation, Physics, Raycast, etc.
+    private NavMeshAgent navAgent;
+    private bool outside = false;
 
-    private bool isGazing = false;
+    // Enemy Variables: Anything related to the enemy
+    private EnemyMovement enemyMovementController;
+    public float detectionDistance = 30.0f;
+    public float killTime = 5.0f;
     private float gazeTimer = 0.0f;
     public float gazeDuration = 5.0f;
+    public float cooldownTimer = 10.0f;
 
-    // Player Interaction Variables
+    // Player Interaction Variables: Anything related to the player-enemy interaction
+    private bool isHunting = false;
     private bool enemyDetected = false;
     private bool playerDetected = false;
-
+    private bool isStalking = false;
     private float timeStalked = 0.0f;
-    public float killTime = 5.0f;
 
     // Misc. Variables
-    private System.Random random = new System.Random();
-    // Start is called before the first frame update
+    private System.Random random;
+
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        enemyMovementController = GetComponent<EnemyMovement>();
+        // Scene Variables
+        mainCamera = Camera.main;
         insideSpawns = GameObject.FindGameObjectsWithTag("Spawn/Inside");
         outsideSpawns = GameObject.FindGameObjectsWithTag("Spawn/Outside");
-        HoldingCell = GameObject.Find("HoldingCell");
         insideSpawns = Array.FindAll(insideSpawns, spawn => spawn != HoldingCell);
         outsideSpawns = Array.FindAll(outsideSpawns, spawn => spawn != HoldingCell);
-        playerCamera = Camera.main;
-        EnemyTeleport();
+
+        // Spatial Variables
+        navAgent = GetComponent<NavMeshAgent>();
+
+        // Enemy Variables
+        enemyMovementController = GetComponent<EnemyMovement>();
+
+        // Misc. Variables
+        random = new System.Random(Environment.TickCount);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Continuously check for the player
-        // If so, initialize second movement phase
         enemyMovementController.LookAtPlayer();
         CheckForPlayer();
         CheckForEnemy();
-        // If the enemy hasn't been detected, the enemy will continously move towards the player.
-        if (!enemyDetected && !playerDetected)
+        if (!enemyDetected && !isStalking)
         {
             enemyMovementController.MoveToPlayer();
         }
-        if (playerDetected)
+        else if (isStalking)
         {
-            // TODO: Play music or other indicator in the future?
-            enemyMovementController.SetIdle();
             StalkPlayer();
+        }
+        if (timeStalked >= killTime)
+        {
+            isStalking = false;
+            isHunting = true;
+        }
+        if (gazeTimer >= gazeDuration)
+        {
+            isStalking = false;
+            RestartCycle();
+        }
+        if (isHunting)
+        {
+            enemyMovementController.HuntPlayer();
         }
     }
 
-    public bool DetermineSpawn()
+    // Get player detected
+    public bool GetEnemyDetected()
     {
-        outside = random.Next(2) == 1;
-        return outside;
+        return enemyDetected;
     }
 
-    public GameObject FindSpawnLocation(bool outside)
+    // Change value of isStalking
+    public void SetStalking(bool value)
     {
-        float playerFOV = player.GetComponentInChildren<Camera>().fieldOfView;
-        Vector3 playerDirection = player.transform.forward;
-        Vector3 playerPosition = player.transform.position;
+        isStalking = value;
+    }
 
+    // Find suitable spawn location for the enemy
+    public GameObject FindSpawnLocation()
+    {
+        // Randomly choose a spawn subset location
+        // outside = random.Next(2) == 1;
+        outside = false;
         GameObject[] spawnLocations = outside ? outsideSpawns : insideSpawns;
+        
+        // Next, find which spawn location the player is currently on and spawn
+        // the enemy on any spawn location
+        GameObject playerTile = FindPlayerTile();
+        spawnLocations = Array.FindAll(spawnLocations, spawn => spawn != playerTile);
+        
+        // Next make sure the spawn point is away from the player's FOV
+        float playerFOV = mainCamera.fieldOfView;
         foreach (GameObject spawn in spawnLocations)
         {
-            Vector3 directionToSpawn = spawn.transform.position - playerPosition;
-            float angle = Vector3.Angle(directionToSpawn, playerDirection);
-            if (angle > playerFOV / 2)  // Check if spawn is outside of player's field of view
+            Vector3 directionToSpawn = spawn.transform.position - playerCapsule.transform.position;
+            float angle = Vector3.Angle(directionToSpawn, playerCapsule.transform.forward);
+            if (angle > playerFOV / 2)
             {
                 return spawn;
             }
         }
-        Debug.Log("No suitable spawn location found");
-        return null;  // Return null if no valid location is found
+        return null;
     }
 
-
-    void EnemyTeleport()
+    // Find the tile the player is currently on
+    public GameObject FindPlayerTile()
     {
-        // Figure out what to do without outside spawns later
-        // outside = DetermineSpawn();
-        outside = false;
-        GameObject spawnLocation = FindSpawnLocation(outside);
-        agent.Warp(spawnLocation.transform.position);
+        Vector3 playerPosition = playerCapsule.transform.position;
+        foreach (GameObject spawn in insideSpawns)
+        {
+            if (spawn.GetComponent<Collider>().bounds.Contains(playerPosition))
+            {
+                return spawn;
+            }
+        }
+        foreach (GameObject spawn in outsideSpawns)
+        {
+            if (spawn.GetComponent<Collider>().bounds.Contains(playerPosition))
+            {
+                return spawn;
+            }
+        }
+        return null;
     }
 
-    void CheckForPlayer()
+    // Teleports the enemy to a valid spawn location
+    void Teleport()
     {
-        // Check if the player is within the enemy's field of view
-        Vector3 playerDirection = playerCapsule.transform.position - transform.position;
-        float angle = Vector3.Angle(playerDirection, transform.forward);
-        if (angle < viewDistance)
+        GameObject spawnLocation = FindSpawnLocation();
+        float randX = random.Next(-5, 5);
+        float randZ = random.Next(-5, 5);
+        Vector3 spawnPosition = spawnLocation.transform.position;
+        spawnPosition.x += randX;
+        spawnPosition.z += randZ;
+        navAgent.Warp(spawnPosition);
+    }
+
+    // Check if the player is within the enemy's field of view
+    public void CheckForPlayer()
+    {
+        Vector3 playerDirection = playerCapsule.transform.position - aiCamera.transform.position;
+        float angle = Vector3.Angle(aiCamera.transform.forward, playerDirection.normalized);
+
+        if (angle < aiCamera.fieldOfView / 2)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, playerDirection, out hit, viewDistance))
+            if (Physics.Raycast(aiCamera.transform.position, playerDirection.normalized, out hit, detectionDistance))
             {
                 if (hit.collider.gameObject == playerCapsule)
                 {
+                    isStalking = true;
                     playerDetected = true;
                 }
                 else
                 {
+                    isStalking = false;
                     playerDetected = false;
                 }
             }
         }
         else
         {
+            isStalking = false;
             playerDetected = false;
         }
     }
 
-    void CheckForEnemy()
+    // Check for the enemy
+    public void CheckForEnemy()
     {
         RaycastHit hit;
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, player.GetComponent<Reach>().arm_length))
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        float playerDetectionDistance = gameController.GetComponent<InventoryManagement>().holdingItem("Eye_Describable")
+                                        ? detectionDistance : player.GetComponent<Reach>().arm_length;
+        
+        if (Physics.Raycast(ray, out hit, playerDetectionDistance))
         {
             if (hit.collider.gameObject == gameObject)
             {
@@ -150,87 +208,49 @@ public class EnemyBehavior : MonoBehaviour
                 enemyDetected = false;
             }
         }
+        else
+        {
+            enemyDetected = false;
+        }
     }
 
-    void StalkPlayer()
+    // Stalk the player
+    public void StalkPlayer()
     {
         bool holdingEye = gameController.GetComponent<InventoryManagement>().holdingItem("Eye_Describable");
-        // TODO: Fix this
-        // if (playerDetected && !enemyDetected)
-        // {
-        //     isGazing = true;
-        //     timeStalked += Time.deltaTime;
-        // }
-        if (holdingEye && playerDetected)
-        {
-            isGazing = true;
-            timeStalked += Time.deltaTime * 3;
-        }
-
-        if (isGazing && (!holdingEye || enemyDetected))
+        if (enemyDetected)
         {
             gazeTimer += Time.deltaTime;
         }
-
-        if (timeStalked >= killTime)
+        if (holdingEye)
         {
-            enemyMovementController.HuntPlayer();
+            timeStalked += Time.deltaTime * 3;
         }
-        if (gazeTimer >= gazeDuration)
+        else
         {
-            RestartCycle();
+            timeStalked += Time.deltaTime;
         }
     }
 
-    void RestartCycle()
+    public void RestartCycle()
     {
         gazeTimer = 0.0f;
+        timeStalked = 0.0f;
+        isStalking = false;
+        isHunting = false;
         playerDetected = false;
         enemyDetected = false;
-        isGazing = false;
-        timeStalked = 0.0f;
-        EnemyTeleport();
+        
+        // Warp back to holding HoldingCell
+        navAgent.Warp(HoldingCell.transform.position);
+
+        // Wait until spawnTimer has passed to teleport again.
+        StartCoroutine(WaitForTeleport());
     }
 
-    // TODO: Add more here in the future
-    public void KillPlayer()
+    IEnumerator WaitForTeleport()
     {
-        Destroy(player);
+        yield return new WaitForSeconds(cooldownTimer);
+        Teleport();
     }
-
-    /* TODO: Leftover code from the description within your text. Need to figure if we want to scrap this
-    or not.
-    */
-    // GameObject FindNearestWindow()
-    // {
-    //     GameObject[] windows = GameObject.FindGameObjectsWithTag("Window");
-    //     GameObject closest = null;
-    //     float distance = Mathf.Infinity;
-    //     Vector3 position = transform.position;
-    //     foreach (GameObject window in windows)
-    //     {
-    //         Vector3 diff = window.transform.position - position;
-    //         float curDistance = diff.sqrMagnitude;
-    //         if (curDistance < distance)
-    //         {
-    //             closest = window;
-    //             distance = curDistance;
-    //         }
-    //     }
-    //     return closest;
-    // }
-
-    //  IEnumerator LookThroughWindow(Transform windowTransform)
-    //     {
-    //         // Wait until the agent reaches the window
-    //         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
-    //         isGazing = true;
-    //         // Look at the window
-    //         Vector3 directionToWindow = windowTransform.position - aiHead.transform.position;
-    //         directionToWindow.y = 0; // This keeps the enemy's rotation only on the horizontal plane
-
-    //         yield return new WaitForSeconds(gazeDuration);
-
-    //     }
-
 }
