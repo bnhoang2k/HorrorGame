@@ -55,6 +55,9 @@ public class EnemyBehavior : MonoBehaviour
 
         // Misc. Variables
         random = new System.Random(Environment.TickCount);
+
+        // Teleport to a valid spawn location
+        Teleport();
     }
 
     void Update()
