@@ -9,6 +9,9 @@ public class PlayerInteract : MonoBehaviour
     private Camera player_camera;
     private GameObject player;
     private float arm_length;
+    private AudioSource playerAudioSource;
+    public AudioClip pickUpSound;
+    public AudioClip floorboardSound;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +19,7 @@ public class PlayerInteract : MonoBehaviour
         GameController = GameObject.Find("GameController");
         player_camera = Camera.main;
         player = GameObject.Find("Player");
+        playerAudioSource = GameObject.Find("Player/PlayerCapsule").GetComponent<AudioSource>();
         arm_length = player.GetComponent<Reach>().arm_length;
     }
 
@@ -43,6 +47,14 @@ public class PlayerInteract : MonoBehaviour
             {
                 Actions.UpdateInventory(describable);
 
+                // check if the object was actually picked up
+                if (GameController.GetComponent<InventoryManagement>().HasItem(describable.name)) {
+                    // play pick up sound
+                    if (playerAudioSource && pickUpSound) {
+                        playerAudioSource.PlayOneShot(pickUpSound);
+                    } else { Debug.Log("No pickup sound in PlayerInteract"); }
+                }
+
                 GameController.GetComponent<InstructionGUI>().setMessage("");
                 Debug.Log("Grabbed " + describable.gameObject.name);
             }
@@ -62,6 +74,11 @@ public class PlayerInteract : MonoBehaviour
 
                 // open the floorboard compartment
                 if (describable.gameObject.GetComponent<OpenFloorboard>()) {
+
+                    // play pick up sound
+                    if (playerAudioSource && floorboardSound) {
+                        playerAudioSource.PlayOneShot(floorboardSound);
+                    } else { Debug.Log("No floorboard sound in PlayerInteract"); }
 
                     describable.gameObject.GetComponent<OpenFloorboard>().Open();
                     Debug.Log("Opened " + describable.gameObject.name);

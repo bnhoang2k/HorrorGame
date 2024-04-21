@@ -24,6 +24,9 @@ public class Openable : MonoBehaviour
     private string locked_message = "Locked";
     private string open_message = "Press E to open";
     private string close_message = "Press E to close";
+    private AudioSource audioSource;
+    public AudioClip openSound;
+    public AudioClip unlockSound;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +34,8 @@ public class Openable : MonoBehaviour
         // find the object that has the animator
         root = GameObject.Find(root_name);
         animator = root.GetComponent<Animator>();
+        // get the audio source of the openable object
+        audioSource = gameObject.GetComponent<AudioSource>();
         // find the game controller
         GameController = GameObject.Find("GameController");
         // find the camera and arm length
@@ -48,7 +53,11 @@ public class Openable : MonoBehaviour
             open = !open;
             Debug.Log("open: " + open);
             animator.SetBool("open", open);
-            Debug.Log(animator);
+            
+            // play opening sound
+            if (audioSource && openSound) {
+                audioSource.PlayOneShot(openSound);
+            } else { Debug.Log("No opening sound: " + gameObject.name); }
         }
         else if (locked) {
             unlock();
@@ -62,6 +71,11 @@ public class Openable : MonoBehaviour
         if (GameController.GetComponent<InventoryManagement>().holdingItem(key)) {
             // unlock the object
             locked = false;
+
+            // play unlocking sound
+            if (audioSource && unlockSound) {
+                audioSource.PlayOneShot(unlockSound);
+            } else { Debug.Log("No unlocking sound: " + gameObject.name); }
 
             // destroy the key and remove from inventory
             GameController.GetComponent<InventoryManagement>().RemoveItem(key);

@@ -13,8 +13,12 @@ public class OuijaInteract : MonoBehaviour
     private float arm_length;
     private string interact_message = "Press E to communicate";
     public GameObject bookcase;
+    public GameObject openBookcase;
+    private Renderer openRend;
     private string input;
     private bool open = false;
+    public AudioSource audioSource;
+    public AudioClip openSound;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,9 @@ public class OuijaInteract : MonoBehaviour
         player_camera = Camera.main;
         arm_length = GameObject.Find("Player").GetComponent<Reach>().arm_length;
         code = codeText.text.ToLower();
+
+        openRend = openBookcase.GetComponent<Renderer>();
+        openRend.enabled = false;
     }
 
     // Update is called once per frame
@@ -59,6 +66,12 @@ public class OuijaInteract : MonoBehaviour
             if (input == code) {
                 // unlock the secret compartment
                 open = true;
+                openRend.enabled = true;
+                // play open sound
+                if (audioSource && openSound) {
+                    audioSource.PlayOneShot(openSound);
+                } else { Debug.Log("No open sound: " + gameObject.name); }
+                // destroy overlaid closed bookcase
                 Destroy(bookcase);
                 Debug.Log("Code correct, unlocking bookcase");
             } else {

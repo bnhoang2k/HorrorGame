@@ -37,10 +37,6 @@ public class LightController : MonoBehaviour
         foreach (LightControl lc in all_lights) {
             all_l += ", " + lc.light.name + ": " + lc.original_intensity;
         }
-        Debug.Log("Base lights: " + base_lights);
-        Debug.Log("LC lights: " + all_l);
-
-        ////
 
         // turn all the lights off at first
         ToggleAllLights(false);

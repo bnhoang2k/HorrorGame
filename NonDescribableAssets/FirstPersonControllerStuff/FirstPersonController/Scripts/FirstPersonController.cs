@@ -76,7 +76,6 @@ namespace StarterAssets
 
 		// Audio Variables
 		[Header("Audio Variables")]
-		[SerializeField] public bool useFootsteps = false;
 		[SerializeField] private float baseStepSpeed = 0.5f;
 		[SerializeField] private AudioSource footstepAudioSource = default;
 		[SerializeField] private AudioClip[] woodClips = default;

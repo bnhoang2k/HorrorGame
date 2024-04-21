@@ -38,8 +38,10 @@ public class InventoryManagement : MonoBehaviour
     public List<InventorySlot> invSlots = new List<InventorySlot>();
     private int num_slots = 5;
     public SenseController senseController;
-    // index of the next open slot in the list, ears = 0 and eyes = 1
     private int slot_start = 2;
+    // index of the next open slot in the list, ears = 0 and eyes = 1
+    private AudioSource audioSource;
+    public AudioClip equipSound;
     
     // Start is called before the first frame update
     void Start() {
@@ -52,6 +54,9 @@ public class InventoryManagement : MonoBehaviour
 
         // get the GameController
         GameController = GameObject.Find("GameController");
+
+        // get audio source
+        audioSource = GameObject.Find("Player/PlayerCapsule").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -68,6 +73,7 @@ public class InventoryManagement : MonoBehaviour
                 senseController.SetDeaf(earItem.equipped);
                 // change equipped status
                 earItem.equipped = !earItem.equipped;
+                PlayEquipSound();
                 Actions.UpdateItemEquipped?.Invoke(earItem);
             }
         }
@@ -83,6 +89,7 @@ public class InventoryManagement : MonoBehaviour
                 senseController.SetBlind(eyeItem.equipped);
                 // change equipped status
                 eyeItem.equipped = !eyeItem.equipped;
+                PlayEquipSound();
                 Actions.UpdateItemEquipped?.Invoke(eyeItem);
             }
 
@@ -93,6 +100,7 @@ public class InventoryManagement : MonoBehaviour
             GameObject slot = invSlots[2].slot;
             InventoryItem item = inventory.Find(item => item.slot == slot);
             item.equipped = !item.equipped;
+            PlayEquipSound();
             Actions.UpdateItemEquipped?.Invoke(item);
         }
 
@@ -101,6 +109,7 @@ public class InventoryManagement : MonoBehaviour
             GameObject slot = invSlots[3].slot;
             InventoryItem item = inventory.Find(item => item.slot == slot);
             item.equipped = !item.equipped;
+            PlayEquipSound();
             Actions.UpdateItemEquipped?.Invoke(item);
         }
 
@@ -109,6 +118,7 @@ public class InventoryManagement : MonoBehaviour
             GameObject slot = invSlots[4].slot;
             InventoryItem item = inventory.Find(item => item.slot == slot);
             item.equipped = !item.equipped;
+            PlayEquipSound();
             Actions.UpdateItemEquipped?.Invoke(item);
         }
 
@@ -125,6 +135,7 @@ public class InventoryManagement : MonoBehaviour
             Actions.UpdateInventory?.Invoke(GameObject.Find("Eye_Describable").GetComponent<Describable>());
             Actions.UpdateInventory?.Invoke(GameObject.Find("Ear_Describable").GetComponent<Describable>());
             Actions.UpdateInventory?.Invoke(GameObject.Find("Key1").GetComponent<Describable>());
+            Actions.UpdateInventory?.Invoke(GameObject.Find("ModernKey_Describable").GetComponent<Describable>());
         }
 
     }
@@ -228,6 +239,13 @@ public class InventoryManagement : MonoBehaviour
         }
         // no slots are empty
         return -1;
+    }
+
+    private void PlayEquipSound() {
+        // play toggle sound
+        if (audioSource && equipSound) {
+            audioSource.PlayOneShot(equipSound);
+        } else { Debug.Log("No equip sound in InventoryManagement"); }
     }
 
 }

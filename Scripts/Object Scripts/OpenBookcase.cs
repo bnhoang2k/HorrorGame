@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class OpenBookcase : MonoBehaviour
 {
-    public GameObject openableBookcase;
+    public GameObject closedBookcase;
+    public GameObject openBookcase;
     private MissingBookcaseItem[] missingItems;
     private List<GameObject> missingItemsList;
+    private Renderer rend;
+    private AudioSource audioSource;
+    public AudioClip putDownSound;
+    public AudioClip openSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +23,28 @@ public class OpenBookcase : MonoBehaviour
         foreach (MissingBookcaseItem item in missingItems) {
             missingItemsList.Add(item.gameObject);
         }
+
+        rend = openBookcase.GetComponent<Renderer>();
+        rend.enabled = false;
+
+        // get audio source
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (missingItemsList.Count == 0) {
+        if (missingItemsList.Count == 0 && closedBookcase) {
             // all items have been returned
+
+            // play open sound
+            if (audioSource && openSound) {
+                audioSource.PlayOneShot(openSound);
+            } else { Debug.Log("No open sound: " + gameObject.name); }
+
             // open the bookcase
-            Destroy(openableBookcase);
+            rend.enabled = true;
+            Destroy(closedBookcase);
         }
     }
 
@@ -33,5 +52,10 @@ public class OpenBookcase : MonoBehaviour
         if (missingItemsList.Contains(item)) {
             missingItemsList.Remove(item);
         }
+
+        // play put down sound
+        if (audioSource && putDownSound) {
+            audioSource.PlayOneShot(putDownSound);
+        } else { Debug.Log("No put down sound: " + gameObject.name); }
     }
 }
