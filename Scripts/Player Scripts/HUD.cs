@@ -7,15 +7,19 @@ public class HUD : MonoBehaviour
 {
 
     public InventoryManagement inventory;
-    public RawImage eyeImage;
-    public RawImage earImage;
+    public RawImage[] eyeImages;
+    public RawImage[] earImages;
 
     // Start is called before the first frame update
     void Start()
     {
         // Hide all the images at the start
-        eyeImage.enabled = false;
-        earImage.enabled = false;
+        foreach (RawImage eye in eyeImages) {
+            eye.enabled = false;
+        }
+        foreach (RawImage ear in earImages) {
+            ear.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -54,10 +58,14 @@ public class HUD : MonoBehaviour
         }
 
         if (item.itemName == "Eye_Describable") {
-            eyeImage.enabled = !eyeImage.enabled;
+            foreach (RawImage eye in eyeImages) {
+                eye.enabled = !eye.enabled;
+            }
         }
         else if (item.itemName == "Ear_Describable") {
-            earImage.enabled = !earImage.enabled;
+            foreach (RawImage ear in earImages) {
+                ear.enabled = !ear.enabled;
+            }
         }
     }
 }

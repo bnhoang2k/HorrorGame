@@ -14,9 +14,6 @@ public class SoundController : MonoBehaviour
     private AudioSource[] all_base_audioSources;
     private List<ASource> all_audioSources;
 
-    // Didn't know where else to stick the background music
-    public AudioSource backgroundMusicSource;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +39,6 @@ public class SoundController : MonoBehaviour
 
     public void ToggleAllSounds(bool on) {
         foreach (ASource source in all_audioSources) {
-            // Skip the background music, maybe we want it to play regardless
-            if (source.audioSource == backgroundMusicSource) { continue; }
             // make sure the audio source still exists
             if (source.audioSource) {
                 // if on is false, set the volume to 0
