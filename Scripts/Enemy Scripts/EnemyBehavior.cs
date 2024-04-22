@@ -36,6 +36,7 @@ public class EnemyBehavior : MonoBehaviour
     private bool playerDetected = false;
     private bool isStalking = false;
     private float timeStalked = 0.0f;
+    private float stalkMovingTimer;
 
     // Misc. Variables
     private System.Random random;
@@ -73,6 +74,14 @@ public class EnemyBehavior : MonoBehaviour
         }
         else if (isStalking)
         {
+            if (stalkMovingTimer > 0.0f)
+            {
+                stalkMovingTimer -= Time.deltaTime;
+            }
+            else
+            {
+                enemyMovementController.MoveToPlayer();
+            }
             StalkPlayer();
             Debug.Log("Stalking Player: " + timeStalked + " seconds | Gaze Timer: " + gazeTimer + " seconds");
         }
@@ -274,5 +283,10 @@ public class EnemyBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTimer);
         Teleport();
+    }
+
+    private void ResetStalkTimer()
+    {
+        stalkMovingTimer = UnityEngine.Random.Range(2.0f, 4.0f);
     }
 }

@@ -11,14 +11,19 @@ public class EnemyMovement : MonoBehaviour
     public GameObject playerCapsule;
     private Camera mainCamera;
     public Camera aiCamera;
-
+    [SerializeField] private float baseStepSpeed;
+    [SerializeField] AudioSource footstepAudioSource = default;
+    [SerializeField] AudioClip[] woodClips = default;
+    private float GetCurrentOffset => isSprinting ? baseStepSpeed * sprintStepMultiplier: baseStepSpeed;
     // Spatial Variables: Navigation, Physics, Raycast, etc.
     private NavMeshAgent navAgent;
 
     // Enemy Variables: Anything related to the enemy
     private EnemyBehavior enemyBehaviorController;
     private Animator animator;
-
+    private bool isSprinting = false;
+    [SerializeField] private float sprintStepMultiplier = 0.6f;
+    private float footstepTimer;
     private float maxSpeed;
 
     // Player Interaction Variables: Anything related to the player-enemy interaction
@@ -37,12 +42,20 @@ public class EnemyMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         FirstPersonController playerController = playerCapsule.GetComponent<FirstPersonController>();
         maxSpeed = playerController.MoveSpeed;
+        baseStepSpeed = 0.5f;
 
         // Player Interaction Variables
         stopRadius = player.GetComponent<Reach>().arm_length + 1.0f;
 
         // Set the enemy to idle
         SetIdle();
+    }
+    void Update()
+    {
+        if (navAgent.speed > 0)
+        {
+            Handle_Footsteps();
+        }
     }
 
     // Animator Fuctions
@@ -151,5 +164,18 @@ public class EnemyMovement : MonoBehaviour
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.0f);
         }
+    }
+
+    private void Handle_Footsteps()
+    {
+        footstepTimer -= Time.deltaTime;
+			if (footstepTimer <= 0)
+			{
+				if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 3))
+				{
+					footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length - 1)]);
+				}
+				footstepTimer = GetCurrentOffset;
+			}
     }
 }
