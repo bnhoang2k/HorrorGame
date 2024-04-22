@@ -59,7 +59,7 @@ public class EnemyBehavior : MonoBehaviour
         random = new System.Random(Environment.TickCount);
 
         // Teleport to a valid spawn location
-        Teleport();
+        StartCoroutine(WaitForTeleport());
     }
 
     void Update()
@@ -126,6 +126,7 @@ public class EnemyBehavior : MonoBehaviour
         float spawnDistance = 5.0f; // Adjustable
 
         Vector3 potentialSpawn = playerPosition - (playerForward * spawnDistance);
+        potentialSpawn.y = 0;
         Debug.Log("Potential Spawn: " + potentialSpawn);
         if (tileBounds.Contains(potentialSpawn)) {return potentialSpawn;}
         else {return tileBounds.ClosestPoint(potentialSpawn);}
@@ -133,34 +134,34 @@ public class EnemyBehavior : MonoBehaviour
 
     // Find the tile the player is currently on
     public GameObject FindPlayerTile()
-{
-    Vector3 playerPosition = playerCapsule.transform.position;
-    foreach (GameObject spawn in insideSpawns)
     {
-        BoxCollider collider = spawn.GetComponent<BoxCollider>();
-        Bounds bounds = collider.bounds;
-        // Adjust the bounds to effectively make them a "2D" area at the player's height
-        bounds.Expand(new Vector3(0, 1000f, 0));  // Expand the bounds infinitely along the Y axis
-
-        if (bounds.Contains(new Vector3(playerPosition.x, collider.transform.position.y, playerPosition.z)))
+        Vector3 playerPosition = playerCapsule.transform.position;
+        foreach (GameObject spawn in insideSpawns)
         {
-            return spawn;
-        }
-    }
-    foreach (GameObject spawn in outsideSpawns)
-    {
-        BoxCollider collider = spawn.GetComponent<BoxCollider>();
-        Bounds bounds = collider.bounds;
-        // Adjust the bounds to effectively make them a "2D" area at the player's height
-        bounds.Expand(new Vector3(0, 1000f, 0));  // Expand the bounds infinitely along the Y axis
+            BoxCollider collider = spawn.GetComponent<BoxCollider>();
+            Bounds bounds = collider.bounds;
+            // Adjust the bounds to effectively make them a "2D" area at the player's height
+            bounds.Expand(new Vector3(0, 1000f, 0));  // Expand the bounds infinitely along the Y axis
 
-        if (bounds.Contains(new Vector3(playerPosition.x, collider.transform.position.y, playerPosition.z)))
-        {
-            return spawn;
+            if (bounds.Contains(new Vector3(playerPosition.x, collider.transform.position.y, playerPosition.z)))
+            {
+                return spawn;
+            }
         }
-    }
+        foreach (GameObject spawn in outsideSpawns)
+        {
+            BoxCollider collider = spawn.GetComponent<BoxCollider>();
+            Bounds bounds = collider.bounds;
+            // Adjust the bounds to effectively make them a "2D" area at the player's height
+            bounds.Expand(new Vector3(0, 1000f, 0));  // Expand the bounds infinitely along the Y axis
+
+            if (bounds.Contains(new Vector3(playerPosition.x, collider.transform.position.y, playerPosition.z)))
+            {
+                return spawn;
+            }
+        }
     return null;
-}
+    }
 
     // Teleports the enemy to a valid spawn location
     void Teleport() {navAgent.Warp(FindSpawnLocation());}

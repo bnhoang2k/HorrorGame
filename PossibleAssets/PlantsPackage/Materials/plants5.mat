@@ -13,7 +13,8 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHATEST_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - WIREFRAME_TRY_QUAD_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -61,9 +62,27 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Wireframe_AmbientOcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Wireframe_ColorTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Wireframe_NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Wireframe_Tessellation_DispTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
+    - _Cull: 2
+    - _CurvedWorldTitle: 0
     - _Cutoff: 0.82
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -78,9 +97,61 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
+    - _WireframeShader_Diameter: 1
+    - _WireframeShader_Smoothness: 0
+    - _WireframeShader_Thickness: 0.01
+    - _Wireframe_AmbientOcclusion: 0
+    - _Wireframe_AmbientOcclusionStrength: 1
+    - _Wireframe_BaseVertexColor: 0
+    - _Wireframe_BumpEnumID: 0
+    - _Wireframe_ColorEmissionStrength: 0
+    - _Wireframe_DistanceFade: 0
+    - _Wireframe_DistanceFadeEnd: 10
+    - _Wireframe_DistanceFadeStart: 5
+    - _Wireframe_DynamicMaskEdgeSmooth: 0
+    - _Wireframe_DynamicMaskEffectsBaseTexEnumID: 0
+    - _Wireframe_DynamicMaskEffectsBaseTexInvert: 0
+    - _Wireframe_DynamicMaskEnumID: 0
+    - _Wireframe_DynamicMaskInvert: 0
+    - _Wireframe_DynamicMaskType: 1
+    - _Wireframe_FresnelBias: 0
+    - _Wireframe_FresnelEnumID: 0
+    - _Wireframe_FresnelInvert: 0
+    - _Wireframe_FresnelPow: 1
+    - _Wireframe_ImprovedBlendEnumID: 0
+    - _Wireframe_IncludeLightEnumID: 0
+    - _Wireframe_MetaPassMultiplier: 0
+    - _Wireframe_NormalReconstruct: 0
+    - _Wireframe_NormalScale: 1
+    - _Wireframe_NormalizeEdges: 0
+    - _Wireframe_RenderingOptions_PBREnumID: 0
+    - _Wireframe_Tessellation: 1
+    - _Wireframe_TessellationEnumID: 0
+    - _Wireframe_Tessellation_DispStrength: 0
+    - _Wireframe_Tessellation_EdgeLength: 16
+    - _Wireframe_Tessellation_MaxDistance: 35
+    - _Wireframe_Tessellation_MinDistance: 10
+    - _Wireframe_Title_GI_Options: 0
+    - _Wireframe_Title_M_Options: 0
+    - _Wireframe_Title_Rendering_Options: 0
+    - _Wireframe_Title_S_Options: 0
+    - _Wireframe_Title_T_Options: 0
+    - _Wireframe_Title_UAR_Options: 0
+    - _Wireframe_Title_V_Options: 0
+    - _Wireframe_Title_W_Options: 0
+    - _Wireframe_TransparencyEnumID: 0
+    - _Wireframe_Transparency_M_Options: 0
+    - _Wireframe_TransparentTex_Alpha_Offset: 0
+    - _Wireframe_TransparentTex_Invert: 0
+    - _Wireframe_TryQuad: 1
+    - _Wireframe_WireVertexColor: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Wireframe_Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Wireframe_ColorTexture_Scroll: {r: 0, g: 0, b: 0, a: 0}
+    - _Wireframe_MainTex_Scroll: {r: 0, g: 0, b: 0, a: 0}
+    - _Wireframe_Tessellation_DispTex_Scroll: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

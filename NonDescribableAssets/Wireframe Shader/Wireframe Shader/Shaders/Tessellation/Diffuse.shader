@@ -58,7 +58,7 @@ Shader "Amazing Assets/Wireframe Shader/Dynamic (SM5)/Tessellation"
 		_WireframeShader_Smoothness("Smoothness", Range(0, 1)) = 0
 		_WireframeShader_Diameter("Diameter", Range(0, 1)) = 1
 		[Toggle(WIREFRAME_NORMALIZE_EDGES_ON)] _Wireframe_NormalizeEdges("Normalize Edges", Float) = 0
-		[Toggle(WIREFRAME_TRY_QUAD_ON)] _Wireframe_TryQuad("Try Quad", Float) = 0
+		[Toggle(WIREFRAME_TRY_QUAD_ON)] _Wireframe_TryQuad("Try Quad", Float) = 1
 		
 
 		//Wire Options  

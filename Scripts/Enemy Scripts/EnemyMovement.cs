@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
     private float maxSpeed;
 
     // Player Interaction Variables: Anything related to the player-enemy interaction
-    public float stopRadius = 5.0f;
+    private float stopRadius;
 
     void Start()
     {
@@ -37,6 +37,9 @@ public class EnemyMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         FirstPersonController playerController = playerCapsule.GetComponent<FirstPersonController>();
         maxSpeed = playerController.MoveSpeed;
+
+        // Player Interaction Variables
+        stopRadius = player.GetComponent<Reach>().arm_length + 1.0f;
 
         // Set the enemy to idle
         SetIdle();
