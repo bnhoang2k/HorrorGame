@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1124054934868292463}
   - component: {fileID: 662848379463289598}
   - component: {fileID: 1267520572122888296}
-  - component: {fileID: 4037002056505786303}
   - component: {fileID: 3322304147408764127}
+  - component: {fileID: 575391970808450594}
   m_Layer: 0
   m_Name: BWindow_Describable
   m_TagString: Untagged
@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: This window is broken.
+  description: Window
   isPickupable: 0
   isOpenable: 0
+  isUniqueInteractable: 0
 --- !u!33 &662848379463289598
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -76,8 +77,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -103,8 +102,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4037002056505786303
-MeshCollider:
+--- !u!114 &3322304147408764127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6971633581167662014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2065496115, guid: cb9c325382ec9464b8e020d7ddfb97b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabProjectPath: Assets/DescribablePrefabs/BWindow_Describable_prefab/BWindow_Describable.prefab
+--- !u!65 &575391970808450594
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -121,20 +133,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: e0a92828a81608946b5991d05dc569e9, type: 2}
---- !u!114 &3322304147408764127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6971633581167662014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2065496115, guid: cb9c325382ec9464b8e020d7ddfb97b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabProjectPath: Assets/DescribablePrefabs/BWindow_Describable_prefab/BWindow_Describable.prefab
+  serializedVersion: 3
+  m_Size: {x: 0.10235047, y: 1.0986806, z: 1.5958934}
+  m_Center: {x: -0.01774609, y: 0.5481656, z: -0.011315333}

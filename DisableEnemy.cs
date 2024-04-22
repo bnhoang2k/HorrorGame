@@ -5,10 +5,13 @@ using UnityEngine;
 public class DisableEnemy : MonoBehaviour
 {
     public GameObject enemy;
+    public bool disableEnemy = false;
     // Start is called before the first frame update
     void Start()
     {
-        enemy.SetActive(false);
+        if (disableEnemy) {
+            enemy.SetActive(false);
+        }
     }
 
     // Update is called once per frame
