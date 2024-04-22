@@ -14,12 +14,11 @@ public class SoundController : MonoBehaviour
     private AudioSource[] all_base_audioSources;
     private List<ASource> all_audioSources;
 
-
     // Start is called before the first frame update
     void Start()
     {
         // find all the audio sources in the scene
-        all_base_audioSources = FindObjectsOfType<AudioSource>();
+        all_base_audioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
         all_audioSources = new List<ASource>();
 
         // create a ASource for each audio source and store its original volume

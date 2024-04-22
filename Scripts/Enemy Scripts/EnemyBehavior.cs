@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -63,7 +64,6 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        KillClose();
         enemyMovementController.LookAtPlayer();
         CheckForPlayer();
         CheckForEnemy();
@@ -97,82 +97,73 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     // Get enemy detected
-    public bool GetEnemyDetected()
-    {
-        return enemyDetected;
-    }
+    public bool GetEnemyDetected() {return enemyDetected;}
     
     // Get player detected
-    public bool GetPlayerDetected()
-    {
-        return playerDetected;
-    }
+    public bool GetPlayerDetected() {return playerDetected;}
 
     // Change value of isStalking
-    public void SetStalking(bool value)
-    {
-        isStalking = value;
-    }
+    public void SetStalking(bool value) {isStalking = value;}
 
     // Find suitable spawn location for the enemy
-    public GameObject FindSpawnLocation()
+    public Vector3 FindSpawnLocation()
     {
-        // Randomly choose a spawn subset location
-        // outside = random.Next(2) == 1;
-        outside = false;
-        GameObject[] spawnLocations = outside ? outsideSpawns : insideSpawns;
-        
-        // Next, find which spawn location the player is currently on and spawn
-        // the enemy on any spawn location
         GameObject playerTile = FindPlayerTile();
-        spawnLocations = Array.FindAll(spawnLocations, spawn => spawn != playerTile);
-        
-        // Next make sure the spawn point is away from the player's FOV
-        float playerFOV = mainCamera.fieldOfView;
-        foreach (GameObject spawn in spawnLocations)
-        {
-            Vector3 directionToSpawn = spawn.transform.position - playerCapsule.transform.position;
-            float angle = Vector3.Angle(directionToSpawn, playerCapsule.transform.forward);
-            if (angle > playerFOV / 2)
-            {
-                return spawn;
-            }
+        if (!playerTile) {
+            Debug.Log("Player tile not found");
+            return Vector3.zero;
         }
-        return null;
+
+        Collider collider = playerTile.GetComponent<Collider>();
+        if (!collider) {
+            Debug.Log("Collider not found");
+            return Vector3.zero;
+        }
+
+        Bounds tileBounds = collider.bounds;
+        Vector3 playerPosition = playerCapsule.transform.position;
+        Vector3 playerForward = mainCamera.transform.forward;
+        float spawnDistance = 5.0f; // Adjustable
+
+        Vector3 potentialSpawn = playerPosition - (playerForward * spawnDistance);
+        Debug.Log("Potential Spawn: " + potentialSpawn);
+        if (tileBounds.Contains(potentialSpawn)) {return potentialSpawn;}
+        else {return tileBounds.ClosestPoint(potentialSpawn);}
     }
 
     // Find the tile the player is currently on
     public GameObject FindPlayerTile()
+{
+    Vector3 playerPosition = playerCapsule.transform.position;
+    foreach (GameObject spawn in insideSpawns)
     {
-        Vector3 playerPosition = playerCapsule.transform.position;
-        foreach (GameObject spawn in insideSpawns)
+        BoxCollider collider = spawn.GetComponent<BoxCollider>();
+        Bounds bounds = collider.bounds;
+        // Adjust the bounds to effectively make them a "2D" area at the player's height
+        bounds.Expand(new Vector3(0, 1000f, 0));  // Expand the bounds infinitely along the Y axis
+
+        if (bounds.Contains(new Vector3(playerPosition.x, collider.transform.position.y, playerPosition.z)))
         {
-            if (spawn.GetComponent<Collider>().bounds.Contains(playerPosition))
-            {
-                return spawn;
-            }
+            return spawn;
         }
-        foreach (GameObject spawn in outsideSpawns)
-        {
-            if (spawn.GetComponent<Collider>().bounds.Contains(playerPosition))
-            {
-                return spawn;
-            }
-        }
-        return null;
     }
+    foreach (GameObject spawn in outsideSpawns)
+    {
+        BoxCollider collider = spawn.GetComponent<BoxCollider>();
+        Bounds bounds = collider.bounds;
+        // Adjust the bounds to effectively make them a "2D" area at the player's height
+        bounds.Expand(new Vector3(0, 1000f, 0));  // Expand the bounds infinitely along the Y axis
+
+        if (bounds.Contains(new Vector3(playerPosition.x, collider.transform.position.y, playerPosition.z)))
+        {
+            return spawn;
+        }
+    }
+    return null;
+}
 
     // Teleports the enemy to a valid spawn location
-    void Teleport()
-    {
-        GameObject spawnLocation = FindSpawnLocation();
-        float randX = random.Next(-5, 5);
-        float randZ = random.Next(-5, 5);
-        Vector3 spawnPosition = spawnLocation.transform.position;
-        spawnPosition.x += randX;
-        spawnPosition.z += randZ;
-        navAgent.Warp(spawnPosition);
-    }
+    void Teleport() {navAgent.Warp(FindSpawnLocation());}
 
     // Check if the player is within the enemy's field of view
     public void CheckForPlayer()
@@ -240,7 +231,7 @@ public class EnemyBehavior : MonoBehaviour
         }
         if (holdingEye)
         {
-            timeStalked += Time.deltaTime * 10;
+            timeStalked += Time.deltaTime * 7;
         }
         else if (!holdingEye && playerDetected && !enemyDetected)
         {
@@ -250,7 +241,6 @@ public class EnemyBehavior : MonoBehaviour
 
     public void KillClose()
     {
-        Debug.Log("bruh");
         if (Vector3.Distance(transform.position, playerCapsule.transform.position) < 0.5f)
         {
             KillPlayer();
