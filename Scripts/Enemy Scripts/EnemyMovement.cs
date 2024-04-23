@@ -17,14 +17,15 @@ public class EnemyMovement : MonoBehaviour
     private float GetCurrentOffset => isSprinting ? baseStepSpeed * sprintStepMultiplier: baseStepSpeed;
     // Spatial Variables: Navigation, Physics, Raycast, etc.
     private NavMeshAgent navAgent;
+    private Vector2 velocity;
+    private Vector2 smoothDeltaPosition;
 
     // Enemy Variables: Anything related to the enemy
     private EnemyBehavior enemyBehaviorController;
-    private Animator animator;
+    public Animator animator;
     private bool isSprinting = false;
     [SerializeField] private float sprintStepMultiplier = 0.6f;
     private float footstepTimer;
-    private float maxSpeed;
 
     // Player Interaction Variables: Anything related to the player-enemy interaction
     private float stopRadius;
@@ -36,12 +37,13 @@ public class EnemyMovement : MonoBehaviour
 
         // Spatial Variables
         navAgent = GetComponent<NavMeshAgent>();
+        animator.applyRootMotion = true;
+        navAgent.updatePosition = false;
+        navAgent.updateRotation = true;
 
         // Enemy Variables
         enemyBehaviorController = GetComponent<EnemyBehavior>();
-        animator = GetComponent<Animator>();
         FirstPersonController playerController = playerCapsule.GetComponent<FirstPersonController>();
-        maxSpeed = playerController.MoveSpeed;
         baseStepSpeed = 0.5f;
 
         // Player Interaction Variables
@@ -52,87 +54,103 @@ public class EnemyMovement : MonoBehaviour
     }
     void Update()
     {
-        if (navAgent.speed > 0)
-        {
-            Handle_Footsteps();
-        }
+        MoveToPlayer();
+        SynchronizeAnimatorAndAgent();
     }
 
     // Animator Fuctions
-    public void SetIdle()
+    private void SetIdle()
     {
         animator.SetBool("isIdle", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
     }
 
-    public void SetWalking()
+    private void SetWalking()
     {
         animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", true);
         animator.SetBool("isRunning", false);
     }
 
-    public void SetRunning()
+    private void SetRunning()
     {
         animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", true);
     }
 
-    public void NavSpeedToAnim(float speedValue)
-    {
-        if (speedValue == 0)
-        {
-            SetIdle();
-        }
-        else if (speedValue > 0 && speedValue <= maxSpeed)
-        {
-            SetWalking();
-        }
-        else if (speedValue > maxSpeed)
-        {
-            SetRunning();
-        }
-        navAgent.speed = speedValue;
-    }
-
     // Find a path to the player and the stride accordingly
     public void MoveToPlayer()
     {
-        /*
-        The goal of this function is to create a path in which the enemy will try to sneak
-        up behind the player.
-        */
-        Vector3 playerPosition = playerCapsule.transform.position;
-        Vector3 playerForward = playerCapsule.transform.forward;
-        Vector3 targetPosition = playerPosition - (playerForward * 1);
-        
-        // Check if targetPosition is within player's field of view
+        Vector3 playerPosition = GameObject.Find("PlayerCapsule").transform.position;
+        Vector3 playerForward = GameObject.Find("PlayerCapsule").transform.forward;
+        Vector3 targetPosition = playerPosition - (playerForward * 3.0f);
+
         Vector3 fromPlayerToTargetDir = (targetPosition - playerPosition).normalized;
         float angle = Vector3.Angle(playerForward, fromPlayerToTargetDir);
-        float playerFOV = mainCamera.fieldOfView;
+        float playerFOV = Camera.main.fieldOfView;
         if (angle <= playerFOV / 2)
         {
-            // If within FOV, find a new point to approach from
-            NavSpeedToAnim(0.0f);
+            SetIdle();
             navAgent.isStopped = true;
             navAgent.SetDestination(transform.position);
             return;
-        }
-
-        // Set the destination of the enemy to the target position
-        navAgent.SetDestination(targetPosition);
-        if ((Vector3.Distance(transform.position, playerPosition) > navAgent.stoppingDistance) && !enemyBehaviorController.GetPlayerDetected())
-        {
-            NavSpeedToAnim(maxSpeed - 2.5f);
-        }
+        }    
         else
         {
-            NavSpeedToAnim(0.0f);
-            navAgent.isStopped = true;
-            navAgent.SetDestination(transform.position);
-            enemyBehaviorController.SetStalking(true);
+            SetWalking();
+            navAgent.SetDestination(targetPosition);
+        }
+    }
+
+    public void FreezeEnemy()
+    {
+        navAgent.isStopped = true;
+        navAgent.ResetPath();
+        SetIdle();
+    }
+
+    void OnAnimatorMove()
+    {
+        // This functions ensures that the root motion is applied to the navAgent
+        // and the navAgent's current position updates to the root position
+        // This is important to prevent foot sliding. Foot sliding occurs when the walking animation
+        // doesn't match the navAgent's position.
+        Vector3 rootPosition = animator.rootPosition;
+        rootPosition.y = navAgent.nextPosition.y;
+        transform.position = rootPosition;
+        transform.rotation = animator.rootRotation;
+        navAgent.nextPosition = transform.position;
+    }
+
+    private void SynchronizeAnimatorAndAgent()
+    {
+        // Not sure what the majority of this code does math-wise
+        // https://www.youtube.com/watch?v=uAGjKxH4sDQ
+        Vector3 worldDeltaPosition = navAgent.nextPosition - transform.position;
+        worldDeltaPosition.y = 0;
+        float dx = Vector3.Dot(transform.right, worldDeltaPosition);
+        float dy = Vector3.Dot(transform.forward, worldDeltaPosition);
+
+        Vector2 vector2 = new Vector2(dx, dy);
+        float smooth = Mathf.Min(1, Time.deltaTime /0.1f);
+        smoothDeltaPosition = Vector2.Lerp(smoothDeltaPosition, vector2, smooth);
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+        {
+            velocity = Vector2.Lerp(Vector2.zero,
+                                    velocity,
+                                    navAgent.remainingDistance /navAgent.stoppingDistance);
+        }
+        // Determines whether we should move or not
+        bool shouldMove = velocity.magnitude > 0.0f && navAgent.remainingDistance > navAgent.stoppingDistance;
+        if (shouldMove) {SetWalking();}
+        else if (navAgent.remainingDistance <= navAgent.stoppingDistance) {SetIdle();}
+
+        float deltaMagnitude = worldDeltaPosition.magnitude;
+        if (deltaMagnitude > navAgent.radius / 3.0f)
+        {
+            transform.position = Vector3.Lerp(animator.rootPosition, navAgent.nextPosition, smooth);
         }
     }
 
@@ -141,7 +159,7 @@ public class EnemyMovement : MonoBehaviour
         // Set the destination of the enemy to the player's position
         navAgent.destination = playerCapsule.transform.position; // Set the destination only once or conditionally.
         navAgent.isStopped = false;
-        NavSpeedToAnim(maxSpeed * 1.5f);
+        SetRunning();
         enemyBehaviorController.KillClose();
     }
 

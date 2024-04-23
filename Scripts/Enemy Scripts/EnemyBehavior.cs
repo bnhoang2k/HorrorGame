@@ -64,15 +64,17 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        enemyMovementController.LookAtPlayer();
         CheckForPlayer();
         CheckForEnemy();
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance) {enemyMovementController.LookAtPlayer();}
+        if (enemyDetected) {enemyMovementController.FreezeEnemy();}
         if (!enemyDetected && !isStalking && !isHunting)
         {
             enemyMovementController.MoveToPlayer();
         }
         else if (isStalking)
         {
+            enemyMovementController.LookAtPlayer();
             if (stalkMovingTimer > 0.0f)
             {
                 stalkMovingTimer -= Time.deltaTime;

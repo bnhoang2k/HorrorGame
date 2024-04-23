@@ -11413,6 +11413,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &2135992979 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 19071043279900973, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+  m_PrefabInstance: {fileID: 2567125944442602850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2142669794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7422064740606740510, guid: 444d873de00069741bb3dcf3bca2468a, type: 3}
@@ -11501,6 +11506,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 664994902353810663, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      propertyPath: m_Speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 664994902353810663, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 664994902353810663, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: m_StoppingDistance
       value: 1
       objectReference: {fileID: 0}
@@ -11508,6 +11521,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 439036079}
+    - target: {fileID: 1483516673602439517, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2135992979}
+    - target: {fileID: 1483516673602439517, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1483516673602439517, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: stopRadius
       value: 2
@@ -11582,7 +11603,7 @@ PrefabInstance:
       objectReference: {fileID: 1036456840}
     - target: {fileID: 3139432077030405403, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: gazeDuration
-      value: 999999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3139432077030405403, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: cooldownTimer
