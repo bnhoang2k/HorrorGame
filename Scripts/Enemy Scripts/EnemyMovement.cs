@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
         baseStepSpeed = 0.5f;
 
         // Player Interaction Variables
-        stopRadius = player.GetComponent<Reach>().arm_length + 1.0f;
+        stopRadius = player.GetComponent<Reach>().arm_length;
 
         // Set the enemy to idle
         SetIdle();
@@ -106,7 +106,7 @@ public class EnemyMovement : MonoBehaviour
         */
         Vector3 playerPosition = playerCapsule.transform.position;
         Vector3 playerForward = playerCapsule.transform.forward;
-        Vector3 targetPosition = playerPosition - (playerForward * stopRadius);
+        Vector3 targetPosition = playerPosition - (playerForward * 1);
         
         // Check if targetPosition is within player's field of view
         Vector3 fromPlayerToTargetDir = (targetPosition - playerPosition).normalized;
@@ -123,7 +123,7 @@ public class EnemyMovement : MonoBehaviour
 
         // Set the destination of the enemy to the target position
         navAgent.SetDestination(targetPosition);
-        if ((Vector3.Distance(transform.position, playerPosition) > stopRadius) && !enemyBehaviorController.GetPlayerDetected())
+        if ((Vector3.Distance(transform.position, playerPosition) > navAgent.stoppingDistance) && !enemyBehaviorController.GetPlayerDetected())
         {
             NavSpeedToAnim(maxSpeed - 2.5f);
         }

@@ -53,11 +53,18 @@ public class Openable : MonoBehaviour
             open = !open;
             Debug.Log("open: " + open);
             animator.SetBool("open", open);
-            
             // play opening sound
             if (audioSource && openSound) {
                 audioSource.PlayOneShot(openSound);
             } else { Debug.Log("No opening sound: " + gameObject.name); }
+            // if the object is a door, rebake the NavMesh
+            if (gameObject.name == "Door_Main1")
+            {
+                NavMeshBaker navMeshBaker = GameObject.Find("GameController").GetComponent<NavMeshBaker>();
+                if (open) {navMeshBaker.LayerChanger(root, "Default");}
+                else {navMeshBaker.LayerChanger(root, "NavMeshLayer");}
+                navMeshBaker.ReBakeNavMesh();
+            }
         }
         else if (locked) {
             unlock();

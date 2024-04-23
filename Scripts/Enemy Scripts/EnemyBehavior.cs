@@ -20,7 +20,6 @@ public class EnemyBehavior : MonoBehaviour
 
     // Spatial Variables: Navigation, Physics, Raycast, etc.
     private NavMeshAgent navAgent;
-    private bool outside = false;
 
     // Enemy Variables: Anything related to the enemy
     private EnemyMovement enemyMovementController;

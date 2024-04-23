@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1023959083628916710}
   - component: {fileID: 1423784933203647569}
   - component: {fileID: 8319081180063905664}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,6 +53,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1257,7 +1259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7422064740606740510}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall_Door_Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1292,6 +1294,18 @@ PrefabInstance:
     - target: {fileID: 1498204609983339016, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: m_Name
       value: Door1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498204609983339016, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555110380207502235, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914312295070531897, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2778696782159507809, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1349,17 +1363,141 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4125551501571309136, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883185443088918067, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793726660931248982, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124139980227304769, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605810004848269134, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7708798338533341041, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
       propertyPath: root_name
       value: Door1
       objectReference: {fileID: 0}
+    - target: {fileID: 7799171943835902732, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977094681946383280, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8977094681946383280, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9137357297011803017}
+    - targetCorrespondingSourceObject: {fileID: 5793726660931248982, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5988648395072931111}
+    - targetCorrespondingSourceObject: {fileID: 1914312295070531897, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8942634834799403265}
+    - targetCorrespondingSourceObject: {fileID: 7124139980227304769, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 56338317499771493}
   m_SourcePrefab: {fileID: 100100000, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+--- !u!1 &1027094450160163523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914312295070531897, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+  m_PrefabInstance: {fileID: 1500252925275266042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8942634834799403265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027094450160163523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Door lock
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueInteractable: 0
 --- !u!4 &3629358237341887131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2778696782159507809, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
   m_PrefabInstance: {fileID: 1500252925275266042}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4951298383856908460 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5793726660931248982, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+  m_PrefabInstance: {fileID: 1500252925275266042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5988648395072931111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4951298383856908460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Door lock
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueInteractable: 0
+--- !u!1 &7513398474293098570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8977094681946383280, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+  m_PrefabInstance: {fileID: 1500252925275266042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9137357297011803017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513398474293098570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Door hinge
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueInteractable: 0
+--- !u!1 &8507299177214936763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7124139980227304769, guid: cb4d3a432eed22d4fb9be76e6d21d2a4, type: 3}
+  m_PrefabInstance: {fileID: 1500252925275266042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &56338317499771493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8507299177214936763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Door lock
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueInteractable: 0

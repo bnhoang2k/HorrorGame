@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,9 +9,17 @@ using UnityEngine.AI;
 public class NavMeshBaker : MonoBehaviour
 {
     private NavMeshSurface navMeshSurface;
+    public GameObject[] doors;
     [SerializeField] private float voxelSize = 0.1666667f;
     // Start is called before the first frame update
     void Start()
+    {
+        BakeNavMesh();
+    }
+
+    // For some reason, it keeps resetting when we remove the data so we have to create a function
+    // has all of ours settings
+    public void BakeNavMesh()
     {
         navMeshSurface = GetComponent<NavMeshSurface>();
         // Set the NavMesh Agent Type to be "Humanoid"
@@ -26,5 +35,27 @@ public class NavMeshBaker : MonoBehaviour
         navMeshSurface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
         // Bake the NavMesh
         navMeshSurface.BuildNavMesh();
+    }
+
+    // Due to the way the NavMeshSurface works, we need to bake the NavMesh every time the doors are opened or closed
+    // Our method of NavMeshSurface baking will depend on the GameObject's layer, so we need to change the layer of the doors
+    // to "Default" when they are opened and back to "NavMeshLayer" when they are closed.
+    // Plan is to call it from the Openable script IF it's a door and call the rebake function.
+    public void LayerChanger(GameObject currentDoor, string layer)
+    {
+        currentDoor.layer = LayerMask.NameToLayer(layer);
+        foreach (Transform child in currentDoor.transform)
+        {
+            LayerChanger(child.gameObject, layer);
+        }
+    }
+    public void ReBakeNavMesh()
+    {
+        navMeshSurface.RemoveData();
+        // Make the agent re-aware of the new changes
+        NavMeshAgent enemyAgent = GameObject.Find("Enemy").GetComponent<NavMeshAgent>();
+        enemyAgent.ResetPath();
+
+        BakeNavMesh();
     }
 }

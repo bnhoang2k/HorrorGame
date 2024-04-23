@@ -135,6 +135,7 @@ public class InventoryManagement : MonoBehaviour
             Actions.UpdateInventory?.Invoke(GameObject.Find("Eye_Describable").GetComponent<Describable>());
             Actions.UpdateInventory?.Invoke(GameObject.Find("Ear_Describable").GetComponent<Describable>());
             Actions.UpdateInventory?.Invoke(GameObject.Find("Key1").GetComponent<Describable>());
+            Actions.UpdateInventory?.Invoke(GameObject.Find("Key2").GetComponent<Describable>());
             Actions.UpdateInventory?.Invoke(GameObject.Find("ModernKey_Describable").GetComponent<Describable>());
         }
 
