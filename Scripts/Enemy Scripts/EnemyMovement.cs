@@ -4,6 +4,12 @@ using StarterAssets;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum EnemyState
+{
+    Idle,
+    Walking,
+    Running
+}
 public class EnemyMovement : MonoBehaviour
 {
     // Scene Variables: Stuff we may need from the Scene
@@ -56,6 +62,7 @@ public class EnemyMovement : MonoBehaviour
     {
         MoveToPlayer();
         SynchronizeAnimatorAndAgent();
+        Handle_Footsteps();
     }
 
     // Animator Fuctions
@@ -184,8 +191,10 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void Handle_Footsteps()
+    public void Handle_Footsteps()
     {
+        if (GetEnemyState() == EnemyState.Walking || GetEnemyState() == EnemyState.Running)
+        {
         footstepTimer -= Time.deltaTime;
 			if (footstepTimer <= 0)
 			{
@@ -195,5 +204,14 @@ public class EnemyMovement : MonoBehaviour
 				}
 				footstepTimer = GetCurrentOffset;
 			}
+        }
+    }
+
+    public EnemyState GetEnemyState()
+    {
+        if (animator.GetBool("isIdle")) { return EnemyState.Idle; }
+        else if (animator.GetBool("isWalking")) { return EnemyState.Walking; }
+        else if (animator.GetBool("isRunning")) { return EnemyState.Running; }
+        else { return EnemyState.Idle; }
     }
 }
