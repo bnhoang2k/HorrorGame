@@ -185,14 +185,21 @@ public class EnemyMovement : MonoBehaviour
 
     // Makes the enemy rotate to look at the player when called
     public void LookAtPlayer()
+{
+    // Get the direction to the player but ignore the y component to avoid vertical rotation
+    Vector3 playerDirection = new Vector3(playerCapsule.transform.position.x, transform.position.y, playerCapsule.transform.position.z) - transform.position;
+    
+    // Create a rotation that looks along the modified playerDirection, with the up vector set to the world's y-axis
+    Quaternion lookRotation = Quaternion.LookRotation(playerDirection);
+    
+    // Ensure there is a valid direction vector to avoid any undefined behavior with Quaternion.LookRotation
+    if (playerDirection != Vector3.zero)
     {
-        Vector3 playerDirection = playerCapsule.transform.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(playerDirection);
-        if (playerDirection != Vector3.zero)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.0f);
-        }
+        // Smoothly interpolate the enemy's rotation towards the calculated lookRotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.0f);
     }
+}
+
 
     public void Handle_Footsteps()
     {

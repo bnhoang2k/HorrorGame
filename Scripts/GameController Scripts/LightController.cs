@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -19,7 +21,7 @@ public class LightController : MonoBehaviour
     void Start()
     {
         // find all the lights in the scene
-        all_base_lights = FindObjectsOfType<Light>();
+        all_base_lights = FindObjectsByType<Light>(FindObjectsSortMode.None);
 
         all_lights = new List<LightControl>();
 
@@ -77,4 +79,23 @@ public class LightController : MonoBehaviour
         }
 
     }
+
+    public void FlickerLights(float duration, float frequency)
+    {
+        StartCoroutine(FlickerRoutine(duration, frequency));
+    }
+
+    private IEnumerator FlickerRoutine(float duration, float frequency)
+{
+    float time = 0;
+    bool lightsOn = true;  // Track the current state of the lights
+    while (time < duration)
+    {
+        lightsOn = !lightsOn;  // Toggle the state
+        ToggleAllLights(lightsOn);
+        yield return new WaitForSeconds(frequency);
+        time += frequency;
+    }
+    ToggleAllLights(true);  // Ensure all lights are turned back on after flickering
+}
 }

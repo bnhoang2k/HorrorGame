@@ -89,12 +89,16 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        // Debug.Log("Enemy Detected: " + enemyDetected + " | Player Detected: " + playerDetected);
+        Debug.Log("Enemy Detected: " + enemyDetected + " | Player Detected: " + playerDetected);
         CheckForPlayer();
         CheckForEnemy();
         GazeEnemy();
-        if (navAgent.remainingDistance < navAgent.stoppingDistance && navAgent.hasPath)
+
+    
+        // Only call Warp if the enemy needs to move sideways or backwards
+        if (navAgent.remainingDistance < navAgent.stoppingDistance && navAgent.hasPath && !isHunting)
         {
+            navAgent.isStopped = true;
             enemyMovementController.LookAtPlayer();
         }
         if (playerDetected)
@@ -103,8 +107,8 @@ public class EnemyBehavior : MonoBehaviour
             navAgent.isStopped = true;
         }
         if (enemyDetected && !isHunting) {enemyMovementController.FreezeEnemy();}
-        if (!enemyDetected && !isStalking && !isHunting && !playerDetected) {enemyMovementController.MoveBehindPlayer();}
-        else if (isStalking)
+        if (!enemyDetected && !isHunting && !playerDetected) {enemyMovementController.MoveBehindPlayer();}
+        if (isStalking)
         {
             enemyMovementController.LookAtPlayer();
             StalkPlayer();
@@ -121,10 +125,16 @@ public class EnemyBehavior : MonoBehaviour
         if (gazeTimer >= gazeDuration)
         {
             isStalking = false;
+            LightController lightController = gameController.GetComponent<LightController>();
+            lightController.FlickerLights(0.3f, 0.1f);
             RestartCycle();
         }
         if (isHunting) {enemyMovementController.UpdateHunting();}
-        if (FindPlayerTile() != FindEnemyTile() && FindEnemyTile() != HoldingCell && !isTeleporting) {StartCoroutine(WaitForTeleport());}
+        if (FindPlayerTile() != FindEnemyTile() && FindEnemyTile() != HoldingCell && !isTeleporting && !playerDetected)
+        {
+            enemyMovementController.FreezeEnemy();
+            StartCoroutine(WaitForTeleport());
+        }
     }
     
     private void CheckForPlayer()
@@ -166,6 +176,7 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 playerPosition = playerCapsule.transform.position;
         Vector3 potentialSpawn = Vector3.zero;
         bool valid = false;
+        Vector3 behindDirection = -mainCamera.transform.forward;
         for (int i = 0; i < 100; i++)
         {
             potentialSpawn = new Vector3(
@@ -173,12 +184,24 @@ public class EnemyBehavior : MonoBehaviour
                 0, 
                 UnityEngine.Random.Range(tileBounds.min.z, tileBounds.max.z));
 
-            if (Vector3.Distance(playerPosition, potentialSpawn) > 5.0f) {valid = true; break;}
+            Vector3 directionToPotentialSpawn = (potentialSpawn - playerPosition).normalized;
+            if (Vector3.Dot(directionToPotentialSpawn, behindDirection) > 0 && // Check if it's behind
+            Vector3.Distance(playerPosition, potentialSpawn) > 5.0f) // Check if it's at least 5 units away
+            {
+                valid = true;
+                break;
+            }
         }
 
         if (tileBounds.Contains(potentialSpawn) && valid) {return potentialSpawn;}
         // else {return tileBounds.ClosestPoint(potentialSpawn);}
-        else {return Vector3.zero;}
+        else 
+        {
+            return new Vector3(
+                UnityEngine.Random.Range(tileBounds.min.x, tileBounds.max.x), 
+                0, 
+                UnityEngine.Random.Range(tileBounds.min.z, tileBounds.max.z));
+        }
     }
 
     // Find the tile the player is currently on
@@ -261,6 +284,11 @@ public class EnemyBehavior : MonoBehaviour
         else if (!holdingEye && playerDetected && !enemyDetected)
         {
             timeStalked += Time.deltaTime;
+        }
+        if (timeStalked <= killTime / 2.0f)
+        {
+            LightController lightController = gameController.GetComponent<LightController>();
+            lightController.FlickerLights(0.3f, 0.1f);
         }
     }
     public void GazeEnemy()
