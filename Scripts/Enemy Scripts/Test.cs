@@ -21,7 +21,13 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveToTarget();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Running");
+            SetRunning();
+            navAgent.SetDestination(GameObject.Find("PlayerCapsule").transform.position);
+        }
+        // MoveToTarget();
         SynchronizeAnimatorAndAgent();
     }
     public void MoveToPlayer()

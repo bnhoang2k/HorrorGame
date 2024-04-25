@@ -60,7 +60,6 @@ public class EnemyMovement : MonoBehaviour
     }
     void Update()
     {
-        MoveToPlayer();
         SynchronizeAnimatorAndAgent();
         Handle_Footsteps();
     }
@@ -88,7 +87,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // Find a path to the player and the stride accordingly
-    public void MoveToPlayer()
+    public void MoveBehindPlayer()
     {
         Vector3 playerPosition = GameObject.Find("PlayerCapsule").transform.position;
         Vector3 playerForward = GameObject.Find("PlayerCapsule").transform.forward;
@@ -109,6 +108,13 @@ public class EnemyMovement : MonoBehaviour
             SetWalking();
             navAgent.SetDestination(targetPosition);
         }
+    }
+
+    public void Creep()
+    {
+        navAgent.isStopped = false;
+        navAgent.SetDestination(playerCapsule.transform.position);
+        SetWalking();
     }
 
     public void FreezeEnemy()
@@ -164,20 +170,16 @@ public class EnemyMovement : MonoBehaviour
     public void HuntPlayer()
     {
         // Set the destination of the enemy to the player's position
-        navAgent.destination = playerCapsule.transform.position; // Set the destination only once or conditionally.
-        navAgent.isStopped = false;
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance) { return; }
+        navAgent.destination = playerCapsule.transform.position;
         SetRunning();
-        enemyBehaviorController.KillClose();
     }
 
     public void UpdateHunting()
     {
-        if (Vector3.Distance(navAgent.destination, playerCapsule.transform.position) > 0.5f)
-        {
-            navAgent.ResetPath();
-            navAgent.SetDestination(playerCapsule.transform.position);
-        }
-        enemyBehaviorController.KillClose();
+        Debug.Log("Updating Hunting");
+        SetRunning();
+        navAgent.SetDestination(playerCapsule.transform.position);
     }
 
     // Makes the enemy rotate to look at the player when called

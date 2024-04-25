@@ -5,12 +5,14 @@ using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyBehavior : MonoBehaviour
 {
     // Scene Variables: Stuff we may need from the Scene
     public GameObject player;
     public GameObject playerCapsule;
+    public GameObject enemyRoot;
     private Camera mainCamera;
     public Camera aiCamera;
     public GameObject gameController;
@@ -31,8 +33,30 @@ public class EnemyBehavior : MonoBehaviour
 
     // Player Interaction Variables: Anything related to the player-enemy interaction
     private bool isHunting = false;
-    private bool enemyDetected = false;
+    private bool objectDetected(Camera c, GameObject obj)
+    {
+        var planes = GeometryUtility.CalculateFrustumPlanes(c);
+        var point = obj.transform.position;
+        foreach (var plane in planes)
+        {
+            if (plane.GetDistanceToPoint(point) < 0)
+            {
+                return false;
+            }
+        }
+        RaycastHit hit;
+        var rayStart = c.transform.position + c.transform.forward * 0.1f;
+        if (Physics.Raycast(rayStart, point - rayStart, out hit))
+        {
+            if (hit.collider.gameObject == obj)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     private bool playerDetected = false;
+    private bool enemyDetected = false;
     private bool isStalking = false;
     private float timeStalked = 0.0f;
     private float stalkMovingTimer;
@@ -64,27 +88,19 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
+        // Debug.Log("Stalk Timer: " + timeStalked + " | Gaze Timer: " + gazeTimer);
         CheckForPlayer();
         CheckForEnemy();
-        if (navAgent.remainingDistance <= navAgent.stoppingDistance) {enemyMovementController.LookAtPlayer();}
-        if (enemyDetected) {enemyMovementController.FreezeEnemy();}
-        if (!enemyDetected && !isStalking && !isHunting)
+        if (navAgent.remainingDistance <= navAgent.stoppingDistance && navAgent.hasPath)
         {
-            enemyMovementController.MoveToPlayer();
+            enemyMovementController.LookAtPlayer();
         }
+        if (enemyDetected && !isHunting) {enemyMovementController.FreezeEnemy();}
+        if (!enemyDetected && !isStalking && !isHunting) {enemyMovementController.MoveBehindPlayer();}
         else if (isStalking)
         {
             enemyMovementController.LookAtPlayer();
-            if (stalkMovingTimer > 0.0f)
-            {
-                stalkMovingTimer -= Time.deltaTime;
-            }
-            else
-            {
-                enemyMovementController.MoveToPlayer();
-            }
             StalkPlayer();
-            Debug.Log("Stalking Player: " + timeStalked + " seconds | Gaze Timer: " + gazeTimer + " seconds");
         }
         if (timeStalked >= killTime)
         {
@@ -101,19 +117,28 @@ public class EnemyBehavior : MonoBehaviour
             RestartCycle();
         }
         if (isHunting)
+        {enemyMovementController.UpdateHunting();}
+    }
+    
+    private void CheckForPlayer()
+    {
+        if (objectDetected(aiCamera, playerCapsule))
         {
-            enemyMovementController.UpdateHunting();
+            playerDetected = true;
+            isStalking = true;
+        }
+        else
+        {
+            playerDetected = false;
+            isStalking = false;
         }
     }
 
-    // Get enemy detected
-    public bool GetEnemyDetected() {return enemyDetected;}
-    
-    // Get player detected
-    public bool GetPlayerDetected() {return playerDetected;}
-
-    // Change value of isStalking
-    public void SetStalking(bool value) {isStalking = value;}
+    private void CheckForEnemy()
+    {
+        if (objectDetected(mainCamera, enemyRoot)) {enemyDetected = true;}
+        else {enemyDetected = false;}
+    }
 
     // Find suitable spawn location for the enemy
     public Vector3 FindSpawnLocation()
@@ -137,7 +162,6 @@ public class EnemyBehavior : MonoBehaviour
 
         Vector3 potentialSpawn = playerPosition - (playerForward * spawnDistance);
         potentialSpawn.y = 0;
-        Debug.Log("Potential Spawn: " + potentialSpawn);
         if (tileBounds.Contains(potentialSpawn)) {return potentialSpawn;}
         else {return tileBounds.ClosestPoint(potentialSpawn);}
     }
@@ -177,60 +201,6 @@ public class EnemyBehavior : MonoBehaviour
     void Teleport() {navAgent.Warp(FindSpawnLocation());}
 
     // Check if the player is within the enemy's field of view
-    public void CheckForPlayer()
-    {
-        Vector3 playerDirection = playerCapsule.transform.position - aiCamera.transform.position;
-        float angle = Vector3.Angle(aiCamera.transform.forward, playerDirection.normalized);
-
-        if (angle < aiCamera.fieldOfView / 2)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(aiCamera.transform.position, playerDirection.normalized, out hit, detectionDistance))
-            {
-                if (hit.collider.gameObject == playerCapsule)
-                {
-                    isStalking = true;
-                    playerDetected = true;
-                }
-                else
-                {
-                    isStalking = false;
-                    playerDetected = false;
-                }
-            }
-        }
-        else
-        {
-            isStalking = false;
-            playerDetected = false;
-        }
-    }
-
-    // Check for the enemy
-    public void CheckForEnemy()
-    {
-        RaycastHit hit;
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        float playerDetectionDistance = gameController.GetComponent<InventoryManagement>().holdingItem("Eye_Describable")
-                                        ? detectionDistance : player.GetComponent<Reach>().arm_length;
-        
-        if (Physics.Raycast(ray, out hit, playerDetectionDistance))
-        {
-            if (hit.collider.gameObject == gameObject)
-            {
-                enemyDetected = true;
-            }
-            else
-            {
-                enemyDetected = false;
-            }
-        }
-        else
-        {
-            enemyDetected = false;
-        }
-    }
 
     // Stalk the player
     public void StalkPlayer()
@@ -250,19 +220,6 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void KillClose()
-    {
-        if (Vector3.Distance(transform.position, playerCapsule.transform.position) < 0.5f)
-        {
-            KillPlayer();
-        }
-    }
-
-    public void KillPlayer()
-    {
-        EditorApplication.isPlaying = false;
-        EditorApplication.ExitPlaymode();
-    }
 
     public void RestartCycle()
     {
@@ -286,8 +243,4 @@ public class EnemyBehavior : MonoBehaviour
         Teleport();
     }
 
-    private void ResetStalkTimer()
-    {
-        stalkMovingTimer = UnityEngine.Random.Range(2.0f, 4.0f);
-    }
 }
