@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.SceneManagement;
 
 public class EnemyBehavior : MonoBehaviour
@@ -30,6 +31,7 @@ public class EnemyBehavior : MonoBehaviour
     private float gazeTimer = 0.0f;
     public float gazeDuration = 5.0f;
     public float cooldownTimer = 10.0f;
+    private bool isTeleporting = false;
 
     // Player Interaction Variables: Anything related to the player-enemy interaction
     private bool isHunting = false;
@@ -87,7 +89,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Enemy Detected" + enemyDetected + " | Player Detected" + playerDetected);
+        // Debug.Log("Enemy Detected: " + enemyDetected + " | Player Detected: " + playerDetected);
         CheckForPlayer();
         CheckForEnemy();
         GazeEnemy();
@@ -95,8 +97,13 @@ public class EnemyBehavior : MonoBehaviour
         {
             enemyMovementController.LookAtPlayer();
         }
+        if (playerDetected)
+        {
+            navAgent.ResetPath();
+            navAgent.isStopped = true;
+        }
         if (enemyDetected && !isHunting) {enemyMovementController.FreezeEnemy();}
-        if (!enemyDetected && !isStalking && !isHunting) {enemyMovementController.MoveBehindPlayer();}
+        if (!enemyDetected && !isStalking && !isHunting && !playerDetected) {enemyMovementController.MoveBehindPlayer();}
         else if (isStalking)
         {
             enemyMovementController.LookAtPlayer();
@@ -116,8 +123,8 @@ public class EnemyBehavior : MonoBehaviour
             isStalking = false;
             RestartCycle();
         }
-        if (isHunting)
-        {enemyMovementController.UpdateHunting();}
+        if (isHunting) {enemyMovementController.UpdateHunting();}
+        if (FindPlayerTile() != FindEnemyTile() && FindEnemyTile() != HoldingCell && !isTeleporting) {StartCoroutine(WaitForTeleport());}
     }
     
     private void CheckForPlayer()
@@ -205,6 +212,36 @@ public class EnemyBehavior : MonoBehaviour
         return null;
     }
 
+    public GameObject FindEnemyTile()
+    {
+        Vector3 enemyPosition = enemyRoot.transform.position;
+        foreach (GameObject spawn in insideSpawns)
+        {
+            BoxCollider collider = spawn.GetComponent<BoxCollider>();
+            Bounds bounds = collider.bounds;
+            // Adjust the bounds to effectively make them a "2D" area at the player's height
+            bounds.Expand(new Vector3(0, 1000f, 0));  // Expand the bounds infinitely along the Y axis
+
+            if (bounds.Contains(new Vector3(enemyPosition.x, collider.transform.position.y, enemyPosition.z)))
+            {
+                return spawn;
+            }
+        }
+        foreach (GameObject spawn in outsideSpawns)
+        {
+            BoxCollider collider = spawn.GetComponent<BoxCollider>();
+            Bounds bounds = collider.bounds;
+            // Adjust the bounds to effectively make them a "2D" area at the player's height
+            bounds.Expand(new Vector3(0, 1000f, 0));  // Expand the bounds infinitely along the Y axis
+
+            if (bounds.Contains(new Vector3(enemyPosition.x, collider.transform.position.y, enemyPosition.z)))
+            {
+                return spawn;
+            }
+        }
+        return null;
+    }
+
     // Teleports the enemy to a valid spawn location
     void Teleport() 
     {
@@ -228,9 +265,15 @@ public class EnemyBehavior : MonoBehaviour
     }
     public void GazeEnemy()
     {
-        if (enemyDetected)
+        float playerDetectionDistance = gameController.GetComponent<InventoryManagement>().holdingItem("Eye_Describable")
+                                        ? detectionDistance : player.GetComponent<Reach>().arm_length;
+        RaycastHit ray;
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out ray, playerDetectionDistance))
         {
-            gazeTimer += Time.deltaTime;
+            if (ray.collider.gameObject == enemyRoot)
+            {
+                gazeTimer += Time.deltaTime;
+            }
         }
     }
 
@@ -242,6 +285,7 @@ public class EnemyBehavior : MonoBehaviour
         isHunting = false;
         playerDetected = false;
         enemyDetected = false;
+        isTeleporting = false;
         
         // Warp back to holding HoldingCell
         navAgent.Warp(HoldingCell.transform.position);
@@ -252,7 +296,9 @@ public class EnemyBehavior : MonoBehaviour
 
     IEnumerator WaitForTeleport()
     {
+        isTeleporting = true;
         yield return new WaitForSeconds(cooldownTimer);
         Teleport();
+        isTeleporting = false;
     }
 }

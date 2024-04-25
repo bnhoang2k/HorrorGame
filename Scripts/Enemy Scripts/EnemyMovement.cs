@@ -60,7 +60,7 @@ public class EnemyMovement : MonoBehaviour
     }
     void Update()
     {
-        LookAtPlayer();
+        // LookAtPlayer();
         SynchronizeAnimatorAndAgent();
         Handle_Footsteps();
     }
