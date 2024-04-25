@@ -15,6 +15,7 @@ public class DescribableGUI : MonoBehaviour
     void Start() {
         // hide the normal mouse cursor
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame

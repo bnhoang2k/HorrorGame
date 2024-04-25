@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// [RequireComponent(typeof(Renderer))]
+[RequireComponent(typeof(Describable))]
 public class MaterialToWireframe : MonoBehaviour
 {
     // To use this script, the object MUST MUST MUST have a MeshRenderer.
     private Renderer[] objectRenderers;
     public float tessellationValue = 1.0f; // 1.0f is the default. Higher values = higher complexity.
-    private float fadeStart = 2.0f;
-    private float fadeEnd = 3.0f; // Can't attach the arm length of the player because it'll slow down the program.
+    public float fadeStart = 2.0f;
+    public float fadeEnd = 3.0f; // Can't attach the arm length of the player because it'll slow down the program.
     void Start()
     {
         objectRenderers = GetComponentsInChildren<Renderer>(true);
