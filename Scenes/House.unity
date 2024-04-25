@@ -3383,7 +3383,6 @@ GameObject:
   m_Component:
   - component: {fileID: 615263739}
   - component: {fileID: 615263740}
-  - component: {fileID: 615263741}
   m_Layer: 0
   m_Name: EnemyRoot
   m_TagString: Untagged
@@ -3427,18 +3426,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3201065, y: 2.3499856, z: 1.4114838}
   m_Center: {x: -0.008800507, y: -0.1398952, z: 0.24246216}
---- !u!114 &615263741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615263738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6dc6d5d37a79a4bab2f5e18ce15172, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &625713821
 GameObject:
   m_ObjectHideFlags: 0
@@ -5282,7 +5269,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.08, y: 0.40300003, z: 0.62}
+  m_Extents: {x: 0.505, y: 0.40300003, z: 0.62}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -11542,6 +11529,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6243095019583703895, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
   m_PrefabInstance: {fileID: 2567125944442602850}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &2135992987
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135992968}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2142669794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7422064740606740510, guid: 444d873de00069741bb3dcf3bca2468a, type: 3}
@@ -11635,11 +11643,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 664994902353810663, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: m_AngularSpeed
-      value: 360
+      value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 664994902353810663, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: m_StoppingDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 664994902353810663, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1483516673602439517, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: player
@@ -11719,7 +11731,7 @@ PrefabInstance:
       objectReference: {fileID: 439036079}
     - target: {fileID: 3139432077030405403, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: killTime
-      value: 15
+      value: 999999
       objectReference: {fileID: 0}
     - target: {fileID: 3139432077030405403, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: enemyRoot
@@ -11731,11 +11743,11 @@ PrefabInstance:
       objectReference: {fileID: 1036456840}
     - target: {fileID: 3139432077030405403, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: gazeDuration
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3139432077030405403, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: cooldownTimer
-      value: 30
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3139432077030405403, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: playerCapsule
@@ -11802,12 +11814,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6981336641429216645, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981336641429216645, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: field of view
-      value: 144.68654
+      value: 96.9194
       objectReference: {fileID: 0}
     - target: {fileID: 6981336641429216645, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: m_FOVAxisMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981336641429216645, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      propertyPath: far clip plane
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981336641429216645, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      propertyPath: orthographic size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6981336641429216645, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       propertyPath: m_projectionMatrixMode
@@ -11835,6 +11859,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6766726040090595821, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2135992975}
+    - targetCorrespondingSourceObject: {fileID: 6766726040090595821, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2135992987}
     - targetCorrespondingSourceObject: {fileID: 8541998002934797082, guid: be8223fa53fa478478fec3f5ac67acba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1813961768}
@@ -11923,7 +11950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5442810455250136988, guid: ab36a149aeee3254b8add20bb847db37, type: 3}
       propertyPath: m_Extents.x
-      value: 0.28
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 5442810455250136988, guid: ab36a149aeee3254b8add20bb847db37, type: 3}
       propertyPath: m_Extents.z

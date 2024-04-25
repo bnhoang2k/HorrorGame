@@ -59,7 +59,6 @@ public class EnemyBehavior : MonoBehaviour
     private bool enemyDetected = false;
     private bool isStalking = false;
     private float timeStalked = 0.0f;
-    private float stalkMovingTimer;
 
     // Misc. Variables
     private System.Random random;
@@ -88,10 +87,11 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        // Debug.Log("Stalk Timer: " + timeStalked + " | Gaze Timer: " + gazeTimer);
+        Debug.Log("Enemy Detected" + enemyDetected + " | Player Detected" + playerDetected);
         CheckForPlayer();
         CheckForEnemy();
-        if (navAgent.remainingDistance <= navAgent.stoppingDistance && navAgent.hasPath)
+        GazeEnemy();
+        if (navAgent.remainingDistance < navAgent.stoppingDistance && navAgent.hasPath)
         {
             enemyMovementController.LookAtPlayer();
         }
@@ -157,13 +157,21 @@ public class EnemyBehavior : MonoBehaviour
 
         Bounds tileBounds = collider.bounds;
         Vector3 playerPosition = playerCapsule.transform.position;
-        Vector3 playerForward = mainCamera.transform.forward;
-        float spawnDistance = 5.0f; // Adjustable
+        Vector3 potentialSpawn = Vector3.zero;
+        bool valid = false;
+        for (int i = 0; i < 100; i++)
+        {
+            potentialSpawn = new Vector3(
+                UnityEngine.Random.Range(tileBounds.min.x, tileBounds.max.x), 
+                0, 
+                UnityEngine.Random.Range(tileBounds.min.z, tileBounds.max.z));
 
-        Vector3 potentialSpawn = playerPosition - (playerForward * spawnDistance);
-        potentialSpawn.y = 0;
-        if (tileBounds.Contains(potentialSpawn)) {return potentialSpawn;}
-        else {return tileBounds.ClosestPoint(potentialSpawn);}
+            if (Vector3.Distance(playerPosition, potentialSpawn) > 5.0f) {valid = true; break;}
+        }
+
+        if (tileBounds.Contains(potentialSpawn) && valid) {return potentialSpawn;}
+        // else {return tileBounds.ClosestPoint(potentialSpawn);}
+        else {return Vector3.zero;}
     }
 
     // Find the tile the player is currently on
@@ -194,11 +202,14 @@ public class EnemyBehavior : MonoBehaviour
                 return spawn;
             }
         }
-    return null;
+        return null;
     }
 
     // Teleports the enemy to a valid spawn location
-    void Teleport() {navAgent.Warp(FindSpawnLocation());}
+    void Teleport() 
+    {
+        navAgent.Warp(FindSpawnLocation());
+    }
 
     // Check if the player is within the enemy's field of view
 
@@ -206,10 +217,6 @@ public class EnemyBehavior : MonoBehaviour
     public void StalkPlayer()
     {
         bool holdingEye = gameController.GetComponent<InventoryManagement>().holdingItem("Eye_Describable");
-        if (enemyDetected)
-        {
-            gazeTimer += Time.deltaTime;
-        }
         if (holdingEye)
         {
             timeStalked += Time.deltaTime * 7;
@@ -219,7 +226,13 @@ public class EnemyBehavior : MonoBehaviour
             timeStalked += Time.deltaTime;
         }
     }
-
+    public void GazeEnemy()
+    {
+        if (enemyDetected)
+        {
+            gazeTimer += Time.deltaTime;
+        }
+    }
 
     public void RestartCycle()
     {
@@ -242,5 +255,4 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(cooldownTimer);
         Teleport();
     }
-
 }
