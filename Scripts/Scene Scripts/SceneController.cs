@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public void RestartGame()
+    public void StartGame()
     {
         SceneManager.LoadScene("House");
     }
