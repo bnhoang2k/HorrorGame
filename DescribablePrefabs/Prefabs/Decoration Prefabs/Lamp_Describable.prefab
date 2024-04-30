@@ -4869,6 +4869,7 @@ GameObject:
   - component: {fileID: 6399539399379861843}
   - component: {fileID: 5418506328502519077}
   - component: {fileID: -8895143646482128406}
+  - component: {fileID: 601638122486404710}
   m_Layer: 0
   m_Name: Lamp_Describable
   m_TagString: Untagged
@@ -4975,3 +4976,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectPath: Assets/DescribablePrefabs/Need to be made wireframe/Lamp_Describable_prefab/Lamp_Describable.prefab
+--- !u!64 &601638122486404710
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6562695874565930245}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 4a2f041e098e4584799706d760e0c4ee, type: 2}

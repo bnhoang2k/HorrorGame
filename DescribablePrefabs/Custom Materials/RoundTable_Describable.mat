@@ -124,7 +124,7 @@ Material:
     - _Wireframe_NormalScale: 1
     - _Wireframe_NormalizeEdges: 0
     - _Wireframe_RenderingOptions_PBREnumID: 0
-    - _Wireframe_Tessellation: 3
+    - _Wireframe_Tessellation: 1
     - _Wireframe_TessellationEnumID: 0
     - _Wireframe_Tessellation_DispStrength: 0
     - _Wireframe_Tessellation_EdgeLength: 20.2

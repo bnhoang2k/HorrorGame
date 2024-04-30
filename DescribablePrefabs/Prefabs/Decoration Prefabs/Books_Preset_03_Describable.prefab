@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2198731927256416819}
   - component: {fileID: 1548521064501242460}
   - component: {fileID: 6448866166562703895}
+  - component: {fileID: 554200794494805267}
   m_Layer: 0
   m_Name: Books_Preset_03_Describable
   m_TagString: Untagged
@@ -116,3 +117,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectPath: Assets/DescribablePrefabs/Need to be made wireframe/Books_Preset_03_Describable_prefab/Books_Preset_03_Describable.prefab
+--- !u!64 &554200794494805267
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031357064875706220}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 1827d7c480503c14bb07bf6f328e3aaf, type: 2}

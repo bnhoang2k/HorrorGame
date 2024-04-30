@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8502826268450270635}
   - component: {fileID: -6649869435776499965}
   - component: {fileID: 4632187643649695916}
+  - component: {fileID: 8151554154836622423}
   m_Layer: 0
   m_Name: Bottle_03
   m_TagString: Untagged
@@ -116,3 +117,25 @@ MonoBehaviour:
   isPickupable: 0
   isOpenable: 0
   isUniqueInteractable: 0
+--- !u!64 &8151554154836622423
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5426136662385079583}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 9cb429a5c5618c14aa27b887f0c44a4d, type: 2}
