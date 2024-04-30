@@ -23533,12 +23533,32 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7799968655582293264, guid: 687a270e778e1644293e41c0d688218e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2114785198}
+    - targetCorrespondingSourceObject: {fileID: 5558997690460591714, guid: 687a270e778e1644293e41c0d688218e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1544929838}
   m_SourcePrefab: {fileID: 100100000, guid: 687a270e778e1644293e41c0d688218e, type: 3}
 --- !u!4 &1544929836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 57012321385075693, guid: 687a270e778e1644293e41c0d688218e, type: 3}
   m_PrefabInstance: {fileID: 1544929835}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1544929837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5558997690460591714, guid: 687a270e778e1644293e41c0d688218e, type: 3}
+  m_PrefabInstance: {fileID: 1544929835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1544929838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544929837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f20f0a630a803045812c26ec00b3e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1545416040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32352,6 +32372,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5456497535929435766, guid: c20e2d55ad25bae4dad18df57de3b300, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456497535929435766, guid: c20e2d55ad25bae4dad18df57de3b300, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33182,6 +33210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 812667690}
     m_Modifications:
+    - target: {fileID: 1214251248807255221, guid: a64d17681e6d62b428b728b526d637b6, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5451477476409652965, guid: a64d17681e6d62b428b728b526d637b6, type: 3}
       propertyPath: m_Name
       value: Latern_Describable
@@ -33296,6 +33328,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 812667690}
     m_Modifications:
+    - target: {fileID: 4147173642776181538, guid: 00b89a11b84bc114494b4a3d3df83e03, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6011099127377853914, guid: 00b89a11b84bc114494b4a3d3df83e03, type: 3}
       propertyPath: m_Name
       value: BundleCandle03_Describable
