@@ -16,45 +16,35 @@ public class Test : MonoBehaviour
         animator.applyRootMotion = true;
         navAgent.updatePosition = false;
         navAgent.updateRotation = true;
+        // Start enemy invisible
+        Renderer meshRenderer = GetComponentInChildren<Renderer>();
+        meshRenderer.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        Renderer meshRenderer = GetComponentInChildren<Renderer>();
+        LightController lc = FindAnyObjectByType<LightController>();
+        if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("Running");
-            SetRunning();
-            navAgent.SetDestination(GameObject.Find("PlayerCapsule").transform.position);
+            meshRenderer.enabled = true;
+            lc.FlickerLights(0.3f, 0.1f);
         }
-        // MoveToTarget();
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            lc.FlickerLights(0.3f, 0.1f);
+        }
+        if (meshRenderer.enabled)
+        {
+            RunAtPlayer();
+        }
         SynchronizeAnimatorAndAgent();
     }
-    public void MoveToPlayer()
+    public void RunAtPlayer()
     {
-        SetWalking();
+        SetRunning();
         navAgent.SetDestination(GameObject.Find("PlayerCapsule").transform.position);
-    }
-    
-    public void MoveToTarget()
-    {
-        Vector3 playerPosition = GameObject.Find("PlayerCapsule").transform.position;
-        Vector3 playerForward = GameObject.Find("PlayerCapsule").transform.forward;
-        Vector3 targetPosition = playerPosition - (playerForward * 3.0f);
-
-        Vector3 fromPlayerToTargetDir = (targetPosition - playerPosition).normalized;
-        float angle = Vector3.Angle(playerForward, fromPlayerToTargetDir);
-        float playerFOV = Camera.main.fieldOfView;
-        if (angle <= playerFOV / 2)
-        {
-            SetIdle();
-            navAgent.isStopped = true;
-            navAgent.SetDestination(transform.position);
-            return;
-        }
-
-        SetWalking();
-        navAgent.SetDestination(targetPosition);
     }
 
     void OnAnimatorMove()

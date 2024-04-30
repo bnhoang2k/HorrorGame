@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8065818962840024990}
   - component: {fileID: 5280263771674099666}
   - component: {fileID: -4371526702672278182}
+  - component: {fileID: 1709417063014316532}
   m_Layer: 0
   m_Name: Bottle_02
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74524849413695256}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 159, y: -12, z: 87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -59,6 +60,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -97,3 +100,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectPath: Assets/DescribablePrefabs/Need to be made wireframe/Bottle_02_prefab/Bottle_02.prefab
+--- !u!114 &1709417063014316532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74524849413695256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Bottle
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueInteractable: 0

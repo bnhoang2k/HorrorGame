@@ -28,6 +28,7 @@ public class LightController : MonoBehaviour
         foreach(Light light in all_base_lights) {
             LightControl lc = new LightControl(light, light.intensity);
             all_lights.Add(lc);
+            Debug.Log("Light: " + light.name + ", Intensity: " + light.intensity);
         }
 
         // DEBUGGING //

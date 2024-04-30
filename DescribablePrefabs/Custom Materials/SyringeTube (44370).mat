@@ -127,8 +127,8 @@ Material:
     - _Wireframe_BumpEnumID: 0
     - _Wireframe_ColorEmissionStrength: 0
     - _Wireframe_DistanceFade: 0
-    - _Wireframe_DistanceFadeEnd: 3
-    - _Wireframe_DistanceFadeStart: 2
+    - _Wireframe_DistanceFadeEnd: 2
+    - _Wireframe_DistanceFadeStart: 1
     - _Wireframe_DynamicMaskEdgeSmooth: 0
     - _Wireframe_DynamicMaskEffectsBaseTexEnumID: 0
     - _Wireframe_DynamicMaskEffectsBaseTexInvert: 0

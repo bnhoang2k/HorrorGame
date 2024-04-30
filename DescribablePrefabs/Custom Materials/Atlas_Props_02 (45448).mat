@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SyringeBody (44724)
+  m_Name: Atlas_Props_02 (45448)
   m_Shader: {fileID: 4800000, guid: 1829b7a5a473bbf4192595624aafa19d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -18,7 +18,8 @@ Material:
   - _EMISSION
   m_InvalidKeywords:
   - _METALLICGLOSSMAP
-  m_LightmapFlags: 0
+  - _NORMALMAP
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -29,7 +30,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 031998b9a91d4ceb9ef8aa85d4a1e4b9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -49,11 +50,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a47c4ab9b6f823547b234703979aef54, type: 3}
+        m_Texture: {fileID: 2800000, guid: 96674c4c0c3248708166abf9d9fd90a7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 8e039cb6fcce395498f6ea098f1b0cca, type: 3}
+        m_Texture: {fileID: 2800000, guid: 57d83ff8241d40f7adc94897a9bd289e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -61,10 +62,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -86,34 +83,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlendOp: 0
     - _BumpScale: 1
-    - _CameraFadingEnabled: 0
-    - _CameraFarFadeDistance: 2
-    - _CameraNearFadeDistance: 1
     - _Cull: 2
     - _CurvedWorldTitle: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistortionBlend: 0.5
-    - _DistortionEnabled: 0
-    - _DistortionStrength: 1
-    - _DistortionStrengthScaled: 0
     - _DstBlend: 0
-    - _EmissionEnabled: 0
-    - _FlipbookMode: 0
-    - _GlossMapScale: 0.72
+    - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightingEnabled: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Shininess: 0.38355362
     - _SmoothnessTextureChannel: 0
-    - _SoftParticlesEnabled: 0
-    - _SoftParticlesFarFadeDistance: 1
-    - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
@@ -126,8 +110,8 @@ Material:
     - _Wireframe_BumpEnumID: 0
     - _Wireframe_ColorEmissionStrength: 0
     - _Wireframe_DistanceFade: 0
-    - _Wireframe_DistanceFadeEnd: 2
-    - _Wireframe_DistanceFadeStart: 1
+    - _Wireframe_DistanceFadeEnd: 3
+    - _Wireframe_DistanceFadeStart: 2
     - _Wireframe_DynamicMaskEdgeSmooth: 0
     - _Wireframe_DynamicMaskEffectsBaseTexEnumID: 0
     - _Wireframe_DynamicMaskEffectsBaseTexInvert: 0
@@ -166,10 +150,9 @@ Material:
     - _Wireframe_WireVertexColor: 0
     - _ZWrite: 1
     m_Colors:
-    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecColor: {r: 0.77205884, g: 0.77205884, b: 0.77205884, a: 1}
     - _Wireframe_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Wireframe_ColorTexture_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _Wireframe_MainTex_Scroll: {r: 0, g: 0, b: 0, a: 0}

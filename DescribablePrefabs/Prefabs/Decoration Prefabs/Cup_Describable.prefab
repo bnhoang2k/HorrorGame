@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2533506120314460704
+--- !u!1 &459330734136164336
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6271044533549056247}
-  - component: {fileID: 4973818393804263904}
-  - component: {fileID: 7108396165319603069}
-  - component: {fileID: 50768137825767704}
-  - component: {fileID: 8355427562906779990}
+  - component: {fileID: 1665981122918880124}
+  - component: {fileID: 5964896549704007961}
+  - component: {fileID: 2195576492831747184}
+  - component: {fileID: 7658517207744038859}
+  - component: {fileID: 3882500918252461155}
+  - component: {fileID: 8271172076013995581}
   m_Layer: 0
-  m_Name: Book_04
+  m_Name: Cup_Describable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 81
   m_IsActive: 1
---- !u!4 &6271044533549056247
+--- !u!4 &1665981122918880124
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533506120314460704}
+  m_GameObject: {fileID: 459330734136164336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 181, y: -12, z: 87}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -3.5872235, y: 2.4873774, z: -4.5169153}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4973818393804263904
+--- !u!33 &5964896549704007961
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533506120314460704}
-  m_Mesh: {fileID: 4300000, guid: 5663a099f7a6e004ba1b00f70ed86fbd, type: 2}
---- !u!23 &7108396165319603069
+  m_GameObject: {fileID: 459330734136164336}
+  m_Mesh: {fileID: 4300000, guid: 1b5666de642f468eb7f461f508ed3389, type: 3}
+--- !u!23 &2195576492831747184
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533506120314460704}
+  m_GameObject: {fileID: 459330734136164336}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -65,14 +66,14 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e155c082c7531f4d86e184ac522dc7e, type: 2}
+  - {fileID: 2100000, guid: e8d858f4dafd40318a65052911414e45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 8
+  m_ScaleInLightmap: 4
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -87,32 +88,56 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &50768137825767704
+--- !u!114 &7658517207744038859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533506120314460704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2065496115, guid: cb9c325382ec9464b8e020d7ddfb97b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabProjectPath: Assets/DescribablePrefabs/Need to be made wireframe/Book_04_prefab/Book_04.prefab
---- !u!114 &8355427562906779990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533506120314460704}
+  m_GameObject: {fileID: 459330734136164336}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Book
+  description: Chalice
   isPickupable: 0
   isOpenable: 0
   isUniqueInteractable: 0
+--- !u!114 &3882500918252461155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459330734136164336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e945cd39f72824fa8b85c4692acbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tessellationValue: 1
+  fadeStart: 2
+  fadeEnd: 3
+--- !u!64 &8271172076013995581
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459330734136164336}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 1b5666de642f468eb7f461f508ed3389, type: 3}
