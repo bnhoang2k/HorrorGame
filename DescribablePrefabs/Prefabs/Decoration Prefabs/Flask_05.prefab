@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8186633622281799717}
   - component: {fileID: 6946544372030755433}
   - component: {fileID: -7981793990573808972}
+  - component: {fileID: 5331973681250320867}
   m_Layer: 0
   m_Name: Flask_05
   m_TagString: Untagged
@@ -27,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5276322798161982043}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 165, y: -12, z: 87}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,3 +99,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectPath: Assets/DescribablePrefabs/Need to be made wireframe/Flask_05_prefab/Flask_05.prefab
+--- !u!114 &5331973681250320867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5276322798161982043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303136f93996e5c489ba485cef0e9aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Flask
+  isPickupable: 0
+  isOpenable: 0
+  isUniqueInteractable: 0

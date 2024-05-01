@@ -12,6 +12,7 @@ public class OpenBookcase : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip putDownSound;
     public AudioClip openSound;
+    public GameObject[] candles;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,13 @@ public class OpenBookcase : MonoBehaviour
 
         rend = openBookcase.GetComponent<Renderer>();
         rend.enabled = false;
+
+        // turn off candles on the inside of the bookcase compartment
+        foreach (GameObject candle in candles) {
+            foreach (Light light in candle.GetComponentsInChildren<Light>()) {
+                light.enabled = false;
+            }
+        }
 
         // get audio source
         audioSource = gameObject.GetComponent<AudioSource>();
@@ -45,6 +53,13 @@ public class OpenBookcase : MonoBehaviour
             // open the bookcase
             rend.enabled = true;
             Destroy(closedBookcase);
+
+            // turn on candles on the inside of the bookcase compartment
+            foreach (GameObject candle in candles) {
+            foreach (Light light in candle.GetComponentsInChildren<Light>()) {
+                light.enabled = true;
+            }
+        }
         }
     }
 
